@@ -1,0 +1,16 @@
+{
+  "name": "@agentstride/evals-internal",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Internal deterministic evaluation harness (not a public package)",
+  "scripts": {
+    "test": "npm run build -w @agentstride/core -w @agentstride/rag && node --test test/*.test.mjs",
+    "eval:enterprise-support": "npm run build -w @agentstride/core -w @agentstride/rag && node enterprise-support/run.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "@agentstride/rag": "*",
+    "zod": "^4.5.4"
+  }
+}

@@ -5,14 +5,16 @@
   "description": "AgentStride monorepo",
   "workspaces": [
     "packages/*",
-    "examples/*"
+    "examples/*",
+    "evals"
   ],
   "scripts": {
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build -w @agentstride/core && npm run build --workspaces --if-present",
     "typecheck": "npm run build -w @agentstride/core && npm run typecheck --workspaces --if-present",
     "publish:check": "node scripts/publish-check.mjs",
-    "examples:smoke": "npm start -w @agentstride/example-orchestrator-n-agents"
+    "examples:smoke": "npm start -w @agentstride/example-orchestrator-n-agents",
+    "eval:enterprise-support": "npm run eval:enterprise-support -w @agentstride/evals-internal"
   },
   "devDependencies": {
     "@standard-schema/spec": "^1.1.0",
