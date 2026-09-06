@@ -530,3 +530,42 @@ Private polish engineering complete on `chore/release-gate`.
 ### Next question
 
 Owner: story selection + origins/vision wording, then decide public posture.
+
+## 2026-09-06 - Public productization plan
+
+### Context
+
+The private engineering release gate reached green after production validation, API freeze, additional vertical slices and release hygiene.
+
+### Evidence
+
+- Tracks A–G complete
+- ADR 0013 accepted
+- examples 23–26 complete
+- release readiness engineering gate green
+- core remains small and optional integrations remain outside core
+
+### Decision
+
+Pause feature expansion and move to a dedicated public productization/release-decision phase.
+
+Added:
+
+`docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+
+The plan separates autonomous private preparation from explicit owner gates for story selection, package scope, version/license and launch.
+
+### Rejected
+
+- another feature/vertical track
+- public launch before narrative/product review
+- publishing all incubated packages by default
+- treating ADR 0013 as automatic justification for 1.0
+
+### Result
+
+The next AI session should focus on public story, README, release scope, versioning recommendation, repository hygiene and dry-run evidence — while keeping the repository private.
+
+### Next question
+
+Owner decisions are intentionally deferred until recommendations and private productization artifacts are ready.
