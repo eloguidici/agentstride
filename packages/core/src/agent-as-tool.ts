@@ -1,5 +1,8 @@
 import { defineTool, type Tool } from "./tool.js";
-import { ABORT_SIGNAL_CONTEXT_KEY } from "./runtime-helpers.js";
+import {
+  ABORT_SIGNAL_CONTEXT_KEY,
+  AGENT_RUN_ID_CONTEXT_KEY,
+} from "./runtime-helpers.js";
 import type { AgentContext, AgentLike } from "./types.js";
 
 export type AgentAsToolOptions = Readonly<{
@@ -10,8 +13,9 @@ export type AgentAsToolOptions = Readonly<{
 /**
  * Expose another agent as a portable tool for local delegation.
  *
- * Forwards the parent run's AbortSignal (from context.abortSignal) into
- * nested `agent.run({ signal })` so cancellation crosses asAgentTool.
+ * Forwards:
+ * - parent AbortSignal (`context.abortSignal` → `run({ signal })`)
+ * - parent run id (`context.agentRunId` → `run({ parentRunId })`)
  */
 export function asAgentTool(
   agent: AgentLike<string, { text: string }>,
@@ -22,9 +26,11 @@ export function asAgentTool(
     description: options.description,
     execute: async (input: { request: string }, context: AgentContext) => {
       const signal = readContextAbortSignal(context);
+      const parentRunId = readContextAgentRunId(context);
       const result = await agent.run(input.request, {
         context,
         ...(signal !== undefined ? { signal } : {}),
+        ...(parentRunId !== undefined ? { parentRunId } : {}),
       });
       return result.text;
     },
@@ -36,4 +42,9 @@ function readContextAbortSignal(
 ): AbortSignal | undefined {
   const value = context[ABORT_SIGNAL_CONTEXT_KEY];
   return value instanceof AbortSignal ? value : undefined;
+}
+
+function readContextAgentRunId(context: AgentContext): string | undefined {
+  const value = context[AGENT_RUN_ID_CONTEXT_KEY];
+  return typeof value === "string" && value.length > 0 ? value : undefined;
 }

@@ -58,7 +58,12 @@ export interface Model {
 export type AgentRunStatus = "completed" | "failed";
 
 export type AgentEvent =
-  | Readonly<{ type: "run:start"; runId: string; input: string }>
+  | Readonly<{
+      type: "run:start";
+      runId: string;
+      input: string;
+      parentRunId?: string;
+    }>
   | Readonly<{ type: "model:start"; runId: string; step: number }>
   | Readonly<{
       type: "model:end";
@@ -93,6 +98,8 @@ export type AgentRun<TOutput = unknown> = Readonly<{
   durationMs: number;
   events: readonly AgentEvent[];
   error?: unknown;
+  /** Set when this run was started as a nested local delegation. */
+  parentRunId?: string;
 }>;
 
 /** @deprecated Prefer AgentRun. Kept as an alias during the transition. */
