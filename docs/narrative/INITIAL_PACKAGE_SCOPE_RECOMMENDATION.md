@@ -1,27 +1,34 @@
 # Initial package scope recommendation
 
 Date: 2026-09-06  
-Status: **Recommendation only — OWNER GATE 2**  
-Do not remove `private: true`. Do not publish.
+Status: **OWNER GATE 2 CLOSED — Option A selected**  
+Selected packages (for a future npm publish only): **`@agentstride/core` + `@agentstride/openai`**
+
+Do not remove `private: true`. Do not publish until the owner explicitly authorizes launch.
+
+## Owner decision
+
+**2026-09-06 — Option A (conservative).**
+
+Initial public npm surface (when authorized): only `core` and `openai`.  
+All other packages (`rag`, `memory`, `mcp`, `nestjs`, `migrate`, `a2a`) stay private/unpublished for now; users follow examples until those packages graduate.
 
 ## Per-package notes
 
 | Package | Purpose | Maturity | Tests | API stability | Deps | README | Essential to first story? |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `core` | Runtime | High for scope | Strong | Freeze candidate (ADR 0013) | `@standard-schema/spec` | Good | **Yes** |
-| `openai` | `Model` adapter | High | Present | Stable enough for 0.x | fetch-only | Good / honest limits | **Yes** for quick start |
-| `rag` | In-memory retriever helpers | Medium | Light | Small surface | Low | OK | No |
-| `memory` | Memory adapters | Medium | Light | Small surface | Low | OK | No |
-| `mcp` | MCP tool bridge | Medium | Present | Evolving with MCP | Process/stdio | OK | No |
-| `nestjs` | Nest DI helpers | Medium | Via examples | Nest version coupling | Nest peers | OK | No (examples show pattern) |
-| `migrate` | Portability helpers | Medium | Present | Deprecations cleaned | Zod types | Good | Nice-to-have later |
-| `a2a` | Remote AgentLike sketch | **Experimental** | Thin | Unstable | Low | Says experimental | **No — defer** |
+| `core` | Runtime | High for scope | Strong | Freeze candidate (ADR 0013) | `@standard-schema/spec` | Good | **Yes — selected** |
+| `openai` | `Model` adapter | High | Present | Stable enough for 0.x | fetch-only | Good / honest limits | **Yes — selected** |
+| `rag` | In-memory retriever helpers | Medium | Light | Small surface | Low | OK | No — deferred |
+| `memory` | Memory adapters | Medium | Light | Small surface | Low | OK | No — deferred |
+| `mcp` | MCP tool bridge | Medium | Present | Evolving with MCP | Process/stdio | OK | No — deferred |
+| `nestjs` | Nest DI helpers | Medium | Via examples | Nest version coupling | Nest peers | OK | No — deferred |
+| `migrate` | Portability helpers | Medium | Present | Deprecations cleaned | Zod types | Good | Deferred |
+| `a2a` | Remote AgentLike sketch | **Experimental** | Thin | Unstable | Low | Says experimental | **Deferred** |
 
-Compatibility burden rises with every published package: semver, types, docs, issue triage.
+## Options considered
 
----
-
-## Option A — Conservative (recommended)
+### Option A — Conservative (**selected**)
 
 Publish later (when owner approves): **`@agentstride/core` + `@agentstride/openai` only**.
 
@@ -31,45 +38,30 @@ Matches the product story: small runtime + one practical model adapter. Lowest s
 **Trade-off**  
 Users copy Nest/RAG/MCP patterns from examples instead of installing official packages immediately.
 
----
-
-## Option B — Balanced
+### Option B — Balanced (rejected for first launch)
 
 **core + openai + one of** `{nestjs | mcp | rag}`.
 
-Only if the owner wants a specific “first optional” narrative (e.g. Nest embedding). Prefer **nestjs** if the public story is “embed in existing backends,” else skip.
-
-**Trade-off**  
-Peers (Nest) or protocol churn (MCP) enter the support matrix early.
-
----
-
-## Option C — Full incubation set
+### Option C — Full incubation set (rejected)
 
 Publish all packages including `a2a` and `migrate`.
 
-**Not recommended initially.** Signals false uniformity of maturity; `a2a` especially should stay experimental/unpublished or clearly pre-release only.
-
----
-
-## Recommendation
-
-**Option A (conservative).** Label any later optional packages as `0.x` experimental until they earn a freeze note of their own.
+## Decision record
 
 ### Context
 Choose smallest credible npm surface.
 
 ### Evidence
-ADR 0013; package READMEs; test layout; a2a experimental disclaimer.
+ADR 0013; package READMEs; test layout; a2a experimental disclaimer; owner confirmation 2026-09-06.
 
 ### Decision
-Recommend core + openai only for first public npm (pending owner).
+**Option A:** `@agentstride/core` + `@agentstride/openai` for first authorized public npm.
 
 ### Rejected
-Publishing a2a; publishing everything to look complete.
+Option B and C for initial launch; publishing `a2a`.
 
 ### Risk
 Users ask for Nest/MCP packages day one — answer with examples + roadmap.
 
 ### Next question
-OWNER GATE 2: which packages, if any?
+OWNER GATE 3: semver + license (recommendation: `0.1.0` + MIT).

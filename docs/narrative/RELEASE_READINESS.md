@@ -33,12 +33,12 @@ Only the owner can flip those switches.
 - [ ] Owner reviews/edits drafts before any external post
 - [ ] Origins / vision accepted by owner for public visibility
 
-## Explicit owner decisions still required
+## Explicit owner decisions
 
-1. Keep private vs make public
-2. npm publish scope (`@agentstride/core` only vs more packages)
-3. Semver starting version (leave `0.0.0` until then)
-4. License confirmation
+1. Keep private vs make public — **open**
+2. npm publish scope — **closed: Option A (`@agentstride/core` + `@agentstride/openai`)** — still not published
+3. Semver starting version — **open** (leave `0.0.0` until Gate 3; rec `0.1.0`)
+4. License confirmation — **open** (rec MIT)
 
 ## Current posture
 
