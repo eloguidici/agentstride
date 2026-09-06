@@ -184,9 +184,10 @@ Status: **Done** on `main` via PR #3 (2026-09-06)
 
 ## Real-world validation track
 
-Status: **In progress** on `feature/real-world-validation` (2026-09-06)
+Status: **In progress** — Nest HTTP surface on `feature/enterprise-nestjs-http` (PR #5); slice already on `main` via PR #4 (2026-09-06)
 
-- `examples/17-enterprise-support-agent` — enterprise Receptionist slice with domain separation
+- `examples/17-enterprise-support-agent` — enterprise Receptionist slice with domain separation (on `main`)
+- `examples/18-enterprise-support-http` — Nest `POST /support/run` wrapping the slice (this branch)
 - Offline tests + optional live run
 - Core frozen (ergonomics documented; no drive-by API changes)
 - Evidence fed into `docs/research/api-review-pre-1.0.md` and development-log
