@@ -4,7 +4,7 @@ This document is the current source of truth for continuing AgentStride in anoth
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/evaluation-harness`** (Track A)  
+Active feature branch: **`feature/nested-cancellation`** (Track B)  
 Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
@@ -18,45 +18,43 @@ Do not make the repository public or publish npm packages unless explicitly requ
 
 ---
 
-## 1. Completed on this branch (Track A)
+## 1. Completed
 
-Evaluation harness (production validation plan Track A):
+Already on `main`:
 
-- `evals/` private workspace `@agentstride/evals-internal`
-- 22 enterprise-support cases + deterministic scripted runner + scorers
-- Baseline: `evals/results/baseline-enterprise-support.json` (22/22)
-- Research: `docs/research/evaluation-harness.md`
-- Example 17: optional `onSecurityEvent` for nested tool observation
-- **Core unchanged**
+- foundation through enterprise Nest HTTP;
+- Track A evaluation harness (`evals/`, 22 cases, baseline).
 
-Commands:
+On this branch (Track B):
 
-```bash
-npm test -w @agentstride/evals-internal
-npm run eval:enterprise-support
-```
+- `asAgentTool` forwards `context.abortSignal` → nested `run({ signal })`
+- ADR 0010 + research note `docs/research/nested-cancellation.md`
+- Core tests: `packages/core/test/nested-cancellation.test.mjs`
+- No cancellation bus; no new public AgentLike options
 
-Plan source of truth:
-
-`docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
+Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
 
 ---
 
 ## 2. Next track after merge
 
-**Track B — Nested cancellation across `asAgentTool`**
+**Track C — Parent/child run causality**
 
-Branch suggestion: `feature/nested-cancellation`
+Branch suggestion: `feature/run-causality`
 
-Known gap: outer `AbortSignal` does not automatically become `run({ signal })` for nested agents.
+Likely minimum: `parentRunId` for local `asAgentTool` delegation.
 
-Do not skip to workflows / A2A / new providers.
+Do not skip to workflows / full A2A / new providers.
 
 ---
 
-## 3. Narrative rule
+## 3. Commands
 
-Capture problem → hypothesis → evidence → decision → rejected → result → next question in the development log / research notes during work (not after the fact).
+```bash
+npm test -w @agentstride/core
+npm test -w @agentstride/evals-internal
+npm test -w @agentstride/example-enterprise-support-agent
+```
 
 ---
 
@@ -67,5 +65,4 @@ npm run build
 npm run typecheck
 npm run test
 npm run publish:check
-npm run eval:enterprise-support
 ```
