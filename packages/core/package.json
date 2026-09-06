@@ -1,0 +1,29 @@
+{
+  "name": "@agentstride/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Core runtime primitives for AgentStride",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.inference.json --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@standard-schema/spec": "^1.1.0"
+  },
+  "devDependencies": {
+    "zod": "^4.5.4"
+  }
+}

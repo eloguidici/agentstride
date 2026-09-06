@@ -1,0 +1,25 @@
+{
+  "name": "agentstride",
+  "private": true,
+  "version": "0.0.0",
+  "description": "AgentStride monorepo",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "test": "npm run test --workspaces --if-present",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "publish:check": "node scripts/publish-check.mjs",
+    "examples:smoke": "npm start -w @agentstride/example-orchestrator-n-agents"
+  },
+  "devDependencies": {
+    "@standard-schema/spec": "^1.1.0",
+    "typescript": "^5.8.3",
+    "zod": "^4.5.4"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
