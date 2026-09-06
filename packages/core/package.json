@@ -1,0 +1,7 @@
+{
+  "name": "@agentstride/core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Core runtime primitives for AgentStride"
+}
