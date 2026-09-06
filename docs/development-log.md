@@ -228,3 +228,33 @@ HTTP disconnect / outer `AbortSignal` can cooperatively stop nested local delega
 ### Next question
 
 Track C: parent/child run causality.
+
+## 2026-09-06 - Track C run causality
+
+### Context
+
+Nested AgentRuns existed without a parent link; reconstructing Receptionist → Security required a bus we refuse to bring back.
+
+### Hypothesis
+
+Optional `parentRunId` auto-set by `asAgentTool` reconstructs local trees.
+
+### Evidence
+
+Core causality tests + example 17 integration assert nested `run:start.parentRunId`.
+
+### Decision
+
+ADR 0011. Reserved `context.agentRunId`. No registry / rootRunId / toolCallId yet.
+
+### Rejected
+
+Global registry; mandatory IDs; OTel-in-core; full correlation field set.
+
+### Result
+
+Local parent/child trees are reconstructable; top-level callers unchanged.
+
+### Next question
+
+Track D: OpenTelemetry proof without core OTel dependency.

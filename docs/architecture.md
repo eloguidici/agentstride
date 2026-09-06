@@ -17,7 +17,8 @@ Important core ideas:
 - `AgentRun` + lifecycle events (no global bus)
 - thin hooks and guards
 - `AgentLike` for local (and later remote) delegation
-- cooperative cancellation via `AbortSignal` (`run({ signal })`, `timeoutMs`, `ModelRequest.signal`)
+- Cooperative cancellation via `AbortSignal` (ADR 0009) including nested `asAgentTool` (ADR 0010)
+- Local parent/child run causality via optional `parentRunId` (ADR 0011)
 - failed runs attach partial progress on `error.agentRun` (real `steps`, messages, events)
 
 ## Optional packages
