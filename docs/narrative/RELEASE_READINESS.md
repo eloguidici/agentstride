@@ -42,7 +42,9 @@ Only the owner can flip those switches.
 
 ## Current posture
 
-**Private. Engineering polish done. Public later — only when the owner says so.**
+**Private. Engineering + private productization + growth/career prep done. Public later — only when the owner says so (Gate 4).**
+
+**Stop:** The engineering, private productization, growth planning and career-positioning preparation that can be done autonomously is complete. The project should pause here for an owner decision.
 
 ---
 

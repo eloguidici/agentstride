@@ -8,10 +8,11 @@ Status: Template — **do not execute public steps without owner**
 - [ ] `main` green (build / typecheck / test / CI)
 - [ ] Secret scan / `.env` posture re-checked
 - [ ] [PUBLIC_WORDING_REVIEW](./PUBLIC_WORDING_REVIEW.md) accepted by owner
-- [ ] OWNER GATE 1: stories selected
+- [ ] OWNER GATE 1: stories selected / Pack 1 drafted
 - [x] OWNER GATE 2: package scope selected — Option A (`core` + `openai`)
 - [x] OWNER GATE 3: semver + license confirmed — `0.1.0` + MIT (bump only at launch)
-- [ ] [public-package-dry-run](../research/public-package-dry-run.md) green for selected packages
+- [x] [public-package-dry-run](../research/public-package-dry-run.md) green for selected packages (install + tsc + runtime)
+- [ ] `docs/internal/` disposition executed (remove/move before public)
 - [ ] Release notes drafted for chosen version
 - [ ] Repository visibility decision recorded
 - [ ] npm org/`@agentstride` access verified **at launch time**

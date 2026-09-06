@@ -704,3 +704,31 @@ Gates 2–3 closed. Still private; no npm publish.
 ### Next question
 
 Owner: draft review and/or visibility + npm launch decision (irreversible).
+
+## 2026-09-06 - Private productization completion (growth + LinkedIn + dry-run)
+
+### Context
+
+Handoff required reading internal growth/career docs that did not yet exist; dry-run covered core runtime only (no openai, no tsc consumer).
+
+### Evidence
+
+- New `docs/internal/` strategy + LinkedIn drafts + disposition
+- Extended `scripts/package-dry-run.mjs` — core+openai pack/install/`tsc --noEmit`/runtime GREEN
+- `docs/research/public-package-dry-run.md` updated
+
+### Decision
+
+Complete remaining autonomous private prep; stop at OWNER GATE 4. Do not publish, open repo, or invent features.
+
+### Rejected
+
+Feature tracks for marketing; leaving internal docs without a pre-public disposition plan; requiring live OpenAI for dry-run.
+
+### Result
+
+Autonomous private productization / growth / career prep complete.
+
+### Next question
+
+Owner Gate 4: internal disposition + visibility/npm + optional post publishing.

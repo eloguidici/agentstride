@@ -97,15 +97,15 @@ Tools are designed to stay portable. `@agentstride/migrate` exposes config helpe
 
 ## Packages
 
-| Package | Role | First-release posture (recommendation) |
+| Package | Role | First-release posture |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | Strong candidate |
-| `@agentstride/openai` | OpenAI-compatible `Model` | Strong candidate |
-| `@agentstride/rag` / `memory` / `mcp` / `nestjs` | Optional | Justify case-by-case |
-| `@agentstride/a2a` | Experimental remote sketch | Defer |
-| `@agentstride/migrate` | Portability helpers | Optional / later |
+| `@agentstride/core` | Runtime | **Selected** (Gate 2) — publish at launch as `0.1.0` |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **Selected** (Gate 2) |
+| `@agentstride/rag` / `memory` / `mcp` / `nestjs` | Optional | Deferred |
+| `@agentstride/a2a` | Experimental remote sketch | Deferred |
+| `@agentstride/migrate` | Portability helpers | Deferred |
 
-See [package scope recommendation](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md). Nothing is published yet.
+Owner selected Gate 2 Option A. Nothing is published yet (`private: true`, versions still `0.0.0`). See [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md) and [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
 
 ## Docs
 
