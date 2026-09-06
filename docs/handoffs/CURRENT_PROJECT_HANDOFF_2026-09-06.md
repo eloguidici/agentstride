@@ -3,8 +3,8 @@
 This document is the current source of truth for continuing AgentStride in another session or tool.
 
 Repository: `eloguidici/agentstride`  
-Default branch: **`main`**  
-Active feature branch: **`feature/run-causality`** (Track C)  
+Default branch: **`main`** @ `5f8553a`  
+Active feature branch: **none** — next is Track D  
 Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
@@ -18,31 +18,29 @@ Do not make the repository public or publish npm packages unless explicitly requ
 
 ---
 
-## 1. Completed
+## 1. Production validation progress
 
-On `main`:
-
-- Track A evaluation harness
-- Track B nested cancellation (ADR 0010)
-
-On this branch (Track C):
-
-- `parentRunId` on `AgentRun` / `AgentRunOptions` / `run:start`
-- reserved `context.agentRunId`; `asAgentTool` sets parent automatically
-- ADR 0011 + `docs/research/run-causality.md`
-- Core + example 17 integration coverage
+| Track | Status |
+| --- | --- |
+| A Evaluation harness | `main` — PR #8 |
+| B Nested cancellation | `main` — PR #9 / ADR 0010 |
+| C Run causality | `main` — PR #10 / ADR 0011 |
+| D OpenTelemetry proof | **next** |
+| E Human approval | pending |
+| F Idempotent side-effects | pending |
+| G Usage accounting | pending |
+| H Pre-1.0 API | pending |
+| I Narrative/release | pending |
 
 Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
 
 ---
 
-## 2. Next track after merge
+## 2. Next branch
 
-**Track D — OpenTelemetry proof**
+`feature/opentelemetry-proof`
 
-Branch suggestion: `feature/opentelemetry-proof`
-
-Example/proof only — do not make OTel a core dependency.
+Example/proof only — **do not** make OpenTelemetry a core dependency.
 
 ---
 
@@ -50,16 +48,6 @@ Example/proof only — do not make OTel a core dependency.
 
 ```bash
 npm test -w @agentstride/core
-npm test -w @agentstride/example-enterprise-support-agent
-```
-
----
-
-## 4. Quality gate
-
-```bash
-npm run build
-npm run typecheck
-npm run test
-npm run publish:check
+npm test -w @agentstride/evals-internal
+npm run eval:enterprise-support
 ```
