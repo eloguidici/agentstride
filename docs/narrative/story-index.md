@@ -16,5 +16,6 @@ Each row is a future public/tech narrative candidate grounded in repository arti
 | Side effects: knowing whether the tool already ran | example `21`, `docs/research/side-effect-idempotency.md` |
 | Usage without prices in core | example `22`, `docs/research/usage-accounting.md` |
 | Near-real ops: Velum Grid alarm triage | example `23` (+ HTTP), `docs/research/alarm-triage.md`, `evals/alarm-triage/` |
+| Near-real ops: Velum Grid change-gate | example `24` (+ HTTP), `docs/research/change-gate.md`, `evals/change-gate/` |
 
 Update this table when a track lands with durable evidence.
