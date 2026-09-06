@@ -60,4 +60,4 @@ Strong runners-up (pack 2): idempotent side effects; OTel out of core; Standard 
 ## Remaining gates
 
 - Owner review/edit of drafts before any LinkedIn/article publish  
-- Package scope / semver / visibility still open (Gates 2–3 + launch)
+- Visibility / npm launch (Gates 2–3 closed: core+openai @ `0.1.0` MIT when authorized)

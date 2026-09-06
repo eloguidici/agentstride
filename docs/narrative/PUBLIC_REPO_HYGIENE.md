@@ -16,7 +16,7 @@ Plan: PP-6
 | Terminology | “production-ready” absent from product docs | Maintain claim discipline ([PUBLIC_WORDING_REVIEW](./PUBLIC_WORDING_REVIEW.md)) |
 | Stale package README claims | Core README fixed in release-gate | OK |
 | Duplicate plan docs | Production-validation plan + productization plan both exist | Keep both; handoff points to productization as **next** |
-| LICENSE | MIT present at repo root | Confirm at OWNER GATE 3 |
+| LICENSE | MIT at repo root | **Gate 3 closed — MIT confirmed** |
 | Private posture | Explicit in README / RELEASE_READINESS | Keep until owner flips |
 
 ## Do not delete
