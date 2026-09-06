@@ -25,6 +25,7 @@ Examples validate the API. Keep them small.
 | `17-enterprise-support-agent` | Real-world slice: Receptionist + security + RAG + structured case result |
 | `18-enterprise-support-http` | Nest HTTP surface for the enterprise slice (`POST /support/run`) |
 | `19-opentelemetry-tracing` | AgentEvent → OpenTelemetry spans (proof; OTel not in core) |
+| `20-human-approval` | Propose → external approve → grant (agent is not its own approver) |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -41,4 +42,6 @@ npm start -w @agentstride/example-enterprise-support-http
 npm test -w @agentstride/example-enterprise-support-http
 npm start -w @agentstride/example-opentelemetry-tracing
 npm test -w @agentstride/example-opentelemetry-tracing
+npm start -w @agentstride/example-human-approval
+npm test -w @agentstride/example-human-approval
 ```
