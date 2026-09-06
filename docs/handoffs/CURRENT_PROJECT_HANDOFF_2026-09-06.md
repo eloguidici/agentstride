@@ -2,42 +2,55 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/usage-accounting`** (Track G)  
+Active feature branch: **none**  
+HEAD: see `git rev-parse HEAD` on latest `main`  
 Repository visibility: **private**
 
 Do not develop on `main`. Do not publish npm / make public unless explicitly requested.
 
-## Progress
+---
+
+## Production validation progress
 
 | Track | Status |
 | --- | --- |
-| A Evaluation harness | `main` |
-| B Nested cancellation | `main` / ADR 0010 |
-| C Run causality | `main` / ADR 0011 |
-| D OpenTelemetry proof | `main` / ADR 0012 |
-| E Human approval | `main` / PR #14 / example 20 |
-| F Idempotency | `main` / PR #15 / example 21 |
-| G Usage accounting | **this branch** / example 22 |
-| H Pre-1.0 API | **paused** |
-| I Narrative/release | **paused** |
+| A Evaluation harness | `main` — PR #8 |
+| B Nested cancellation | `main` — PR #9 / ADR 0010 |
+| C Run causality | `main` — PR #10 / ADR 0011 |
+| D OpenTelemetry proof | `main` — PR #12 / ADR 0012 |
+| E Human approval | `main` — PR #14 / example 20 |
+| F Idempotency | `main` — PR #15 / example 21 |
+| G Usage accounting | `main` — PR #16 / example 22 |
+| H Pre-1.0 API | **paused — owner decision** |
+| I Narrative/release | **paused — owner decision** |
 
-## This branch
+Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`  
+Narrative index: `docs/narrative/story-index.md`
 
-- `examples/22-usage-accounting` — aggregate tokens/steps/tools; external pricing only
-- Core unchanged
-
-```bash
-npm test -w @agentstride/example-usage-accounting
-```
+---
 
 ## Pause
 
 **The project should pause here for an owner decision.**
 
-Tracks H and I (API freeze / public narrative / release) change product posture. Options:
+Tracks H–I change product posture (API freeze, public story, publish). Recommended options:
 
-1. Freeze current API as pre-1.0 and polish docs only.
-2. Continue private incubation with more real use cases.
-3. Explicitly approve public repo and/or npm publish (out of band).
+1. Stay private; run more real use cases before freeze.
+2. Freeze current surface as pre-1.0 and polish docs only.
+3. Explicitly approve making the repo public and/or npm publish.
 
-Do not invent a workflow engine, policy engine, or publish without that decision.
+Do **not** invent workflow/policy engines or publish without that decision.
+
+---
+
+## Useful commands
+
+```bash
+npm test -w @agentstride/core
+npm test -w @agentstride/evals-internal
+npm run eval:enterprise-support
+npm run eval:human-approval
+npm test -w @agentstride/example-human-approval
+npm test -w @agentstride/example-side-effect-idempotency
+npm test -w @agentstride/example-usage-accounting
+```
