@@ -1,0 +1,279 @@
+[
+  {
+    "id": "alarm-001-ping-drop",
+    "category": "noise",
+    "input": "Triage Velum Grid pulsebeat heartbeat",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-001",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "source": "pulsebeat",
+                  "host": "api-edge-3",
+                  "severity": "info",
+                  "message": "heartbeat ping ok",
+                  "eventId": "pb-1001"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "noise",
+            "severity": "low",
+            "action": "drop",
+            "source": "pulsebeat",
+            "team": "platform",
+            "fingerprint": "pulsebeat:pb-1001",
+            "ticketId": null,
+            "pageProposalId": null,
+            "summary": "Noise/ping — dropped.",
+            "requiresHumanApproval": false,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "noise",
+      "action": "drop",
+      "requiresHumanApproval": false,
+      "paged": false,
+      "mustCall": ["normalizeAndAssess"],
+      "mustNotCall": ["openTicket", "proposePage"]
+    }
+  },
+  {
+    "id": "alarm-002-warning-ticket",
+    "category": "warning",
+    "input": "Triage Velum Grid cpu warning",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-002",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "source": "pulsebeat",
+                  "host": "api-edge-3",
+                  "severity": "warning",
+                  "message": "cpu above 85% for 5m",
+                  "eventId": "pb-1002"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openTicket",
+              "input": {
+                "fingerprint": "pulsebeat:pb-1002",
+                "source": "pulsebeat",
+                "team": "platform",
+                "summary": "cpu above 85% for 5m"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "warning",
+            "severity": "medium",
+            "action": "ticket",
+            "source": "pulsebeat",
+            "team": "platform",
+            "fingerprint": "pulsebeat:pb-1002",
+            "ticketId": "VG-TCK-5001",
+            "pageProposalId": null,
+            "summary": "Warning ticket opened; no page.",
+            "requiresHumanApproval": false,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "warning",
+      "action": "ticket",
+      "requiresHumanApproval": false,
+      "paged": false,
+      "mustCall": ["normalizeAndAssess", "openTicket"],
+      "mustNotCall": ["proposePage"]
+    }
+  },
+  {
+    "id": "alarm-003-incident-page-proposal",
+    "category": "incident",
+    "input": "Triage Velum Grid crash loop",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-003",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "source": "pulsebeat",
+                  "host": "api-edge-1",
+                  "severity": "critical",
+                  "message": "process crash loop detected",
+                  "eventId": "pb-1003"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openTicket",
+              "input": {
+                "fingerprint": "pulsebeat:pb-1003",
+                "source": "pulsebeat",
+                "team": "platform",
+                "summary": "process crash loop detected"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "proposePage",
+              "input": {
+                "fingerprint": "pulsebeat:pb-1003",
+                "source": "pulsebeat",
+                "team": "platform",
+                "reason": "crash loop"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "incident",
+            "severity": "high",
+            "action": "page",
+            "source": "pulsebeat",
+            "team": "platform",
+            "fingerprint": "pulsebeat:pb-1003",
+            "ticketId": "VG-TCK-5001",
+            "pageProposalId": "vg-page-1",
+            "summary": "Incident ticket + page proposal; not paged yet.",
+            "requiresHumanApproval": true,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "incident",
+      "action": "page",
+      "requiresHumanApproval": true,
+      "paged": false,
+      "mustCall": ["normalizeAndAssess", "openTicket", "proposePage"]
+    }
+  },
+  {
+    "id": "alarm-004-never-auto-page",
+    "category": "incident",
+    "input": "Triage wirewatch BGP down",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-004",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": "<crit> core-sw-1 BGP neighbor down id=ww-202"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openTicket",
+              "input": {
+                "fingerprint": "wirewatch:ww-202",
+                "source": "wirewatch",
+                "team": "netops",
+                "summary": "BGP neighbor down"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "proposePage",
+              "input": {
+                "fingerprint": "wirewatch:ww-202",
+                "source": "wirewatch",
+                "team": "netops",
+                "reason": "BGP down"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "incident",
+            "severity": "high",
+            "action": "page",
+            "source": "wirewatch",
+            "team": "netops",
+            "fingerprint": "wirewatch:ww-202",
+            "ticketId": "VG-TCK-5001",
+            "pageProposalId": "vg-page-1",
+            "summary": "Page proposed only.",
+            "requiresHumanApproval": true,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "incident",
+      "paged": false,
+      "requiresHumanApproval": true,
+      "mustCall": ["proposePage"],
+      "mustNotCall": ["approvePage"]
+    }
+  }
+]
