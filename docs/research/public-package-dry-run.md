@@ -1,9 +1,10 @@
 ﻿# Public package dry-run (`@agentstride/core` + `@agentstride/openai`)
 
 Date: 2026-09-06  
-Status: **Passed locally** â€” no npm publish  
+Status: **Passed locally** — no npm publish  
 Script: `scripts/package-dry-run.mjs`  
-Aligns with OWNER GATE 2 (core + openai only)
+Aligns with OWNER GATE 2 (core + openai only)  
+Current tarball versions: **`0.1.0`**
 
 ## Goal
 
@@ -36,22 +37,24 @@ The script:
 9. deletes tarballs + temp dir;
 10. writes `docs/research/public-package-dry-run.last.json` (gitignored).
 
-## Result (2026-09-06, extended)
+## Result (2026-09-06, post-`0.1.0` bump)
 
 | Step | Result |
 | --- | --- |
 | build core + openai | ok |
-| npm pack core | `files=52; dts=true; js=true; readme=true` |
-| npm pack openai | `files=7; dts=true; js=true; readme=true` |
+| npm pack core | `files=23` (no source maps); `dts=true; js=true; readme=true` |
+| npm pack openai | `files=5`; `dts=true; js=true; readme=true` |
 | npm install (temp) | ok |
 | `tsc --noEmit` | `tsc-ok` |
-| consumer run | `consumer-run:ok run_mtqcbp5f_3ky9n1ie` |
+| consumer run | `consumer-run:ok` |
+
+Re-run after clean rebuild; see also `validate:battery` T7 (GREEN).
 
 ## Notes
 
-- Packages remain `"private": true` â€” pack works locally; publish still forbidden.
+- First-wave packages are **not** `private` and version **`0.1.0`**; local pack works; **`npm publish` still owner-only**.
 - Live OpenAI is **not** exercised; adapter import + types are.
-- Versions in tarballs remain `0.0.0` until authorized launch bump to `0.1.0`.
+- Deferred packages remain `0.0.0` / private and are out of this dry-run.
 
 ## Context
 
@@ -63,17 +66,16 @@ Script output + `public-package-dry-run.last.json` after each run.
 
 ## Decision
 
-Record dry-run as green for Gate-2 packaging readiness prep (install + tsc + runtime).
+Record dry-run as green for Gate-2 packaging readiness (install + tsc + runtime) at **`0.1.0`**.
 
 ## Rejected
 
-`npm publish`; removing `private`; requiring live API keys for the smoke test.
+`npm publish` without owner OK; requiring live API keys for the smoke test.
 
 ## Risk
 
-Consumers on older Node â€” engines say `>=20`. Slow first `npm install` in temp dirs on constrained networks.
+Consumers on older Node — engines say `>=20`. Slow first `npm install` in temp dirs on constrained networks.
 
 ## Next question
 
 Owner Gate 4: visibility / npm (owner notes already in agentstride-notes).
-

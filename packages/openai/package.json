@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "type": "module",
   "description": "OpenAI model adapter for AgentStride",
+  "keywords": [
+    "agents",
+    "llm",
+    "openai",
+    "typescript",
+    "agentstride"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {

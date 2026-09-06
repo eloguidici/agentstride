@@ -2,18 +2,16 @@
 
 Date: 2026-09-06  
 Status: **OWNER GATE 3 CLOSED — `0.1.0` + MIT**  
-Current package versions in tree: still **`0.0.0`** (bump only at authorized launch)
+Current package versions in tree: **`0.1.0`** for `@agentstride/core` and `@agentstride/openai`; deferred packages remain **`0.0.0`** / private
 
 ## Owner decision
 
 **2026-09-06 — confirmed.**
 
-When launch is explicitly authorized:
-
 - First public versions for selected packages (`@agentstride/core`, `@agentstride/openai`): **`0.1.0`**
 - License: **MIT** (already at repo root `LICENSE`)
 
-Do not bump versions or publish until the owner authorizes launch.
+Tree bump for the first wave is done. **GitHub visibility → public** and **`npm publish`** still require explicit owner authorization.
 
 ## Options considered
 
@@ -69,10 +67,10 @@ ADR 0013; root MIT `LICENSE`; Gate 2 Option A; owner confirmation 2026-09-06.
 **`0.1.0` + MIT** for first authorized publish of `core` and `openai`.
 
 ### Rejected
-Jumping to `1.0.0`; bumping versions in tree before launch authorization.
+Jumping to `1.0.0`; publishing deferred packages at the same cut.
 
 ### Risk
 Users treat 0.1 as disposable junk — mitigate with clear README status + changelog quality.
 
 ### Next question
-Launch gates: draft review / visibility / npm publish — only with explicit owner OK.
+Owner Gate 4: GitHub public → `npm publish` core then openai → tag `v0.1.0`.

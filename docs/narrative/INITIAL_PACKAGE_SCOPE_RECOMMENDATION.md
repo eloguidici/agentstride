@@ -2,15 +2,15 @@
 
 Date: 2026-09-06  
 Status: **OWNER GATE 2 CLOSED — Option A selected**  
-Selected packages (for a future npm publish only): **`@agentstride/core` + `@agentstride/openai`**
+Selected packages (first-wave npm): **`@agentstride/core` + `@agentstride/openai`** at **`0.1.0`**
 
-Do not remove `private: true`. Do not publish until the owner explicitly authorizes launch.
+First-wave packages are **ready to publish** (no `private` flag; MIT; `publishConfig.access=public`). Deferred packages stay `private` / unpublished until they graduate. **`npm publish` still requires explicit owner authorization.**
 
 ## Owner decision
 
 **2026-09-06 — Option A (conservative).**
 
-Initial public npm surface (when authorized): only `core` and `openai`.  
+Initial public npm surface: only `core` and `openai`.  
 All other packages (`rag`, `memory`, `mcp`, `nestjs`, `migrate`, `a2a`) stay private/unpublished for now; users follow examples until those packages graduate.
 
 ## Per-package notes
@@ -30,7 +30,7 @@ All other packages (`rag`, `memory`, `mcp`, `nestjs`, `migrate`, `a2a`) stay pri
 
 ### Option A — Conservative (**selected**)
 
-Publish later (when owner approves): **`@agentstride/core` + `@agentstride/openai` only**.
+Publish when owner approves: **`@agentstride/core` + `@agentstride/openai` only**.
 
 **Why**  
 Matches the product story: small runtime + one practical model adapter. Lowest support surface. README quick start works.

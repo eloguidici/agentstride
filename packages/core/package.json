@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Core runtime primitives for AgentStride",
+  "keywords": [
+    "agents",
+    "llm",
+    "typescript",
+    "openai",
+    "agentstride"
+  ],
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
