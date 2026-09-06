@@ -18,8 +18,18 @@ export {
 } from "./structured-output.js";
 
 export {
+  AgentAbortError,
+  AgentRunTimeoutError,
+  ToolExecutionError,
+  isAgentAbortError,
+  isAgentRunTimeoutError,
+} from "./errors.js";
+
+export {
+  ABORT_SIGNAL_CONTEXT_KEY,
   assertToolAllowed,
   createRunId,
+  runWithDeadline,
   withTimeout,
 } from "./runtime-helpers.js";
 export type { AgentHooks, HookContext } from "./runtime-helpers.js";

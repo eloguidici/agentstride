@@ -1,10 +1,13 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
+import { AgentAbortError, ToolExecutionError } from "./errors.js";
 import {
   assertToolAllowed,
   createRunId,
   finalizeRun,
-  withTimeout,
+  lastAssistantText,
+  runWithDeadline,
+  withAbortSignalContext,
   type AgentHooks,
   type HookContext,
 } from "./runtime-helpers.js";
@@ -20,6 +23,7 @@ import type {
   InferSchemaOutput,
   Memory,
   Model,
+  ModelRequest,
   ToolCall,
   ToolDefinition,
 } from "./types.js";
@@ -29,6 +33,8 @@ export type AgentRunOptions = Readonly<{
   output?: StandardSchemaV1;
   threadId?: string;
   memory?: Memory;
+  /** Cancel this run; also combined with timeoutMs when set. */
+  signal?: AbortSignal;
 }>;
 
 export type AgentConfig = Readonly<{
@@ -76,6 +82,7 @@ export function createAgent(config: AgentConfig): Agent {
       const context = options.context ?? {};
       const memory = options.memory ?? config.memory;
       const messages: AgentMessage[] = [];
+      let steps = 0;
 
       const emit = (event: AgentEvent) => {
         events.push(event);
@@ -93,143 +100,35 @@ export function createAgent(config: AgentConfig): Agent {
       });
 
       try {
-        return await withTimeout(
-          (async () => {
-            emit({ type: "run:start", runId, input });
-            await config.hooks?.beforeRun?.(hookBase());
-
-            if (config.instructions) {
-              messages.push({ role: "system", content: config.instructions });
-            }
-
-            if (memory && options.threadId) {
-              const prior = await memory.load(options.threadId);
-              messages.push(...prior);
-            }
-
-            messages.push({ role: "user", content: input });
-
-            const outputSchemaJson =
-              options.output !== undefined
-                ? getSchemaJsonSchema(options.output)
-                : undefined;
-
-            for (let step = 1; step <= maxSteps; step += 1) {
-              const modelRequest = {
-                messages,
-                tools: toolDefinitions,
-                ...(outputSchemaJson !== undefined
-                  ? { outputSchema: outputSchemaJson }
-                  : {}),
-              };
-
-              emit({ type: "model:start", runId, step });
-              await config.hooks?.beforeModel?.({
-                ...hookBase(),
-                step,
-                modelRequest,
-              });
-
-              const response = await config.model.generate(modelRequest);
-
-              emit({
-                type: "model:end",
-                runId,
-                step,
-                ...(response.usage !== undefined ? { usage: response.usage } : {}),
-              });
-              await config.hooks?.afterModel?.({
-                ...hookBase(),
-                step,
-                modelRequest,
-                modelResponse: response,
-              });
-
-              const toolCalls = response.toolCalls ?? [];
-
-              messages.push({
-                role: "assistant",
-                ...(response.text !== undefined ? { content: response.text } : {}),
-                ...(toolCalls.length > 0 ? { toolCalls } : {}),
-              });
-
-              if (toolCalls.length === 0) {
-                const text = response.text ?? "";
-                let output: unknown;
-
-                if (options.output !== undefined) {
-                  output = await resolveStructuredOutput(
-                    options.output,
-                    response.output,
-                    text,
-                  );
-                }
-
-                if (memory && options.threadId) {
-                  await memory.save(options.threadId, messages);
-                }
-
-                emit({ type: "run:end", runId, status: "completed" });
-
-                return finalizeRun({
-                  id: runId,
-                  status: "completed",
-                  text,
-                  ...(output !== undefined ? { output } : {}),
-                  steps: step,
-                  messages,
-                  startedAt,
-                  events,
-                });
-              }
-
-              for (const call of toolCalls) {
-                assertToolAllowed(
-                  call.name,
-                  config.allowedTools,
-                  config.deniedTools,
-                );
-
-                emit({
-                  type: "tool:start",
-                  runId,
-                  toolName: call.name,
-                  ...(call.id !== undefined ? { toolCallId: call.id } : {}),
-                });
-                await config.hooks?.beforeTool?.({
-                  ...hookBase(),
-                  step,
-                  toolCall: call,
-                });
-
-                const toolOutput = await executeTool(call, tools, context);
-
-                emit({
-                  type: "tool:end",
-                  runId,
-                  toolName: call.name,
-                  ...(call.id !== undefined ? { toolCallId: call.id } : {}),
-                });
-                await config.hooks?.afterTool?.({
-                  ...hookBase(),
-                  step,
-                  toolCall: call,
-                  toolOutput,
-                });
-
-                messages.push({
-                  role: "tool",
-                  name: call.name,
-                  ...(call.id !== undefined ? { toolCallId: call.id } : {}),
-                  output: toolOutput,
-                });
-              }
-            }
-
-            throw new Error(`Agent exceeded maxSteps (${maxSteps})`);
-          })(),
-          config.timeoutMs,
-          "Agent run",
+        return await runWithDeadline(
+          async (signal) =>
+            executeAgentLoop({
+              config,
+              input,
+              options,
+              runId,
+              startedAt,
+              events,
+              context,
+              memory,
+              messages,
+              tools,
+              toolDefinitions,
+              maxSteps,
+              signal,
+              emit,
+              hookBase,
+              setSteps: (value) => {
+                steps = value;
+              },
+            }),
+          {
+            label: "Agent run",
+            ...(config.timeoutMs !== undefined
+              ? { timeoutMs: config.timeoutMs }
+              : {}),
+            ...(options.signal !== undefined ? { signal: options.signal } : {}),
+          },
         );
       } catch (error) {
         emit({ type: "run:error", runId, error });
@@ -242,8 +141,8 @@ export function createAgent(config: AgentConfig): Agent {
           agentRun: finalizeRun({
             id: runId,
             status: "failed" as const,
-            text: "",
-            steps: 0,
+            text: lastAssistantText(messages),
+            steps,
             messages,
             startedAt,
             events,
@@ -255,6 +154,245 @@ export function createAgent(config: AgentConfig): Agent {
   };
 
   return agent;
+}
+
+type LoopArgs = {
+  config: AgentConfig;
+  input: string;
+  options: AgentRunOptions;
+  runId: string;
+  startedAt: number;
+  events: AgentEvent[];
+  context: AgentContext;
+  memory: Memory | undefined;
+  messages: AgentMessage[];
+  tools: Readonly<Record<string, Tool<unknown, unknown>>>;
+  toolDefinitions: ToolDefinition[];
+  maxSteps: number;
+  signal: AbortSignal;
+  emit: (event: AgentEvent) => void;
+  hookBase: () => Omit<
+    HookContext,
+    "step" | "toolCall" | "toolOutput" | "modelRequest" | "modelResponse" | "error"
+  >;
+  setSteps: (value: number) => void;
+};
+
+async function executeAgentLoop(args: LoopArgs): Promise<AgentRun> {
+  const {
+    config,
+    input,
+    options,
+    runId,
+    startedAt,
+    events,
+    context,
+    memory,
+    messages,
+    tools,
+    toolDefinitions,
+    maxSteps,
+    signal,
+    emit,
+    hookBase,
+    setSteps,
+  } = args;
+
+  const toolContext = withAbortSignalContext(context, signal);
+
+  emit({ type: "run:start", runId, input });
+  await config.hooks?.beforeRun?.(hookBase());
+  throwIfAborted(signal);
+
+  if (config.instructions) {
+    messages.push({ role: "system", content: config.instructions });
+  }
+
+  if (memory && options.threadId) {
+    const prior = await memory.load(options.threadId);
+    throwIfAborted(signal);
+    messages.push(...prior);
+  }
+
+  messages.push({ role: "user", content: input });
+
+  const outputSchemaJson =
+    options.output !== undefined
+      ? getSchemaJsonSchema(options.output)
+      : undefined;
+
+  for (let step = 1; step <= maxSteps; step += 1) {
+    setSteps(step);
+    throwIfAborted(signal);
+
+    const modelRequest: ModelRequest = {
+      messages,
+      tools: toolDefinitions,
+      ...(outputSchemaJson !== undefined
+        ? { outputSchema: outputSchemaJson }
+        : {}),
+      signal,
+    };
+
+    const response = await runModelStep({
+      config,
+      runId,
+      step,
+      modelRequest,
+      emit,
+      hookBase,
+    });
+
+    const toolCalls = response.toolCalls ?? [];
+
+    messages.push({
+      role: "assistant",
+      ...(response.text !== undefined ? { content: response.text } : {}),
+      ...(toolCalls.length > 0 ? { toolCalls } : {}),
+    });
+
+    if (toolCalls.length === 0) {
+      const text = response.text ?? "";
+      let output: unknown;
+
+      if (options.output !== undefined) {
+        output = await resolveStructuredOutput(
+          options.output,
+          response.output,
+          text,
+        );
+      }
+
+      if (memory && options.threadId) {
+        await memory.save(options.threadId, messages);
+      }
+
+      emit({ type: "run:end", runId, status: "completed" });
+
+      return finalizeRun({
+        id: runId,
+        status: "completed",
+        text,
+        ...(output !== undefined ? { output } : {}),
+        steps: step,
+        messages,
+        startedAt,
+        events,
+      });
+    }
+
+    for (const call of toolCalls) {
+      throwIfAborted(signal);
+      await runToolCall({
+        config,
+        runId,
+        step,
+        call,
+        tools,
+        toolContext,
+        messages,
+        emit,
+        hookBase,
+      });
+    }
+  }
+
+  throw new Error(`Agent exceeded maxSteps (${maxSteps})`);
+}
+
+async function runModelStep(args: {
+  config: AgentConfig;
+  runId: string;
+  step: number;
+  modelRequest: ModelRequest;
+  emit: (event: AgentEvent) => void;
+  hookBase: LoopArgs["hookBase"];
+}) {
+  const { config, runId, step, modelRequest, emit, hookBase } = args;
+
+  emit({ type: "model:start", runId, step });
+  await config.hooks?.beforeModel?.({
+    ...hookBase(),
+    step,
+    modelRequest,
+  });
+
+  const response = await config.model.generate(modelRequest);
+
+  emit({
+    type: "model:end",
+    runId,
+    step,
+    ...(response.usage !== undefined ? { usage: response.usage } : {}),
+  });
+  await config.hooks?.afterModel?.({
+    ...hookBase(),
+    step,
+    modelRequest,
+    modelResponse: response,
+  });
+
+  return response;
+}
+
+async function runToolCall(args: {
+  config: AgentConfig;
+  runId: string;
+  step: number;
+  call: ToolCall;
+  tools: Readonly<Record<string, Tool<unknown, unknown>>>;
+  toolContext: AgentContext;
+  messages: AgentMessage[];
+  emit: (event: AgentEvent) => void;
+  hookBase: LoopArgs["hookBase"];
+}) {
+  const {
+    config,
+    runId,
+    step,
+    call,
+    tools,
+    toolContext,
+    messages,
+    emit,
+    hookBase,
+  } = args;
+
+  assertToolAllowed(call.name, config.allowedTools, config.deniedTools);
+
+  emit({
+    type: "tool:start",
+    runId,
+    toolName: call.name,
+    ...(call.id !== undefined ? { toolCallId: call.id } : {}),
+  });
+  await config.hooks?.beforeTool?.({
+    ...hookBase(),
+    step,
+    toolCall: call,
+  });
+
+  const toolOutput = await executeTool(call, tools, toolContext);
+
+  emit({
+    type: "tool:end",
+    runId,
+    toolName: call.name,
+    ...(call.id !== undefined ? { toolCallId: call.id } : {}),
+  });
+  await config.hooks?.afterTool?.({
+    ...hookBase(),
+    step,
+    toolCall: call,
+    toolOutput,
+  });
+
+  messages.push({
+    role: "tool",
+    name: call.name,
+    ...(call.id !== undefined ? { toolCallId: call.id } : {}),
+    output: toolOutput,
+  });
 }
 
 async function executeTool(
@@ -273,5 +411,25 @@ async function executeTool(
       ? call.input
       : await parseToolInput(tool.inputSchema, call.input, tool.name);
 
-  return tool.execute(input, context);
+  try {
+    return await tool.execute(input, context);
+  } catch (error) {
+    if (error instanceof ToolExecutionError) {
+      throw error;
+    }
+    throw new ToolExecutionError(tool.name, error);
+  }
+}
+
+function throwIfAborted(signal: AbortSignal): void {
+  if (!signal.aborted) {
+    return;
+  }
+  const reason = signal.reason;
+  if (reason instanceof Error) {
+    throw reason;
+  }
+  throw new AgentAbortError(
+    typeof reason === "string" ? reason : undefined,
+  );
 }
