@@ -6,6 +6,22 @@ It is intentionally ordered to stabilize the smallest useful runtime before addi
 
 The plan can evolve, but changes should be documented.
 
+## Working across ChatGPT, Codex and Cursor
+
+This plan is also a coordination artifact between development tools.
+
+The project may move between ChatGPT, Codex and Cursor frequently. Each environment should treat the repository documentation as shared state.
+
+When a phase is completed or materially changed:
+
+- mark the result clearly in the development log;
+- update this plan if the next phase or scope changed;
+- create/update the relevant ADR;
+- update the current handoff if the next starting point changed;
+- commit before handing the project to another tool.
+
+Do not rely on the previous assistant's chat context. The next environment may only have the repository.
+
 ---
 
 ## Phase 1 - Typed tools and runtime schemas
