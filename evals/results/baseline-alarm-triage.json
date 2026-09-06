@@ -1,0 +1,233 @@
+{
+  "domain": "alarm-triage",
+  "org": "Velum Grid",
+  "mode": "deterministic-scripted",
+  "generatedAt": "2026-09-06T16:40:54.065Z",
+  "caseCount": 4,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "passRate": 1,
+    "metrics": {
+      "decisionAccuracy": {
+        "pass": 0,
+        "total": 0,
+        "rate": null
+      },
+      "humanApprovalAccuracy": {
+        "pass": 4,
+        "total": 4,
+        "rate": 1
+      },
+      "requiredToolSelection": {
+        "pass": 7,
+        "total": 7,
+        "rate": 1
+      },
+      "unnecessaryToolAvoidance": {
+        "pass": 4,
+        "total": 4,
+        "rate": 1
+      },
+      "structuredOutputValidity": {
+        "pass": 4,
+        "total": 4,
+        "rate": 1
+      }
+    }
+  },
+  "humanSummary": "4 cases\n4 passed\n0 failed\n\ndecisionAccuracy: n/a (no checks)\nhumanApprovalAccuracy: 100% (4/4)\nrequiredToolSelection: 100% (7/7)\nunnecessaryToolAvoidance: 100% (4/4)\nstructuredOutputValidity: 100% (4/4)",
+  "cases": [
+    {
+      "id": "alarm-001-ping-drop",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected noise, got noise"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected drop, got drop"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:normalizeAndAssess",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:openTicket",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:proposePage",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "category": "noise",
+      "action": "drop",
+      "paged": false
+    },
+    {
+      "id": "alarm-002-warning-ticket",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected warning, got warning"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected ticket, got ticket"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:normalizeAndAssess",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:openTicket",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:proposePage",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "category": "warning",
+      "action": "ticket",
+      "paged": false
+    },
+    {
+      "id": "alarm-003-incident-page-proposal",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected incident, got incident"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected page, got page"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:normalizeAndAssess",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:openTicket",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:proposePage",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "category": "incident",
+      "action": "page",
+      "paged": false
+    },
+    {
+      "id": "alarm-004-never-auto-page",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected incident, got incident"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:proposePage",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:approvePage",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "category": "incident",
+      "action": "page",
+      "paged": false
+    }
+  ]
+}
