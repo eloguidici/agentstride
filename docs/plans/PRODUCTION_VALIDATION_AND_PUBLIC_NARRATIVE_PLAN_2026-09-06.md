@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Tracks A–C on `main`; Track D (OpenTelemetry proof) on `feature/opentelemetry-proof`
+Status: In progress — Tracks A–D on `main`; Track E (human approval) on `feature/human-approval`
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -633,7 +633,10 @@ Verify:
 
 # Track E - Human approval pattern
 
-Priority: P1
+Priority: P1  
+Status: **Done** (2026-09-06)  
+Branch: `feature/human-approval`  
+Research: `docs/research/human-approval.md`
 
 ## E.1 Why
 
@@ -718,6 +721,8 @@ Capture distinction between guardrails and approval.
 - no core policy engine;
 - execution explicit/auditable;
 - documented trade-offs.
+
+**Exit check (2026-09-06):** met — example 20 + evals/human-approval; core unchanged.
 
 ---
 
