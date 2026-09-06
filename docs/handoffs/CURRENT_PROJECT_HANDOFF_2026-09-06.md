@@ -2,40 +2,73 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`chore/release-gate`**  
-HEAD: see `git rev-parse HEAD` on the active branch  
-Repository visibility: **private** (do not make public / npm publish without explicit owner approval)
+Active implementation branch: **none**  
+Repository visibility: **private**
 
-Do not develop on `main`.
+Do not develop directly on `main` except through reviewed/merged branches.  
+Do not make the repository public or publish npm packages without explicit owner approval.
 
 ---
 
 ## Status
 
-| Area | Status |
-| --- | --- |
-| Tracks A–G | `main` |
-| Track H | ADR 0013 on `main` |
-| Private verticals 23–26 | `main` |
-| Engineering release gate | **this branch** — full test/typecheck/publish:check green |
-| Track I / public | **blocked** — owner must pick stories + approve public/npm |
+Engineering/product validation is complete for the current incubation scope:
 
-Source of truth: `docs/narrative/RELEASE_READINESS.md`  
-Notes: `docs/research/release-gate.md`
+- Tracks A–G: done
+- Track H / pre-1.0 API freeze: done (ADR 0013)
+- Private verticals 23–26: done
+- Engineering release gate: green
+- Track I / public productization: next
 
----
-
-## Next (owner)
-
-1. Pick 3–5 stories from `docs/narrative/story-index.md` for a future public pack.
-2. Review `docs/origins.md` / `docs/vision.md` for public wording.
-3. Decide: stay private vs public vs npm scope.
+The project should **not** return to feature expansion unless a future real product need appears.
 
 ---
 
-## Useful commands
+## Next source of truth
 
-```bash
-npm run build && npm test && npm run typecheck
-npm run publish:check
-```
+Read:
+
+`docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+
+This is the official next-phase plan.
+
+It covers:
+
+1. public story selection;
+2. public wording review;
+3. README productization;
+4. package scope recommendation;
+5. semver recommendation;
+6. public repository hygiene;
+7. package dry run;
+8. owner-selected narrative drafts;
+9. launch checklist.
+
+---
+
+## Important owner gates
+
+AI tools may prepare recommendations and private drafts, but must stop before:
+
+- selecting final public stories without owner approval;
+- removing package private flags;
+- changing repo visibility;
+- publishing npm;
+- choosing final semver/license without owner approval;
+- publishing LinkedIn/articles.
+
+When private productization is complete, stop instead of inventing more runtime work.
+
+---
+
+## Continuity
+
+**The repository is the shared memory.**
+
+Every meaningful session must update:
+
+- development log;
+- relevant narrative/research docs;
+- this handoff if the next starting point changes.
+
+The public story must remain traceable to code, tests, ADRs, evals and commits.

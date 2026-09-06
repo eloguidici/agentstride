@@ -40,3 +40,13 @@ Only the owner can flip those switches.
 ## Current posture
 
 **Private. Engineering polish done. Public later — only when the owner says so.**
+
+---
+
+## Productization plan
+
+The next private preparation phase is defined in:
+
+`docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+
+Engineering readiness does not imply launch authorization. Public story selection, package scope, version/license, repository visibility and npm publication remain explicit owner gates.
