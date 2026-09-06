@@ -34,3 +34,11 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Kept the next technical decision focused on typed runtime schemas for tools before adding provider integrations.
 - Recorded explicit scope boundaries to reduce the risk of AgentStride drifting into another large agent platform.
 - Documented the expected working style for future sessions: small coherent commits, tests, ADRs for important decisions and a human technical writing tone.
+
+## 2026-09-05 - Multi-tool development workflow
+
+- Made cross-tool continuity an explicit project requirement.
+- AgentStride may be developed interchangeably from ChatGPT, Codex and Cursor.
+- The repository documentation is the shared memory between tools; conversational context must not be required to continue.
+- Future sessions should leave meaningful progress in the development log, architectural decisions in ADRs, plan changes in the implementation plan and the latest starting point in the current handoff.
+- The goal is to be able to switch development environments without losing decisions, redoing analysis or asking the owner to repeat context.
