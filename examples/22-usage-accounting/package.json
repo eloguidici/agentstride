@@ -1,0 +1,14 @@
+{
+  "name": "@agentstride/example-usage-accounting",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Aggregate AgentRun usage metrics; cost estimation uses external pricing only",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core && node app.mjs",
+    "test": "npm run build -w @agentstride/core && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*"
+  }
+}
