@@ -258,3 +258,33 @@ Local parent/child trees are reconstructable; top-level callers unchanged.
 ### Next question
 
 Track D: OpenTelemetry proof without core OTel dependency.
+
+## 2026-09-06 - Track D OpenTelemetry proof
+
+### Context
+
+Needed standard traces without turning core into an observability platform.
+
+### Hypothesis
+
+`AgentEvent` + `parentRunId` map cleanly to GenAI-shaped OTel spans in an example bridge.
+
+### Evidence
+
+`examples/19-opentelemetry-tracing` — in-memory tests for run/model/tool spans, nested parent link, failures, privacy defaults. Core has zero `@opentelemetry/*` deps.
+
+### Decision
+
+ADR 0012: OTel out of core; defer `@agentstride/otel` until demand justifies it.
+
+### Rejected
+
+Core OTel; public package now; exporting prompts by default.
+
+### Result
+
+Working proof. Optional package not justified yet.
+
+### Next question
+
+Track E: human approval as propose → approve → act without a workflow engine.
