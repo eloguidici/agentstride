@@ -29,3 +29,30 @@ test("createOpenAIModel maps chat completions through fetch", async () => {
   assert.equal(result.text, "hello from openai");
   assert.equal(result.usage?.totalTokens, 5);
 });
+
+test("createOpenAIModel forwards AbortSignal to fetch", async () => {
+  const controller = new AbortController();
+  let sawSignal = false;
+
+  const model = createOpenAIModel({
+    apiKey: "test-key",
+    model: "gpt-4o-mini",
+    fetchImpl: async (_url, init) => {
+      sawSignal = init?.signal === controller.signal;
+      return new Response(
+        JSON.stringify({
+          choices: [{ message: { content: "ok" } }],
+        }),
+        { status: 200 },
+      );
+    },
+  });
+
+  await model.generate({
+    messages: [{ role: "user", content: "hi" }],
+    tools: [],
+    signal: controller.signal,
+  });
+
+  assert.equal(sawSignal, true);
+});
