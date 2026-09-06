@@ -42,3 +42,15 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - The repository documentation is the shared memory between tools; conversational context must not be required to continue.
 - Future sessions should leave meaningful progress in the development log, architectural decisions in ADRs, plan changes in the implementation plan and the latest starting point in the current handoff.
 - The goal is to be able to switch development environments without losing decisions, redoing analysis or asking the owner to repeat context.
+
+## 2026-09-05 - Typed tool schemas (Phase 1)
+
+- Evaluated Zod-in-core, a custom schema contract, Standard Schema, and JSON Schema-only.
+- Accepted ADR 0005: validate tool inputs through Standard Schema V1; derive JSON Schema through Standard JSON Schema V1 when the library supports it.
+- Kept Zod out of `@agentstride/core` runtime dependencies. It remains the recommended way to author schemas.
+- Extended `defineTool()` with optional `inputSchema`, TypeScript inference, and derived `parameters`.
+- Agent execution now validates model tool arguments before calling `execute`.
+- Added `ToolInputValidationError` with issue details.
+- Deferred tool output validation until structured output / harder boundaries justify it.
+- Updated the fake-model example to pass a Zod schema and show parameters reaching the model.
+- Tests: 8 passing, including valid input, invalid input, untyped tools, and JSON Schema derivation.
