@@ -21,7 +21,7 @@ No drive-by breaking changes unless a vertical slice cannot proceed.
 | `AgentLike.run` options index signature | Loose `[key: string]: unknown` — tighten once remote agents stabilize. |
 | Reserved context key `abortSignal` | **Validated in slice:** cooperative tool cancel works. Avoid colliding domain keys. |
 | Package `exports.types` → `src/` | Incubation convenience for monorepo builds; switch to `dist/*.d.ts` before npm publish. |
-| `asAgentTool` signal forwarding | **Evidence:** nested specialist does not receive `run({ signal })` unless the wrapper maps `context.abortSignal`. Documented; change only if product cancel needs nested abort. |
+| `asAgentTool` signal forwarding | **Done** (ADR 0010): nested `run({ signal })` receives parent `context.abortSignal`. Cooperative work must still honor the signal. |
 
 ## Explicitly not public policy engines
 
