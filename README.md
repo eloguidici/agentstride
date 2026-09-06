@@ -1,35 +1,24 @@
 # AgentStride
 
-AgentStride is a small TypeScript runtime for building AI agents without committing too early to a large framework.
+AgentStride is a lightweight TypeScript runtime for building portable AI agents without committing too early to a large framework.
 
-> Build simple. Grow deliberately.
+> Build simple. Grow deliberately.  
+> Start lightweight. Stay if it is enough. Graduate if it is not.
 
-This repository is still private while the API stabilizes.
+**Status:** repository is **private** while the public productization pack is prepared. Packages remain unpublished (`private: true`). Pre-1.0 freeze decisions: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
-## Install (workspace / local)
+## What it is
 
-```bash
-npm install
-npm run build
-```
+A small **provider-agnostic** core (`createAgent`, `defineTool`, structured output, `AgentRun` events, cooperative cancellation, local delegation) plus **optional** packages for OpenAI-compatible models, RAG helpers, memory, MCP, NestJS and migration adapters.
 
-Eventual public consumption model:
-
-```bash
-npm install @agentstride/core
-```
-
-Optional packages:
-
-- `@agentstride/openai`
-- `@agentstride/rag`
-- `@agentstride/mcp`
-- `@agentstride/memory`
-- `@agentstride/nestjs`
-- `@agentstride/a2a`
-- `@agentstride/migrate`
+Domain logic stays in your application. AgentStride does not ship a workflow engine, hosted control plane or policy framework.
 
 ## Quick start
+
+```bash
+npm install   # monorepo / local workspace today
+npm run build
+```
 
 ```ts
 import { createAgent, defineTool } from "@agentstride/core";
@@ -43,35 +32,90 @@ const findCustomer = defineTool({
 });
 
 const agent = createAgent({
-  model,
+  model, // any object implementing the Model contract
+  instructions: "Use tools when helpful.",
   tools: { findCustomer },
 });
 
-const result = await agent.run("Find customer 42");
+const run = await agent.run("Find customer 42", {
+  output: z.object({ summary: z.string() }),
+});
 ```
+
+Eventual public install (not enabled yet):
+
+```bash
+npm install @agentstride/core @agentstride/openai
+```
+
+## Why AgentStride
+
+- **Small core** — understandable in an afternoon ([vision](docs/vision.md), [architecture](docs/architecture.md)).
+- **Portable tools** — `execute(input, context)`; no runtime message DTOs required ([ADR 0002](docs/decisions/0002-tools-are-portable.md)).
+- **Standard Schema** for tool input and structured output ([ADR 0005](docs/decisions/0005-tool-input-schemas.md) / [0006](docs/decisions/0006-structured-output.md)).
+- **Explicit runs** — `AgentRun` + lifecycle events without a global bus ([ADR 0003](docs/decisions/0003-no-event-bus-in-core.md), [0007](docs/decisions/0007-agent-run-events.md)).
+- **Cancellation & causality** — `AbortSignal` including nested agents; optional `parentRunId` ([ADR 0009](docs/decisions/0009-abort-signal-cancellation.md)–[0011](docs/decisions/0011-run-causality.md)).
+- **Optional integrations** — OpenAI adapter, RAG, memory, MCP, NestJS live outside core.
+
+## Production evidence (examples, not a certificate)
+
+These slices show patterns we care about in real backends. They do **not** mean every deployment is “production-ready.”
+
+| Concern | Where |
+| --- | --- |
+| Deterministic decision evals | [`evals/`](evals/), [research](docs/research/evaluation-harness.md) |
+| Human approval (agent ≠ approver) | [example 20](examples/20-human-approval/), evals |
+| Idempotent side effects | [example 21](examples/21-side-effect-idempotency/) |
+| OpenTelemetry without core lock-in | [example 19](examples/19-opentelemetry-tracing/), [ADR 0012](docs/decisions/0012-opentelemetry-out-of-core.md) |
+| Nest / enterprise HTTP | [examples 17–18](examples/), [26](examples/26-velum-grid-nestjs/) |
+| Near-real ops / compliance demos | Velum Grid examples 23–25 |
+
+## Architecture
+
+```text
+User → Agent → Model ⇄ Tools → AgentRun (+ events)
+                 │
+                 └─ optional: openai | rag | memory | mcp | nestjs
+```
+
+See [architecture](docs/architecture.md) and [origins](docs/origins.md) for the Receptionist / no-bus story.
+
+## When not to use AgentStride
+
+Prefer a larger framework or platform when you already need:
+
+- durable distributed workflows / long-running graphs;
+- a hosted agent control plane (deploy, sessions UI, sandboxes);
+- a broad provider/integration catalog as the product;
+- marketplace, scheduler or channel product features.
+
+AgentStride is for teams that want a **small embeddable runtime** inside their own backend.
+
+## Portability / graduate path
+
+Tools are designed to stay portable. `@agentstride/migrate` exposes config helpers toward other ecosystems — with honest Zod/schema trade-offs documented in that package. Do not treat migration percentages in demos as marketing claims.
+
+## Packages
+
+| Package | Role | First-release posture (recommendation) |
+| --- | --- | --- |
+| `@agentstride/core` | Runtime | Strong candidate |
+| `@agentstride/openai` | OpenAI-compatible `Model` | Strong candidate |
+| `@agentstride/rag` / `memory` / `mcp` / `nestjs` | Optional | Justify case-by-case |
+| `@agentstride/a2a` | Experimental remote sketch | Defer |
+| `@agentstride/migrate` | Portability helpers | Optional / later |
+
+See [package scope recommendation](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md). Nothing is published yet.
 
 ## Docs
 
-- [Publish readiness](docs/PUBLISH.md)
-- [Vision](docs/vision.md)
-- [Architecture](docs/architecture.md)
-- [Origins](docs/origins.md)
-- [Use cases](docs/use-cases.md)
-- [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md)
+- [Public productization plan](docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md)
+- [Release readiness](docs/narrative/RELEASE_READINESS.md)
+- [Story index](docs/narrative/story-index.md)
 - [Decision log](docs/decisions/README.md)
-- [Development log](docs/development-log.md)
-
-## Development continuity
-
-AgentStride may be worked on from different development environments, including ChatGPT, Codex and Cursor.
-
-The repository is intentionally documented so a new session can continue from the codebase rather than depending on previous chat history.
-
-Start with [the current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md) and [the implementation plan](docs/IMPLEMENTATION_PLAN.md).
-
-Default branch is `main`. Do not develop features directly on `main`. Do not make the repository public or publish npm packages unless explicitly requested.
+- [Publish checklist](docs/PUBLISH.md)
 
 ## License
 
-MIT. The repository remains private until an intentional public release.
+MIT. Repository remains private until an intentional public release approved by the owner.
