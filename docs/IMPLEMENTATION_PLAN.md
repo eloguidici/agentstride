@@ -229,7 +229,7 @@ Pause feature growth and reassess if any of the following happens:
 
 ## Production validation + narrative track
 
-Status: **In progress** — Tracks A–D on `main`; Track E on `feature/human-approval` (2026-09-06)
+Status: **In progress** — Tracks A–G on `main`; H/I paused; private slice **Velum Grid alarm triage** on `feature/alarm-triage` (2026-09-06)
 
 Detailed source of truth:
 
@@ -243,8 +243,10 @@ Preferred order:
 4. OpenTelemetry proof — **done** (ADR 0012 / example 19);
 5. human approval — **done** (example 20);
 6. idempotent side-effect tools — **done** (example 21);
-7. usage accounting — **done on branch** (example 22);
+7. usage accounting — **done** (example 22);
 8. pre-1.0 API stabilization — **paused for owner decision**;
 9. narrative/release decision — **paused for owner decision**.
+
+Post-pause private evidence: example `23-alarm-triage` (Velum Grid) — see `docs/research/alarm-triage.md`.
 
 The objective is to increase production credibility without turning AgentStride into a large framework.

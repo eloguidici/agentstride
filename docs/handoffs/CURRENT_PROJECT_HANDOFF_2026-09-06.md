@@ -2,8 +2,8 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **none**  
-HEAD: see `git rev-parse HEAD` on latest `main`  
+Active feature branch: **`feature/alarm-triage`**  
+HEAD: see `git rev-parse HEAD` on the active branch  
 Repository visibility: **private**
 
 Do not develop on `main`. Do not publish npm / make public unless explicitly requested.
@@ -24,20 +24,17 @@ Do not develop on `main`. Do not publish npm / make public unless explicitly req
 | H Pre-1.0 API | **paused — owner decision** |
 | I Narrative/release | **paused — owner decision** |
 
+**Post-pause private slice:** Velum Grid alarm triage on `feature/alarm-triage` (example 23 + `evals/alarm-triage`).
+
 Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`  
-Narrative index: `docs/narrative/story-index.md`
+Narrative index: `docs/narrative/story-index.md`  
+Research: `docs/research/alarm-triage.md`
 
 ---
 
-## Pause
+## Pause (H/I)
 
-**The project should pause here for an owner decision.**
-
-Tracks H–I change product posture (API freeze, public story, publish). Recommended options:
-
-1. Stay private; run more real use cases before freeze.
-2. Freeze current surface as pre-1.0 and polish docs only.
-3. Explicitly approve making the repo public and/or npm publish.
+Tracks H–I still need an owner decision (API freeze / public story / publish). Meanwhile the recommended path is more private, near-real use cases — current work is **Velum Grid** alarm triage.
 
 Do **not** invent workflow/policy engines or publish without that decision.
 
@@ -50,7 +47,7 @@ npm test -w @agentstride/core
 npm test -w @agentstride/evals-internal
 npm run eval:enterprise-support
 npm run eval:human-approval
-npm test -w @agentstride/example-human-approval
-npm test -w @agentstride/example-side-effect-idempotency
-npm test -w @agentstride/example-usage-accounting
+npm run eval:alarm-triage
+npm test -w @agentstride/example-alarm-triage
+npm start -w @agentstride/example-alarm-triage
 ```
