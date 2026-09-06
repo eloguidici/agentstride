@@ -26,3 +26,11 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Added behavior tests for direct responses, tool execution, unknown tools and max-step exhaustion.
 - Added a provider-free example so the core can be exercised before provider adapters exist.
 - Runtime input validation for tool arguments is intentionally not solved yet. The next design step is to decide how schemas fit without coupling the core to one validation library.
+
+## 2026-09-05 - Codex handoff
+
+- Consolidated the current state into `docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-05.md`.
+- Added a phased implementation plan in `docs/IMPLEMENTATION_PLAN.md`.
+- Kept the next technical decision focused on typed runtime schemas for tools before adding provider integrations.
+- Recorded explicit scope boundaries to reduce the risk of AgentStride drifting into another large agent platform.
+- Documented the expected working style for future sessions: small coherent commits, tests, ADRs for important decisions and a human technical writing tone.
