@@ -229,7 +229,7 @@ Pause feature growth and reassess if any of the following happens:
 
 ## Production validation + narrative track
 
-Status: **Planned** (2026-09-06)
+Status: **In progress** — Track A done on `feature/evaluation-harness` (2026-09-06)
 
 Detailed source of truth:
 
@@ -237,7 +237,7 @@ Detailed source of truth:
 
 Preferred order:
 
-1. evaluation harness;
+1. evaluation harness — **done** (`evals/`, 22 cases, baseline);
 2. nested cancellation;
 3. run causality;
 4. OpenTelemetry proof;
