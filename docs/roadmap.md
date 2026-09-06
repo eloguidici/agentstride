@@ -28,14 +28,14 @@ These should not force changes into the core unless there is a strong reason.
 
 ## Later
 
-Possible areas:
+Possible areas (only after stabilize / real use cases):
 
-- local agent delegation;
-- remote agents;
-- A2A adapter;
-- migration helpers for Mastra / LangChain;
+- stronger remote agents;
+- fuller A2A protocol client (today: experimental HTTP AgentLike sketch);
 - OpenTelemetry export;
 - approval / policy helpers.
+
+Local delegation, migration helpers, and Nest/MCP/RAG packages already exist in incubation form on `main`.
 
 ## Explicitly not planned for the first version
 

@@ -58,7 +58,7 @@ const result = await agent.run("Find customer 42");
 - [Origins](docs/origins.md)
 - [Use cases](docs/use-cases.md)
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
-- [Current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-05.md)
+- [Current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md)
 - [Decision log](docs/decisions/README.md)
 - [Development log](docs/development-log.md)
 
@@ -68,7 +68,9 @@ AgentStride may be worked on from different development environments, including 
 
 The repository is intentionally documented so a new session can continue from the codebase rather than depending on previous chat history.
 
-Start with [the current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-05.md) and [the implementation plan](docs/IMPLEMENTATION_PLAN.md).
+Start with [the current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md) and [the implementation plan](docs/IMPLEMENTATION_PLAN.md).
+
+Default branch is `main`. Do not develop features directly on `main`. Do not make the repository public or publish npm packages unless explicitly requested.
 
 ## License
 
