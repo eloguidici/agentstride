@@ -380,3 +380,33 @@ Operational metrics available beside quality evals.
 ### Next question / pause
 
 Track H (pre-1.0 API freeze) and Track I (narrative/release) need an **owner decision** (what to freeze, whether to publish). Do not invent scope.
+
+## 2026-09-06 - Velum Grid alarm triage (private slice)
+
+### Context
+
+Owner chose stay-private + a near-real case: multi-team alarms, categorize, ticket/page — not ACME.
+
+### Hypothesis
+
+Normalize + idempotent tickets + page proposals live in domain; agent never approves its own page.
+
+### Evidence
+
+Example 23 (`pulsebeat` / `wirewatch` / `ledgerflare`); domain + agent tests; `evals/alarm-triage` 4/4.
+
+### Decision
+
+Fictional org **Velum Grid**. External approve roles only. Core unchanged. H/I still paused.
+
+### Rejected
+
+ACME; auto-page from the agent; normalize/approval in core.
+
+### Result
+
+Portable ops vertical slice reusing Tracks E/F patterns.
+
+### Next question
+
+More private use cases, or resume H/I?
