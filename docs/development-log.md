@@ -350,3 +350,33 @@ One case per key; retries report `replayed: true`.
 ### Next question
 
 Track G: usage aggregation for runs/evals without pricing in core.
+
+## 2026-09-06 - Track G usage accounting
+
+### Context
+
+Needed run/eval metrics (tokens, steps, tool counts) without baking provider prices into core.
+
+### Hypothesis
+
+Aggregate from AgentRun events; estimate cost only with caller-supplied pricing.
+
+### Evidence
+
+Example 22 tests for aggregateUsageFromRun / estimateCostUsd / multi-run rows.
+
+### Decision
+
+Helpers live in the example. No prices in core. No billing package.
+
+### Rejected
+
+Hard-coded rates; mandatory cost on AgentRun.
+
+### Result
+
+Operational metrics available beside quality evals.
+
+### Next question / pause
+
+Track H (pre-1.0 API freeze) and Track I (narrative/release) need an **owner decision** (what to freeze, whether to publish). Do not invent scope.
