@@ -178,16 +178,18 @@ Hardening added without publishing:
 
 ## Stabilize track (post–Phase 14 incubation)
 
-Status: **In progress** on `feature/runtime-hardening` (2026-09-06)
+Status: **Done** on `main` via PR #3 (2026-09-06)
 
-Goal: harden runtime behavior before more features.
+---
 
-- failed `AgentRun` preserves real progress
-- `AbortSignal` / timeout cancellation semantics
-- failure-path tests
-- OpenAI adapter cancellation + honest structured-output docs
-- migrate Zod trade-off documented
-- API cleanup notes for a future 1.0 (no drive-by breaking changes)
+## Real-world validation track
+
+Status: **In progress** on `feature/real-world-validation` (2026-09-06)
+
+- `examples/17-enterprise-support-agent` — enterprise Receptionist slice with domain separation
+- Offline tests + optional live run
+- Core frozen (ergonomics documented; no drive-by API changes)
+- Evidence fed into `docs/research/api-review-pre-1.0.md` and development-log
 
 ---
 
