@@ -530,11 +530,9 @@ Do not edit package versions until owner approves.
 
 # OWNER GATE 3 - Version and license confirmation
 
-Owner must explicitly confirm:
+**CLOSED 2026-09-06:** first authorized public versions = **`0.1.0`**; license = **MIT**.
 
-- initial semver;
-- license remains MIT or changes;
-- public compatibility promise.
+Tree remains `0.0.0` / `private: true` until explicit launch authorization. No automatic publish.
 
 ---
 
