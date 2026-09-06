@@ -1,0 +1,33 @@
+{
+  "name": "@agentstride/nestjs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NestJS integration for AgentStride",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "peerDependencies": {
+    "@agentstride/core": "*",
+    "@nestjs/common": "^10.0.0 || ^11.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@nestjs/common": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@agentstride/core": "*"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@agentstride/example-migrate-langchain",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core -w @agentstride/migrate && node index.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "@agentstride/migrate": "*",
+    "zod": "^4.5.4"
+  }
+}

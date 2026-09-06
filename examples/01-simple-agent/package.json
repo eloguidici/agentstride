@@ -1,0 +1,12 @@
+{
+  "name": "@agentstride/example-simple-agent",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core && node index.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*"
+  }
+}
