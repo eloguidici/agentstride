@@ -136,7 +136,7 @@ Added `examples/17-enterprise-support-agent`:
 
 ### Ergonomics findings (`problem → example → possible solution`)
 
-1. **Nested cancel signal** — Outer `run({ signal })` aborts the receptionist wait, but `asAgentTool` only forwards `context`, not `options.signal`, so the specialist model may not see `ModelRequest.signal`. *Possible solution (not done):* `asAgentTool` maps `context.abortSignal` into `run({ signal })`. Evidence only; core left unchanged.
+1. **Nested cancel signal** — Outer `run({ signal })` aborts the receptionist wait, but `asAgentTool` only forwards `context`, not `options.signal`, so the specialist model may not see `ModelRequest.signal`. *Resolved later as ADR 0010 / Track B:* `asAgentTool` maps `context.abortSignal` into `run({ signal })`.
 2. **Reserved `abortSignal` key** — Cooperative tools work; domain authors must avoid colliding keys. Still acceptable vs widening `Tool.execute`.
 3. **Lookup misses as throws** — Throwing from `findCustomer` aborted the whole run before structured `customer-not-found`. Fixed in the **example** by returning `{ found: false }` (app/adapter choice, not core).
 4. **Trace ergonomics** — Manual `onEvent` printer is enough; OTel still not justified.
@@ -198,3 +198,33 @@ We can fail a case with `caseId` + check reason. Core unchanged.
 ### Next question
 
 Track B: nested cancellation across `asAgentTool`.
+
+## 2026-09-06 - Track B nested cancellation
+
+### Context
+
+Outer abort rejected the parent wait while nested specialists could keep running (`asAgentTool` did not pass `signal`).
+
+### Hypothesis
+
+Map `context.abortSignal` → nested `run({ signal })` with no new public options.
+
+### Evidence
+
+Core tests in `nested-cancellation.test.mjs`: nested model/tool abort on parent cancel; success/context/no-signal paths unchanged.
+
+### Decision
+
+Ship the forward in `asAgentTool`. ADR 0010. Research note `docs/research/nested-cancellation.md`.
+
+### Rejected
+
+AgentLike cancel expansion; caller-managed-only; cancellation bus.
+
+### Result
+
+HTTP disconnect / outer `AbortSignal` can cooperatively stop nested local delegation when work honors the signal.
+
+### Next question
+
+Track C: parent/child run causality.

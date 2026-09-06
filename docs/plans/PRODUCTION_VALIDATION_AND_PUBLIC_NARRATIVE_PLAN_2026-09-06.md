@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Track A (evaluation harness) implemented on `feature/evaluation-harness`  
+Status: In progress — Track A done; Track B (nested cancellation) on `feature/nested-cancellation`  
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -363,7 +363,9 @@ Track A is done when:
 # Track B - Nested cancellation across AgentLike / asAgentTool
 
 Priority: P0/P1  
-Evidence already exists from enterprise slice
+Status: **Done** (2026-09-06)  
+Branch: `feature/nested-cancellation`  
+ADR: `docs/decisions/0010-nested-agent-cancellation.md`
 
 ## B.1 Known problem
 
@@ -438,6 +440,8 @@ Capture before/after behavior.
 - no cancellation bus;
 - core API remains small;
 - enterprise example still passes.
+
+**Exit check (2026-09-06):** met via ADR 0010 + `packages/core/test/nested-cancellation.test.mjs`.
 
 ---
 
