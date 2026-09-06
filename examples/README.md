@@ -17,6 +17,10 @@ Examples validate the API. Keep them small.
 | `mcp-demo-server` | Tiny owned MCP server (`echo`, `add`) |
 | `11-live-mcp` | Live OpenRouter agent using the demo MCP server |
 | `12-nestjs-app` | Real NestJS HTTP app embedding AgentStride |
+| `migration-shared` | Portable domain for migration demos |
+| `13-migration-baseline` | AgentStride baseline + reuse metric |
+| `14-migrate-mastra` | Same domain via Mastra tool config |
+| `15-migrate-langchain` | Same domain via LangChain tool config |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 

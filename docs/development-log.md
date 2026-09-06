@@ -55,7 +55,14 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Updated the fake-model example to pass a Zod schema and show parameters reaching the model.
 - Tests: 8 passing, including valid input, invalid input, untyped tools, and JSON Schema derivation.
 
-## 2026-09-05 - MCP client demo and NestJS mini-app
+## 2026-09-05 - Migration proof with measured reuse
+
+- Added `examples/migration-shared` with a framework-free domain module.
+- Added baseline AgentStride + Mastra + LangChain migration examples.
+- Extended `@agentstride/migrate` with `toMastraToolConfig()` and `toLangChainToolConfig()`.
+- Measured reuse as shared domain lines / (shared + framework adapter lines).
+- Local run: Mastra used real `@mastra/core` createTool; LangChain demo kept a compatible shim when the full LangChain dep tree was unavailable.
+
 
 - Added an AgentStride-owned demo MCP server (`examples/mcp-demo-server`) with `echo` and `add`. Did not modify any personal MCP projects outside the repo.
 - Extended `@agentstride/mcp` with `connectMcpStdio()` and MCP result unwrapping.

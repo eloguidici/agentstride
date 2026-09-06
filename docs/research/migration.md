@@ -1,13 +1,47 @@
-# Migration research notes
+# Migration proof
 
-Status: Phase 13 starter
+Status: Phase 13 implemented with measured reuse
 
-AgentStride tools are intentionally portable:
+## Shared domain
 
-- typed/plain `execute(input, context)`
-- optional Standard Schema / JSON Schema parameters
-- no AgentStride message envelopes in domain tools
+`examples/migration-shared/domain.mjs` contains:
 
-`@agentstride/migrate` exposes `toPortableTool()`, `toMastraTool()` and `toLangChainTool()` as thin extractions of that contract.
+- Zod input schema
+- tool name/description constants
+- `findCustomerService()`
+- instructions text
 
-Real wrapping into Mastra/LangChain constructors should happen in application code or later dedicated adapters once those APIs are pinned for examples.
+No AgentStride / Mastra / LangChain imports.
+
+## Examples
+
+| Example | Role |
+| --- | --- |
+| `13-migration-baseline` | AgentStride agent using the shared domain |
+| `14-migrate-mastra` | Same domain via `toMastraToolConfig()` (+ optional `@mastra/core`) |
+| `15-migrate-langchain` | Same domain via `toLangChainToolConfig()` (+ optional `@langchain/core`) |
+
+## How reuse is measured
+
+```text
+reuse% = shared domain lines / (shared domain lines + framework adapter lines)
+```
+
+Runtime framework packages are excluded on purpose. We only count application code that you would rewrite or keep.
+
+## Helpers
+
+`@agentstride/migrate`:
+
+- `toPortableTool()`
+- `toMastraToolConfig()`
+- `toLangChainToolConfig()`
+
+## Run
+
+```bash
+npm start -w @agentstride/example-migration-baseline
+npm start -w @agentstride/example-migrate-mastra
+npm start -w @agentstride/example-migrate-langchain
+node examples/migration-shared/run-all.mjs
+```

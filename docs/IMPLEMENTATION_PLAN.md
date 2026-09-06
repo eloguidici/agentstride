@@ -135,10 +135,21 @@ Status: **Explored** (2026-09-05)
 
 ## Phase 13 - Migration / portability proof
 
-Status: **Started** (2026-09-05)
+Status: **Done (measured)** (2026-09-05)
 
-- `@agentstride/migrate` portable tool helpers
-- full Mastra/LangChain wrapper examples still thin by design
+- Shared domain in `examples/migration-shared`
+- Baseline AgentStride example
+- Mastra migration example (`toMastraToolConfig`, real `@mastra/core` when available)
+- LangChain migration example (`toLangChainToolConfig`, shim/real DynamicStructuredTool)
+- Honest reuse metric script (shared domain lines / shared+adapter lines)
+
+Observed in local runs (approximate):
+
+- AgentStride baseline reuse ~34%
+- Mastra adapter reuse ~29%
+- LangChain adapter reuse ~28%
+
+Interpretation: the domain module is fully reused; framework examples differ mainly in adapter ceremony.
 
 ---
 
