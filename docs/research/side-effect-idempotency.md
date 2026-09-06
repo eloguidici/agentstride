@@ -1,4 +1,4 @@
-# Side-effect idempotency (Track F)
+﻿# Side-effect idempotency (Track F)
 
 Date: 2026-09-06  
 Status: Implemented  
@@ -10,11 +10,11 @@ Tool calls can succeed while the client loses the response; models can repeat to
 
 ## Hypothesis
 
-Domain ownership of `tenantId + requestId + actionType` (plus in-flight dedupe) is enough — no core framework.
+Domain ownership of `tenantId + requestId + actionType` (plus in-flight dedupe) is enough â€” no core framework.
 
 ## Evidence
 
-`examples/21-side-effect-idempotency` — 6 tests: duplicate key, concurrent race, lost response, agent double tool call → one case.
+`examples/21-side-effect-idempotency` â€” 6 tests: duplicate key, concurrent race, lost response, agent double tool call â†’ one case.
 
 ## Decision
 
@@ -28,6 +28,6 @@ Core idempotency middleware; workflow engine; durable distributed lock service f
 
 Retries return `{ replayed: true }` with the same `caseId`.
 
-## Next question
+## Follow-up
 
-Track G: can we aggregate ModelUsage / tool counts for runs and evals without putting prices in core?
+See usage-accounting research and example 22.

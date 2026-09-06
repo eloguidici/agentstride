@@ -1,4 +1,4 @@
-# Nested cancellation across asAgentTool (Track B)
+﻿# Nested cancellation across asAgentTool (Track B)
 
 Date: 2026-09-06  
 Status: Implemented  
@@ -18,11 +18,11 @@ Before: documented gap in enterprise slice / api-review.
 
 After (`packages/core/test/nested-cancellation.test.mjs`):
 
-- parent abort → nested model sees `request.signal` and aborts;
+- parent abort â†’ nested model sees `request.signal` and aborts;
 - nested tool sees `context.abortSignal` and aborts;
 - successful delegation unchanged;
 - context (`tenantId`) still forwarded;
-- no external signal → nested run still completes;
+- no external signal â†’ nested run still completes;
 - already-aborted parent fails before nested work starts.
 
 ## Decision
@@ -37,6 +37,6 @@ Larger AgentLike cancel API; caller-managed-only nested cancel; cancellation bus
 
 Local delegation cancel is cooperative end-to-end when work honors AbortSignal. Core API surface unchanged aside from behavior of `asAgentTool`.
 
-## Next question
+## Follow-up
 
-Track C: can we reconstruct parent/child run causality (`parentRunId`) without growing the API much?
+See run-causality research (parentRunId).

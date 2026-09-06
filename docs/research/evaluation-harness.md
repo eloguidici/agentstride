@@ -1,4 +1,4 @@
-# Evaluation harness (Track A)
+﻿# Evaluation harness (Track A)
 
 Date: 2026-09-06  
 Status: Implemented (deterministic baseline)  
@@ -43,7 +43,7 @@ If we encode enterprise-support expectations as an explicit dataset and score `A
 
 ## Result
 
-We can answer: “for this scripted policy + wired tools, did the run match the expected decision and tool constraints?” Failures identify `caseId` + check reason. Core unchanged.
+We can answer: â€œfor this scripted policy + wired tools, did the run match the expected decision and tool constraints?â€ Failures identify `caseId` + check reason. Core unchanged.
 
 ## Limitations (honest)
 
@@ -57,8 +57,6 @@ Nested tools are visible only because example 17 now forwards `onSecurityEvent`.
 - 22 scenarios made decision expectations explicit without growing core.
 - We refused a public evals package until evidence demanded one.
 
-## Next question
+## Follow-up
 
-Does nested cancellation across `asAgentTool` need a core fix (Track B), and can evals later assert abort behavior as an expected failure mode?
-
-**Update:** Track B shipped (ADR 0010). Evals abort scenarios remain optional later.
+Nested cancellation across `asAgentTool` is covered in ADR 0010; evals can assert abort as an expected failure mode.

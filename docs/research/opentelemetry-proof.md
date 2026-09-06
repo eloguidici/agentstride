@@ -1,4 +1,4 @@
-# OpenTelemetry proof (Track D)
+﻿# OpenTelemetry proof (Track D)
 
 Date: 2026-09-06  
 Status: Implemented  
@@ -10,7 +10,7 @@ Backends need standard traces. We refused to put an event bus in core; the open 
 
 ## Hypothesis
 
-An example-level bridge can produce GenAI-shaped spans (invoke_agent / chat / execute_tool) with nested parent links and privacy defaults — without any OTel import in core.
+An example-level bridge can produce GenAI-shaped spans (invoke_agent / chat / execute_tool) with nested parent links and privacy defaults â€” without any OTel import in core.
 
 ## Evidence
 
@@ -30,6 +30,6 @@ Core OTel; immediate public package; exporting prompts by default.
 
 Working trace proof. Optional package deferred until demand + convention stability justify it.
 
-## Next question
+## Follow-up
 
-Track E: can human approval become an execution pattern (propose → approve → act) without a workflow engine?
+See human-approval research and example 20.

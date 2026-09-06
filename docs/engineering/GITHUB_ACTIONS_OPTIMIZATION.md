@@ -156,7 +156,7 @@ paths-ignore:
   - "**/*.md"
 ```
 
-**Verified safe for this repo:** docs do not generate code, do not build a docs site in CI, and are not compile inputs. ADRs/research/handoffs are evidence, not build artifacts.
+**Verified safe for this repo:** docs do not generate code, do not build a docs site in CI, and are not compile inputs. ADRs/research notes are evidence, not build artifacts.
 
 **Not ignored:** `.github/workflows/**`, `packages/**`, `examples/**`, `evals/**`, lockfiles, scripts — any of these still trigger CI.
 

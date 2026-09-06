@@ -6,7 +6,7 @@ Branch: `feature/alarm-triage-http` (slice landed via `feature/alarm-triage` on 
 
 ## Context
 
-After Tracks A–G, the owner chose to stay private and exercise a near-real vertical slice: alarms from different teams, agents that categorize and act — without inventing ACME.
+After earlier production-pattern tracks, we exercised a near-real vertical slice: alarms from different teams, agents that categorize and act — without inventing ACME.
 
 ## Hypothesis
 
@@ -28,8 +28,8 @@ ACME naming; agent self-approval of pages; normalize/approval in core; Nest for 
 
 ## Result
 
-Portable ops vertical slice with end-to-end propose → external decide, reusing Tracks E/F patterns.
+Portable ops vertical slice with end-to-end propose → external decide, reusing human-approval and idempotency patterns.
 
-## Next question
+## Related
 
-Owner: another private use case, Nest HTTP wrapper, or resume Tracks H/I?
+See also change-gate and data-export verticals under `examples/`.

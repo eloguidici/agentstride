@@ -1,25 +1,24 @@
 # Validation battery — AgentStride health check
 
 Date: 2026-09-06  
-Branch: `chore/validation-battery`  
-Goal: **probar → medir → decidir si estamos bien** antes de narrativa/release owner gates.
+Goal: local verification of build, tests, evals, demos, and package dry-run.
 
-This is not a new feature track. It is a structured local verification of existing evidence.
+This is not a feature track. It is a structured check of existing evidence.
 
 ## Scope
 
 | In | Out |
 | --- | --- |
 | Build / typecheck / unit+example tests | Live OpenRouter/OpenAI (optional, key-gated) |
-| All deterministic eval suites | Making repo public / npm publish |
-| Offline demos (`npm start` fake models) | New verticals or core changes |
-| Package dry-run for `@agentstride/core` | Spending GitHub Actions minutes |
+| All deterministic eval suites | New verticals or core changes |
+| Offline demos (`npm start` fake models) | Spending GitHub Actions minutes unnecessarily |
+| Package dry-run for `@agentstride/core` + `@agentstride/openai` | |
 
 ## Inventory (what we are validating)
 
 ### Foundation
-- `@agentstride/core` and optional packages build/typecheck
-- `publish:check` (still private)
+- `@agentstride/core` / `@agentstride/openai` and optional packages build/typecheck
+- `publish:check`
 
 ### Product patterns (examples)
 - `19` OTel proof  
@@ -140,8 +139,8 @@ Writes:
 - **YELLOW** — required pass but demos/dry-run flaky or live skipped with intent to run later  
 - **RED** — any T0–T5 failure  
 
-## How this feeds productization
+## How to use the verdict
 
-After a GREEN run, owner story selection is safer: claims map to commands that just passed.
+After a GREEN run, treat offline/fake-mode claims as evidence-backed.
 
-After YELLOW/RED: fix or narrow public claims before PP-8 drafts.
+After YELLOW/RED: fix failures before relying on those claims in docs or releases.

@@ -28,6 +28,6 @@ Hard-coded provider prices in core; mandatory cost fields on AgentRun.
 
 Quality metrics can sit beside token/step usage. Cost remains an external overlay.
 
-## Next question
+## Follow-up
 
-Track H: is the public API stable enough for a pre-1.0 freeze, or do we pause for an owner narrative/release decision?
+See ADR 0013 for the pre-1.0 freeze decisions that followed this work.

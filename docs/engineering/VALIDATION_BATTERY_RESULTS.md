@@ -16,7 +16,7 @@ Live providers (T8): **skipped** (sin `OPENROUTER_API_KEY` / `OPENAI_API_KEY`).
 
 | Tier | Name | Result | Notes |
 | --- | --- | --- | --- |
-| T0 | engineering-gate | PASS | build ~51s, typecheck ~32s, publish:check OK (private warns) |
+| T0 | engineering-gate | PASS | build ~51s, typecheck ~32s, publish:check OK |
 | T1 | core | PASS | 39/39 tests |
 | T2 | production-patterns | PASS | OTel 4, approval 15, idempotency 6, usage 4 |
 | T3 | verticals | PASS | enterprise 12+3 HTTP; alarm 12; change 8; export 6; nest 3 |
@@ -34,16 +34,14 @@ Live providers (T8): **skipped** (sin `OPENROUTER_API_KEY` / `OPENAI_API_KEY`).
 - Decision evals **do not regress** against baselines.
 - Full workspace suite is green.
 - Offline demos produce successful runs (fake models).
-- `@agentstride/core` is packable and consumable locally without npm publish.
+- First-wave packages are packable and consumable (dry-run / registry).
 
 ### Gaps / not proven here
-- Live LLM quality (OpenRouter/OpenAI) — not run.
-- GitHub Actions remote CI — minutes/billing constrained; local battery substitutes for this pass.
+- Live LLM quality (OpenRouter/OpenAI) — not run in this pass.
 - Load/performance — out of scope.
-- Public narrative drafts — still owner-gated; battery supports confidence, not publication.
 
 ### Recommendation
-Safe to treat productization claims as **evidence-backed for offline/fake mode**. Before public launch, optionally run T8 live smoke once keys are available.
+Safe to treat offline/fake-mode claims as **evidence-backed**. Optionally run T8 live smoke when keys are available.
 
 ## Re-run
 

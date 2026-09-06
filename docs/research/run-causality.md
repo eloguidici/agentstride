@@ -1,4 +1,4 @@
-# Run causality / parentRunId (Track C)
+﻿# Run causality / parentRunId (Track C)
 
 Date: 2026-09-06  
 Status: Implemented  
@@ -29,6 +29,6 @@ Bus/registry; mandatory correlation for all users; OTel-in-core; full field set 
 
 Local delegation trees are reconstructable. Callers who ignore causality see no breaking change.
 
-## Next question
+## Follow-up
 
-Track D: can lifecycle events map to OpenTelemetry without making OTel a core dependency?
+See OpenTelemetry proof research and example 19.

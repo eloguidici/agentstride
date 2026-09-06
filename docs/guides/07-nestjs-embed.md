@@ -23,7 +23,7 @@ Use Nest (or plain Node HTTP) as the **app shell**. AgentStride is a library cal
 | [`26-velum-grid-nestjs`](../../examples/26-velum-grid-nestjs) | Alarm + change-gate Nest surface |
 | [`23` / `24` `http.mjs`](../../examples/23-alarm-triage) | Plain Node HTTP approve/reject |
 
-Package: [`packages/nestjs`](../../packages/nestjs) (optional; Gate 2 first publish is core + openai only).
+Package: [`packages/nestjs`](../../packages/nestjs) (optional; not published on npm in `0.1.x` — use from the monorepo).
 
 ## Limits
 

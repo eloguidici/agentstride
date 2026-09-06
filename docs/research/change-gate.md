@@ -30,6 +30,6 @@ ACME; agent self-execution; Nest for this slice; inventing a workflow engine.
 
 Second private ops vertical proving the approval/idempotency story outside alarms.
 
-## Next question
+## Related
 
-More private verticals, Nest packaging, or resume Tracks H/I?
+See data-export and alarm-triage verticals; Nest embed in `examples/26-velum-grid-nestjs`.

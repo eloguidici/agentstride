@@ -1,4 +1,4 @@
-# Human approval pattern (Track E)
+﻿# Human approval pattern (Track E)
 
 Date: 2026-09-06  
 Status: Implemented  
@@ -6,7 +6,7 @@ Branch: `feature/human-approval`
 
 ## Context
 
-Enterprise support already flagged `requiresHumanApproval`, but that was a result flag — not an execution pattern. Sensitive side effects (grant production access) needed propose → external approve → execute without a workflow/policy engine.
+Enterprise support already flagged `requiresHumanApproval`, but that was a result flag â€” not an execution pattern. Sensitive side effects (grant production access) needed propose â†’ external approve â†’ execute without a workflow/policy engine.
 
 ## Hypothesis
 
@@ -14,8 +14,8 @@ Keep proposals, permissions, grant, and audit in domain/application code. The ag
 
 ## Evidence
 
-- `examples/20-human-approval` — 15 tests (domain, agent, HTTP)
-- Agent tools: `findCustomer`, `proposeProductionAccess` only — no approve/grant
+- `examples/20-human-approval` â€” 15 tests (domain, agent, HTTP)
+- Agent tools: `findCustomer`, `proposeProductionAccess` only â€” no approve/grant
 - Duplicate approve returns prior execution without re-grant
 - Reject / expire / unauthorized / unknown fail safely
 - Evals: `evals/human-approval` baseline 3/3
@@ -36,7 +36,7 @@ Application-layer `ProposedAction` store + `approveProposedAction` / `rejectProp
 
 ## Security notes
 
-- Propose roles ≠ approve roles (`support` can propose; `admin` / `security-approver` approve)
+- Propose roles â‰  approve roles (`support` can propose; `admin` / `security-approver` approve)
 - Side effect `grantProductionAccessService` only callable from approve path
 - Audit records requester, approver, agentRunId, timestamps
 
@@ -46,8 +46,8 @@ Guards/hooks can block tools; they are not human approval. Approval is an explic
 
 ## Result
 
-We can reconstruct who asked, what was proposed, which run, who approved, and what executed — with in-memory audit.
+We can reconstruct who asked, what was proposed, which run, who approved, and what executed â€” with in-memory audit.
 
-## Next question
+## Follow-up
 
-Track F: can side-effect tools be idempotent at the domain level under retries/duplicates?
+See side-effect idempotency research and example 21.
