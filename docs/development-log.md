@@ -60,6 +60,7 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Confirmed OpenRouter works with `@agentstride/openai`.
 - Added `examples/08-live-tool`: real tool calling (`findCustomer`) against OpenRouter.
 - Added `examples/09-live-structured`: real structured output validation against OpenRouter.
+- Added `examples/10-live-receptionist`: live ReceptionistAgent delegation to a security specialist.
 - Adapter now injects JSON Schema hints for structured output and retries without `response_format` when a gateway rejects it.
 - Core structured-output parsing tolerates fenced / surrounding JSON text.
 

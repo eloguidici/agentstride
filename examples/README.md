@@ -13,10 +13,12 @@ Examples validate the API. Keep them small.
 | `07-openai` | Real provider text reply (OpenAI / OpenRouter) |
 | `08-live-tool` | Live tool calling against OpenRouter |
 | `09-live-structured` | Live structured output against OpenRouter |
+| `10-live-receptionist` | Live ReceptionistAgent delegation against OpenRouter |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
 ```bash
 npm start -w @agentstride/example-live-tool
 npm start -w @agentstride/example-live-structured
+npm start -w @agentstride/example-live-receptionist
 ```
