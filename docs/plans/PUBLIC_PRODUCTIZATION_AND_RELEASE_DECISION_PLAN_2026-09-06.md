@@ -858,3 +858,15 @@ This document may guide launch preparation, channel strategy, first-user goals a
 It does not authorize public launch or publication.
 
 Before making the repository public, review the internal strategy file and decide whether to remove, move or convert it.
+
+---
+
+## Career-positioning reference
+
+Public productization should also consider the owner's professional objective: AgentStride is intended to function as a strong technical portfolio asset.
+
+Internal guidance:
+
+`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+
+Use it when preparing LinkedIn/profile drafts and launch sequencing, but do not expose the internal career strategy automatically when the repository becomes public.

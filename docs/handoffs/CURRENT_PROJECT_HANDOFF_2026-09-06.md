@@ -52,3 +52,15 @@ While the repository remains private, promotion/distribution planning is documen
 Use it together with the public productization plan when preparing launch recommendations.
 
 Important: this file is internal. Before repository visibility changes, explicitly review whether to remove, move or convert it.
+
+---
+
+## Career positioning / LinkedIn
+
+Internal career-positioning guidance is documented in:
+
+`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+
+Use it when preparing profile wording, Featured links, technical posts and career-oriented launch sequencing.
+
+This file is internal and should be reviewed/removed/moved before the repository becomes public.
