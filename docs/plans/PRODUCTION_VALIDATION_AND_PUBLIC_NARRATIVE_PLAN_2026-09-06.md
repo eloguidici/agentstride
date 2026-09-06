@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Tracks A–B on `main`; Track C (run causality) on `feature/run-causality`
+Status: In progress — Tracks A–C on `main`; Track D (OpenTelemetry proof) on `feature/opentelemetry-proof`
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -551,7 +551,10 @@ Preserve:
 
 # Track D - OpenTelemetry proof
 
-Priority: P1
+Priority: P1  
+Status: **Done** (2026-09-06)  
+Branch: `feature/opentelemetry-proof`  
+ADR: `docs/decisions/0012-opentelemetry-out-of-core.md`
 
 ## D.1 Goal
 
@@ -623,6 +626,8 @@ Verify:
 - core untouched by OTel dependency;
 - privacy decision documented;
 - decision whether a future optional package is justified.
+
+**Exit check (2026-09-06):** met — example 19 + ADR 0012 (no `@agentstride/otel` yet).
 
 ---
 
