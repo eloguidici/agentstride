@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Tracks A–E on `main`; Track F (idempotency) on `feature/side-effect-idempotency`
+Status: In progress — Tracks A–F on `main`; Track G on `feature/usage-accounting`; **pause before H/I for owner decision**
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -795,7 +795,10 @@ Do not create a generic core idempotency framework unless repeated evidence dema
 
 # Track G - Usage and cost accounting
 
-Priority: P2
+Priority: P2  
+Status: **Done** (2026-09-06)  
+Branch: `feature/usage-accounting`  
+Research: `docs/research/usage-accounting.md`
 
 ## G.1 Current state
 
