@@ -22,7 +22,8 @@ Do not publish LinkedIn/articles/npm or make the repo public without explicit ow
 | Owner strategy / LinkedIn drafts | **moved** to `agentstride-notes` |
 | Implementer docs | on `main` — `docs/GETTING_STARTED.md` + `docs/guides/` |
 | Public/npm packaging hygiene | hardened — `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` |
-| Visibility / npm | **OWNER GATE 4 — awaiting owner** |
+| Validation battery | on `main` — `npm run validate:battery` |
+| Visibility / npm | **OWNER GATE 4 — step by step with owner** |
 
 ---
 

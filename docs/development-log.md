@@ -777,6 +777,20 @@ Leaving strategy docs in AgentStride “as private folder name”; Drive-only ba
 
 History scrub + Gate 4 launch when owner authorizes.
 
+## 2026-09-06 - Validation battery landed on main
+
+### Context
+
+Local full validation suite (build/typecheck/test/evals/dry-run) existed on a conflicting branch.
+
+### Decision
+
+Rebase onto current main and keep battery docs + `npm run validate:battery` without rewriting the current handoff narrative.
+
+### Next question
+
+Gate 4 launch sequence (step by step).
+
 ## 2026-09-06 - Public/npm readiness audit + packaging fixes
 
 ### Context
