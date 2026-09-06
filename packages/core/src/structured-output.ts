@@ -51,7 +51,7 @@ export async function resolveStructuredOutput<TSchema extends StandardSchemaV1>(
 
   let parsed: unknown;
   try {
-    parsed = JSON.parse(trimmed);
+    parsed = JSON.parse(extractJsonPayload(trimmed));
   } catch {
     throw new StructuredOutputValidationError([
       { message: "Model text was not valid JSON" },
@@ -59,6 +59,21 @@ export async function resolveStructuredOutput<TSchema extends StandardSchemaV1>(
   }
 
   return parseWithSchema(schema, parsed);
+}
+
+function extractJsonPayload(text: string): string {
+  const fenced = text.match(/```(?:json)?\s*([\s\S]*?)```/i);
+  if (fenced?.[1]) {
+    return fenced[1].trim();
+  }
+
+  const start = text.indexOf("{");
+  const end = text.lastIndexOf("}");
+  if (start >= 0 && end > start) {
+    return text.slice(start, end + 1);
+  }
+
+  return text;
 }
 
 function formatStructuredMessage(issues: readonly SchemaIssue[]): string {

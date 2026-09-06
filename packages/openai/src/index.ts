@@ -12,6 +12,8 @@ export type OpenAIModelOptions = Readonly<{
   model?: string;
   baseUrl?: string;
   headers?: Readonly<Record<string, string>>;
+  /** When false, never send response_format even if outputSchema is present. */
+  jsonObjectMode?: boolean;
   fetchImpl?: typeof fetch;
 }>;
 
@@ -57,6 +59,7 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
   ).replace(/\/$/, "");
   const fetchImpl = options.fetchImpl ?? fetch;
   const extraHeaders = options.headers ?? {};
+  const jsonObjectMode = options.jsonObjectMode ?? true;
 
   return {
     async generate(request: ModelRequest): Promise<ModelResponse> {
@@ -66,18 +69,24 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
 
       const body: Record<string, unknown> = {
         model,
-        messages: request.messages.map(toOpenAIMessage),
+        messages: withOutputSchemaHint(
+          request.messages.map(toOpenAIMessage),
+          request.outputSchema,
+        ),
       };
 
       if (request.tools.length > 0) {
         body.tools = request.tools.map(toOpenAITool);
       }
 
-      if (request.outputSchema) {
+      const wantsJsonObject =
+        jsonObjectMode && request.outputSchema !== undefined;
+
+      if (wantsJsonObject) {
         body.response_format = { type: "json_object" };
       }
 
-      const response = await fetchImpl(`${baseUrl}/chat/completions`, {
+      let response = await fetchImpl(`${baseUrl}/chat/completions`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${apiKey}`,
@@ -87,7 +96,28 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
         body: JSON.stringify(body),
       });
 
-      const json = (await response.json()) as OpenAIChatResponse;
+      let json = (await response.json()) as OpenAIChatResponse;
+
+      // Some OpenRouter free models reject response_format; retry without it.
+      if (
+        !response.ok &&
+        wantsJsonObject &&
+        /response_format|json_object|supported/i.test(
+          json.error?.message ?? "",
+        )
+      ) {
+        delete body.response_format;
+        response = await fetchImpl(`${baseUrl}/chat/completions`, {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${apiKey}`,
+            "content-type": "application/json",
+            ...extraHeaders,
+          },
+          body: JSON.stringify(body),
+        });
+        json = (await response.json()) as OpenAIChatResponse;
+      }
 
       if (!response.ok) {
         throw new Error(
@@ -215,4 +245,22 @@ function toToolCall(call: {
     name: call.function.name,
     input,
   };
+}
+
+function withOutputSchemaHint(
+  messages: Array<Record<string, unknown>>,
+  outputSchema: Readonly<Record<string, unknown>> | undefined,
+): Array<Record<string, unknown>> {
+  if (!outputSchema) {
+    return messages;
+  }
+
+  const hint = {
+    role: "system",
+    content:
+      "Return a single JSON object that matches this JSON Schema exactly. Do not include markdown fences or extra keys.\n" +
+      JSON.stringify(outputSchema),
+  };
+
+  return [hint, ...messages];
 }

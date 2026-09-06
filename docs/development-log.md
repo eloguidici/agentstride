@@ -55,7 +55,14 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Updated the fake-model example to pass a Zod schema and show parameters reaching the model.
 - Tests: 8 passing, including valid input, invalid input, untyped tools, and JSON Schema derivation.
 
-## 2026-09-05 - Phases 2-14 incubation sweep
+## 2026-09-05 - Live OpenRouter vertical slices
+
+- Confirmed OpenRouter works with `@agentstride/openai`.
+- Added `examples/08-live-tool`: real tool calling (`findCustomer`) against OpenRouter.
+- Added `examples/09-live-structured`: real structured output validation against OpenRouter.
+- Adapter now injects JSON Schema hints for structured output and retries without `response_format` when a gateway rejects it.
+- Core structured-output parsing tolerates fenced / surrounding JSON text.
+
 
 - Phase 2: structured output via `run(input, { output })`, ADRs 0006, fallback JSON parsing.
 - Phase 3: `AgentRun`, run ids, lifecycle events, `onEvent` callback (ADR 0007).
