@@ -470,3 +470,33 @@ Second ops vertical complementary to reactive alarm triage.
 ### Next question
 
 More private use cases, Nest packaging, or resume H/I?
+
+## 2026-09-06 - Private polish pack (vertical #3 + Nest + H + I prep)
+
+### Context
+
+Owner asked to apply remaining options but keep the repo private until “perfecto”.
+
+### Hypothesis
+
+One more compliance vertical + Nest packaging + API freeze docs/packaging + narrative release gate can land without going public.
+
+### Evidence
+
+Example 25 data-export; example 26 Nest Velum; ADR 0013; types→dist; RELEASE_READINESS private gate.
+
+### Decision
+
+Do Track H cleanup now; Track I = readiness only. No public repo. No npm publish.
+
+### Rejected
+
+Auto-publish; skipping freeze docs; ACME.
+
+### Result
+
+Private polish pack on `feature/private-polish-pack`.
+
+### Next question
+
+Owner reviews RELEASE_READINESS; merge when green; public only later by explicit ask.

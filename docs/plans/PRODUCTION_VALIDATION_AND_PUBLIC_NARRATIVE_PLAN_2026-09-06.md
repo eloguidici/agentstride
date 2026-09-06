@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Tracks A–G on `main`; **pause before H/I for owner decision**; private slice Velum Grid alarm triage on `feature/alarm-triage`
+Status: In progress — Tracks A–G on `main`; Track H ADR 0013; Track I release prep **without** public/npm; private polish pack (examples 25–26)
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
