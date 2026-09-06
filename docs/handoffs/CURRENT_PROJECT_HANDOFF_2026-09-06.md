@@ -4,7 +4,7 @@ This document is the current source of truth for continuing AgentStride in anoth
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **none** — next is Track E  
+Active feature branch: **`feature/human-approval`** (Track E)  
 Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
@@ -22,32 +22,30 @@ Do not make the repository public or publish npm packages unless explicitly requ
 
 | Track | Status |
 | --- | --- |
-| A Evaluation harness | `main` — PR #8 |
-| B Nested cancellation | `main` — PR #9 / ADR 0010 |
-| C Run causality | `main` — PR #10 / ADR 0011 |
-| D OpenTelemetry proof | `main` — PR #12 / ADR 0012 / example 19 |
-| E Human approval | **next** |
-| F Idempotent side-effects | pending |
-| G Usage accounting | pending |
-| H Pre-1.0 API | pending |
-| I Narrative/release | pending |
-
-Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
+| A–D | on `main` |
+| E Human approval | **this branch** — example 20 + evals |
+| F Idempotent side-effects | next after merge |
+| G–I | pending |
 
 ---
 
-## 2. Next branch
+## 2. This branch (Track E)
 
-`feature/human-approval`
-
-Validate propose → external approve → domain action **without** a workflow/policy engine.
-
----
-
-## 3. Commands
+- `examples/20-human-approval` — propose → approve/reject → grant
+- Agent cannot approve itself (no approve/grant tools)
+- In-memory audit with agentRunId correlation
+- `evals/human-approval` baseline 3/3
+- `docs/research/human-approval.md`
+- `docs/narrative/` story index
+- **Core unchanged** (no ADR)
 
 ```bash
-npm test -w @agentstride/example-opentelemetry-tracing
-npm test -w @agentstride/evals-internal
-npm test -w @agentstride/core
+npm test -w @agentstride/example-human-approval
+npm run eval:human-approval
 ```
+
+---
+
+## 3. Next after merge
+
+`feature/side-effect-idempotency` — Track F (domain-first idempotency).
