@@ -1,6 +1,6 @@
 # Contributing / maintaining AgentStride
 
-This repository may remain **private** until the owner authorizes a public release. Do not publish npm packages or change GitHub visibility without that decision.
+This repository is releasing publicly as `0.1.0` for `@agentstride/core` and `@agentstride/openai`. Do not publish additional packages or change npm scope without an explicit owner decision.
 
 See launch readiness: `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` and `docs/narrative/LAUNCH_CHECKLIST.md`.
 
@@ -19,7 +19,7 @@ See launch readiness: `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` and `docs
 - [Launch checklist](docs/narrative/LAUNCH_CHECKLIST.md)  
 - [Public/npm readiness audit](docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md)
 
-Owner-private strategy and career notes are **not** in this repository. They live in the separate private vault `eloguidici/agentstride-notes`.
+Owner-private strategy and career notes live in the separate private vault `eloguidici/agentstride-notes` (keep that repo private).
 
 ## Implementer docs
 

@@ -17,7 +17,7 @@ Audit: `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md`
 - [x] `0.1.0` release notes drafted (`docs/RELEASE_NOTES.md`)
 - [x] `SECURITY.md` + `CODE_OF_CONDUCT.md` present
 - [x] Owner-private strategy notes moved to `eloguidici/agentstride-notes` (removed from this tree)
-- [ ] README / GETTING_STARTED “private” banners updated for public day
+- [x] README / GETTING_STARTED “private” banners updated for public day
 - [ ] Repository visibility decision recorded
 - [ ] npm org/`@agentstride` access verified **at launch time**
 

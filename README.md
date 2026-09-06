@@ -5,7 +5,7 @@
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** repository is **private**. Packages remain unpublished (`private: true`). Planned first npm surface (when authorized): `@agentstride/core` + `@agentstride/openai` at `0.1.0` (MIT). Freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** First public release — `@agentstride/core` + `@agentstride/openai` at **`0.1.0`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ---
 
@@ -67,10 +67,8 @@ const run = await agent.run("Find customer 42", {
 });
 ```
 
-After an authorized launch:
-
 ```bash
-npm install @agentstride/core @agentstride/openai
+npm install @agentstride/core @agentstride/openai   # after npm publish of 0.1.0
 ```
 
 Prove packaging locally without publishing:
@@ -124,13 +122,13 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 | Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | Intended at launch (`0.1.0`) |
-| `@agentstride/openai` | OpenAI-compatible `Model` | Intended at launch |
+| `@agentstride/core` | Runtime | **`0.1.0`** |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.0`** |
 | `rag` / `memory` / `mcp` / `nestjs` | Optional | Later |
 | `a2a` | Experimental remote sketch | Deferred |
 | `migrate` | Portability helpers | Later |
 
-Nothing is published yet (`private: true`, versions `0.0.0`). Details: [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md), [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
+Scope and versioning notes: [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md), [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
 
 ## Docs
 
@@ -143,4 +141,4 @@ Nothing is published yet (`private: true`, versions `0.0.0`). Details: [package 
 
 ## License
 
-MIT. Repository remains private until an intentional public release approved by the owner.
+MIT.

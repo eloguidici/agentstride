@@ -2,7 +2,11 @@
 
 Goal: run a minimal AgentStride agent in about ten minutes.
 
-**Status:** packages are still `private: true` in this repository. Use the monorepo workspace today. After an owner-authorized launch, install `@agentstride/core` and `@agentstride/openai` from npm (`0.1.0` planned).
+**Install:** from this monorepo today, or from npm once the `0.1.0` publish completes:
+
+```bash
+npm install @agentstride/core @agentstride/openai
+```
 
 ## 1. Mental model (2 minutes)
 
