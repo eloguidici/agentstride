@@ -19,10 +19,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
       - run: node scripts/sync-workspace-lock.mjs
-      # Full lockfile tree sync is flaky on some local SSL setups; prefer install over ci until publish.
       - run: npm install --no-audit --no-fund
+      # Package exports point at dist/; build before typecheck/tests.
+      - run: npm run build
       - run: npm run typecheck
       - run: npm run test
-      - run: npm run build
       - run: npm run publish:check
       - run: npm run examples:smoke

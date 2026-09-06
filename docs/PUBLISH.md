@@ -24,4 +24,6 @@ npm run publish:check
 
 Until the lockfile includes the full third-party tree, CI uses `npm install` (not `npm ci`). Switch back to `npm ci` after a clean lockfile regeneration on a machine with working registry access.
 
+CI builds `@agentstride/core` first, then the rest of the workspaces. During incubation, package `exports.types` point at `src/` so dependents typecheck without requiring `dist/` yet. Before public publish, switch `types` back to `dist/*.d.ts`.
+
 Do **not** run `npm publish` from CI until the public release is explicitly approved.
