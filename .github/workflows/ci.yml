@@ -1,0 +1,28 @@
+name: ci
+
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: node scripts/sync-workspace-lock.mjs
+      # Full lockfile tree sync is flaky on some local SSL setups; prefer install over ci until publish.
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build
+      - run: npm run publish:check
+      - run: npm run examples:smoke

@@ -1,0 +1,14 @@
+{
+  "name": "@agentstride/example-live-structured",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core -w @agentstride/openai && node index.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "@agentstride/openai": "*",
+    "zod": "^4.5.4"
+  }
+}
