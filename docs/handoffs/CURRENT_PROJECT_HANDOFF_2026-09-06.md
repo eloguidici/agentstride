@@ -2,7 +2,7 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/alarm-triage`**  
+Active feature branch: **`feature/alarm-triage-http`**  
 HEAD: see `git rev-parse HEAD` on the active branch  
 Repository visibility: **private**
 
@@ -24,7 +24,7 @@ Do not develop on `main`. Do not publish npm / make public unless explicitly req
 | H Pre-1.0 API | **paused — owner decision** |
 | I Narrative/release | **paused — owner decision** |
 
-**Post-pause private slice:** Velum Grid alarm triage on `feature/alarm-triage` (example 23 + `evals/alarm-triage`).
+**Private slice:** Velum Grid alarm triage on `main` (example 23 + evals). Deepen in progress: HTTP approve/reject + more evals on `feature/alarm-triage-http`.
 
 Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`  
 Narrative index: `docs/narrative/story-index.md`  
@@ -34,7 +34,7 @@ Research: `docs/research/alarm-triage.md`
 
 ## Pause (H/I)
 
-Tracks H–I still need an owner decision (API freeze / public story / publish). Meanwhile the recommended path is more private, near-real use cases — current work is **Velum Grid** alarm triage.
+Tracks H–I still need an owner decision (API freeze / public story / publish). Meanwhile the recommended path is more private, near-real use cases.
 
 Do **not** invent workflow/policy engines or publish without that decision.
 
@@ -50,4 +50,5 @@ npm run eval:human-approval
 npm run eval:alarm-triage
 npm test -w @agentstride/example-alarm-triage
 npm start -w @agentstride/example-alarm-triage
+npm run start:http -w @agentstride/example-alarm-triage
 ```
