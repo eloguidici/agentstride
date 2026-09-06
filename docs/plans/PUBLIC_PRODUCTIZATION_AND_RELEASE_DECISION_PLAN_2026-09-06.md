@@ -1,7 +1,7 @@
 # AgentStride - Public Productization and Release Decision Plan
 
 Date: 2026-09-06  
-Status: Planned  
+Status: Private preparation in progress / autonomous prep landing on `docs/public-productization-prep`  
 Repository posture: **private until explicit owner approval**
 
 This plan starts after the engineering release gate.

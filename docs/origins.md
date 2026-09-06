@@ -2,7 +2,7 @@
 
 Before starting AgentStride I went back to an older multi-agent system I had built for an enterprise project.
 
-That code is useful context because many of the problems we are discussing now were already present there, even if the implementation looked different.
+That code is useful **technical history**: many problems we discuss now (delegation, correlation, orchestration weight) already showed up there, even though AgentStride is a separate design. This section does not describe any employer’s current product, customer data, or confidential systems.
 
 ## What the old system had
 
