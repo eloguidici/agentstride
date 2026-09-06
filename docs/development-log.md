@@ -569,3 +569,29 @@ The next AI session should focus on public story, README, release scope, version
 ### Next question
 
 Owner decisions are intentionally deferred until recommendations and private productization artifacts are ready.
+
+## 2026-09-06 - GitHub Actions optimization
+
+### Context
+
+Org/account Actions minutes were exhausted. CI ran full build/test on feature pushes **and** PRs (often 4 jobs per change), including doc-heavy work.
+
+### Evidence
+
+`.github/workflows/ci.yml` triggered on `push: main|feature/**` + all `pull_request`; matrix Node 20/22; no concurrency; no paths-ignore.
+
+### Decision
+
+PR/main-focused CI, docs `paths-ignore`, concurrency cancel-in-progress, `workflow_dispatch`; keep `build-test` + Node 20/22.
+
+### Rejected
+
+Disabling CI; dropping Node 22 without required-check confirmation; Windows/macOS runners.
+
+### Result
+
+Documented in `docs/engineering/GITHUB_ACTIONS_OPTIMIZATION.md`. Validate locally while Actions billing is blocked.
+
+### Next question
+
+Merge CI chore when ready; resume productization owner gates; avoid push spam.

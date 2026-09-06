@@ -2,73 +2,47 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active implementation branch: **none**  
+Active implementation branch: **`chore/github-actions-optimization`**  
+Also open: `docs/public-productization-prep` (PR #24) — private productization prep  
 Repository visibility: **private**
 
-Do not develop directly on `main` except through reviewed/merged branches.  
+Do not develop directly on `main`.  
 Do not make the repository public or publish npm packages without explicit owner approval.
 
 ---
 
 ## Status
 
-Engineering/product validation is complete for the current incubation scope:
+Engineering incubation for the current scope is complete (Tracks A–G, ADR 0013, verticals 23–26, release-gate).
 
-- Tracks A–G: done
-- Track H / pre-1.0 API freeze: done (ADR 0013)
-- Private verticals 23–26: done
-- Engineering release gate: green
-- Track I / public productization: next
+**GitHub Actions:** account minutes exhausted. This branch optimizes CI consumption (see `docs/engineering/GITHUB_ACTIONS_OPTIMIZATION.md`). Prefer local validation; do not rely on Actions until billing allows.
 
-The project should **not** return to feature expansion unless a future real product need appears.
+**Public productization:** plan on `main`; private prep artifacts are on PR #24 (may need re-merge after CI policy lands).
 
 ---
 
-## Next source of truth
+## CI policy (after this chore merges)
 
-Read:
-
-`docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
-
-This is the official next-phase plan.
-
-It covers:
-
-1. public story selection;
-2. public wording review;
-3. README productization;
-4. package scope recommendation;
-5. semver recommendation;
-6. public repository hygiene;
-7. package dry run;
-8. owner-selected narrative drafts;
-9. launch checklist.
+- **No** full CI on every feature-branch push  
+- **Yes** full CI on PRs (unless docs-only) and on non-doc pushes to `main`  
+- **concurrency** cancels obsolete runs  
+- **`workflow_dispatch`** for manual full runs  
+- Matrix Node 20+22 kept; job name `build-test` preserved  
 
 ---
 
-## Important owner gates
+## Owner gates (productization — unchanged)
 
-AI tools may prepare recommendations and private drafts, but must stop before:
-
-- selecting final public stories without owner approval;
-- removing package private flags;
-- changing repo visibility;
-- publishing npm;
-- choosing final semver/license without owner approval;
-- publishing LinkedIn/articles.
-
-When private productization is complete, stop instead of inventing more runtime work.
+Story selection, package scope, semver/license, visibility/npm remain owner decisions. Do not invent new runtime features while waiting.
 
 ---
 
-## Continuity
+## Useful commands (local)
 
-**The repository is the shared memory.**
-
-Every meaningful session must update:
-
-- development log;
-- relevant narrative/research docs;
-- this handoff if the next starting point changes.
-
-The public story must remain traceable to code, tests, ADRs, evals and commits.
+```bash
+npm run build
+npm run typecheck
+npm test
+npm run publish:check
+npm run examples:smoke
+```
