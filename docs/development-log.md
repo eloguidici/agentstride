@@ -652,3 +652,29 @@ PP-8 deliverable ready for owner review.
 ### Next question
 
 Owner edits/approves drafts; still needs package/semver/visibility decisions before launch.
+
+## 2026-09-06 - OWNER GATE 2 closed (Option A)
+
+### Context
+
+Owner chose package scope for a future first npm publish.
+
+### Evidence
+
+Owner confirmation: Option A from `INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md`.
+
+### Decision
+
+Initial authorized npm surface (when launch is approved): `@agentstride/core` + `@agentstride/openai` only. Other packages remain unpublished.
+
+### Rejected
+
+Publishing Nest/RAG/MCP/memory/migrate/a2a in the first wave; removing `private: true` now.
+
+### Result
+
+Gate 2 closed. Still private; no publish.
+
+### Next question
+
+OWNER GATE 3: semver + license (recommend `0.1.0` + MIT).

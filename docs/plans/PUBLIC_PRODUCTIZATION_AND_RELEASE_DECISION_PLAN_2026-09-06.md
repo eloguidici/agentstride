@@ -487,9 +487,9 @@ Provide a recommendation, but do not remove `private: true`.
 
 # OWNER GATE 2 - Package scope
 
-Owner selects which packages, if any, are intended for initial npm publication.
+**CLOSED 2026-09-06 — Option A:** initial npm surface (when launch approved) = `@agentstride/core` + `@agentstride/openai` only.
 
-No package may be made publishable solely because the recommendation exists.
+No package may be made publishable solely because the recommendation exists. Still requires explicit launch authorization.
 
 ---
 
