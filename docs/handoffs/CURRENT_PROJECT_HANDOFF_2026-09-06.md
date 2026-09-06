@@ -2,7 +2,7 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active work: owner gates on productization  
+Active work: owner launch decisions (still private)  
 Also open: `chore/validation-battery` (PR #26) — conflicting; rebase later  
 Repository visibility: **private**
 
@@ -13,32 +13,30 @@ Do not publish LinkedIn/articles/npm or make the repo public without explicit ow
 
 ## Status
 
-- Pack 1 narrative drafts on `main` (not published).
-- **OWNER GATE 2 closed:** first npm surface = `@agentstride/core` + `@agentstride/openai` only (still private / not published).
+Productization **decision gates 2–3 closed**. Still private; packages remain `0.0.0` / `private: true`.
 
 | Gate | State |
 | --- | --- |
-| Stories for drafting | Pack 1 selected + drafted |
+| Stories for drafting | Pack 1 drafted |
 | Draft review / publish posts | **awaiting owner** |
-| Package scope | **closed — Option A (core + openai)** |
-| Semver + license | **awaiting owner** (rec: `0.1.0` + MIT) |
-| Visibility / npm | **awaiting owner** |
+| Package scope | **closed — core + openai** |
+| Semver + license | **closed — `0.1.0` + MIT** |
+| Visibility / npm | **awaiting owner** (irreversible) |
 
 ---
 
 ## What to read
 
-- Package scope: `docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md`
 - Versioning: `docs/narrative/VERSIONING_RECOMMENDATION.md`
+- Packages: `docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md`
 - Drafts: `docs/narrative/drafts/README.md`
-- Plan: `docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+- Launch: `docs/narrative/LAUNCH_CHECKLIST.md`
 
 ---
 
 ## Owner next
 
-1. Review/edit Pack 1 drafts (publish only with explicit OK).  
-2. **Gate 3:** confirm semver + license (`0.1.0` + MIT recommended).  
-3. Keep private vs public / npm — separate irreversible decision.
+1. Review/edit Pack 1 drafts (external posts only with explicit OK).  
+2. Decide keep **private** vs make **public** (and only then: bump to `0.1.0`, remove `private`, npm publish).  
 
-**Do not invent a new engineering feature phase while closing gates.**
+**Do not invent a new engineering feature phase while closing launch gates.**

@@ -10,7 +10,7 @@ Status: Template — **do not execute public steps without owner**
 - [ ] [PUBLIC_WORDING_REVIEW](./PUBLIC_WORDING_REVIEW.md) accepted by owner
 - [ ] OWNER GATE 1: stories selected
 - [x] OWNER GATE 2: package scope selected — Option A (`core` + `openai`)
-- [ ] OWNER GATE 3: semver + license confirmed
+- [x] OWNER GATE 3: semver + license confirmed — `0.1.0` + MIT (bump only at launch)
 - [ ] [public-package-dry-run](../research/public-package-dry-run.md) green for selected packages
 - [ ] Release notes drafted for chosen version
 - [ ] Repository visibility decision recorded
