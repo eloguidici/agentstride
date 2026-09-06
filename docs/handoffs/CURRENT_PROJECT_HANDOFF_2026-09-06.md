@@ -1,51 +1,30 @@
 # AgentStride - Current Handoff (2026-09-06)
 
-This document is the current source of truth for continuing AgentStride in another session or tool.
-
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/human-approval`** (Track E)  
+Active feature branch: **`feature/side-effect-idempotency`** (Track F)  
 Repository visibility: **private**
 
-Do not develop feature work directly on `main`.  
-Do not make the repository public or publish npm packages unless explicitly requested.
+Do not develop on `main`. Do not publish npm / make public unless explicitly requested.
 
----
-
-## 0. Continuity
-
-**The repository is the shared memory.**
-
----
-
-## 1. Production validation progress
+## Progress
 
 | Track | Status |
 | --- | --- |
-| A–D | on `main` |
-| E Human approval | **this branch** — example 20 + evals |
-| F Idempotent side-effects | next after merge |
-| G–I | pending |
+| A–E | on `main` (E = PR #14) |
+| F Idempotency | **this branch** — example 21 |
+| G Usage accounting | next |
 
----
+## This branch
 
-## 2. This branch (Track E)
-
-- `examples/20-human-approval` — propose → approve/reject → grant
-- Agent cannot approve itself (no approve/grant tools)
-- In-memory audit with agentRunId correlation
-- `evals/human-approval` baseline 3/3
-- `docs/research/human-approval.md`
-- `docs/narrative/` story index
-- **Core unchanged** (no ADR)
+- `examples/21-side-effect-idempotency`
+- Domain key `tenantId:requestId:action` + in-flight dedupe
+- Core unchanged
 
 ```bash
-npm test -w @agentstride/example-human-approval
-npm run eval:human-approval
+npm test -w @agentstride/example-side-effect-idempotency
 ```
 
----
+## Next
 
-## 3. Next after merge
-
-`feature/side-effect-idempotency` — Track F (domain-first idempotency).
+`feature/usage-accounting` — Track G (aggregate usage; no prices in core).
