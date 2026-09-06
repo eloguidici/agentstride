@@ -9,7 +9,7 @@ Status: Template — **do not execute public steps without owner**
 - [ ] Secret scan / `.env` posture re-checked
 - [ ] [PUBLIC_WORDING_REVIEW](./PUBLIC_WORDING_REVIEW.md) accepted by owner
 - [ ] OWNER GATE 1: stories selected
-- [ ] OWNER GATE 2: package scope selected
+- [x] OWNER GATE 2: package scope selected — Option A (`core` + `openai`)
 - [ ] OWNER GATE 3: semver + license confirmed
 - [ ] [public-package-dry-run](../research/public-package-dry-run.md) green for selected packages
 - [ ] Release notes drafted for chosen version
