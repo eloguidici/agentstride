@@ -4,6 +4,13 @@ export type { Agent, AgentConfig, AgentRunOptions } from "./agent.js";
 export { defineTool } from "./tool.js";
 export type { Tool } from "./tool.js";
 
+export {
+  ToolInputValidationError,
+  getSchemaJsonSchema,
+  parseToolInput,
+} from "./schema.js";
+export type { JsonSchemaObject, SchemaIssue, StandardSchemaV1 } from "./schema.js";
+
 export type {
   AgentContext,
   AgentMessage,

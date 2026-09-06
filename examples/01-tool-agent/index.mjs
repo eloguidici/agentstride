@@ -1,8 +1,12 @@
 import { createAgent, defineTool } from "@agentstride/core";
+import { z } from "zod";
 
 const findCustomer = defineTool({
   name: "findCustomer",
   description: "Find a customer by id",
+  inputSchema: z.object({
+    id: z.string(),
+  }),
   execute({ id }) {
     return { id, name: "Ada Lovelace" };
   },
@@ -11,10 +15,15 @@ const findCustomer = defineTool({
 let call = 0;
 
 const demoModel = {
-  async generate() {
+  async generate(request) {
     call += 1;
 
     if (call === 1) {
+      console.log(
+        "tool parameters passed to model:",
+        JSON.stringify(request.tools[0]?.parameters, null, 2),
+      );
+
       return {
         toolCalls: [
           {

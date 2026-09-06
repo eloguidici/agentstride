@@ -9,6 +9,7 @@ export type ToolCall = Readonly<{
 export type ToolDefinition = Readonly<{
   name: string;
   description: string;
+  parameters?: Readonly<Record<string, unknown>>;
 }>;
 
 export type AgentMessage =
