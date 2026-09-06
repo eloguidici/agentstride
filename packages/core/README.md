@@ -49,6 +49,8 @@ Providers, RAG, MCP, NestJS, migrate helpers — separate packages.
 
 ## Docs
 
+- Getting started: `docs/GETTING_STARTED.md`
+- Layers + guides: `docs/guides/`
 - Vision / architecture: `docs/vision.md`, `docs/architecture.md`
 - Decisions: `docs/decisions/`
 - Release posture: `docs/narrative/RELEASE_READINESS.md`

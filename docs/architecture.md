@@ -2,6 +2,8 @@
 
 AgentStride is organized as a monorepo of small packages.
 
+**New here?** Start with the implementer [layer model](./guides/00-layers.md) and [Getting started](./GETTING_STARTED.md).
+
 ## Core
 
 `@agentstride/core` owns the execution loop:

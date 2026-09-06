@@ -109,11 +109,18 @@ Owner selected Gate 2 Option A. Nothing is published yet (`private: true`, versi
 
 ## Docs
 
+**Implementers**
+
+- [Getting started](docs/GETTING_STARTED.md)
+- [Guides](docs/guides/README.md) (layers, cancellation, approval, Nest, …)
+- [Architecture](docs/architecture.md) · [Vision](docs/vision.md)
+- [Decision log (ADRs)](docs/decisions/README.md)
+- [Examples — Start here](examples/README.md)
+
+**Maintainers / launch**
+
 - [Current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md)
-- [Public productization plan](docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md)
 - [Release readiness](docs/narrative/RELEASE_READINESS.md)
-- [Story index](docs/narrative/story-index.md)
-- [Decision log](docs/decisions/README.md)
 - [Publish checklist](docs/PUBLISH.md)
 
 ## License

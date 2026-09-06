@@ -754,3 +754,29 @@ Complete remaining autonomous private prep; stop at OWNER GATE 4. Do not publish
 ### Next question
 
 Owner Gate 4: internal disposition + visibility/npm + optional post publishing.
+
+## 2026-09-06 - Implementer-facing docs (P0–P3)
+
+### Context
+
+External implementers had ADRs + many examples but no layered getting-started path.
+
+### Evidence
+
+Plan `IMPLEMENTER_DOCS_PLAN_2026-09-06.md`; `docs/GETTING_STARTED.md`; `docs/guides/00`–`07`; examples Start here; README/architecture/package links.
+
+### Decision
+
+Ship thin evidence-backed guides in English (same as root README); keep ADRs as depth; no new features.
+
+### Rejected
+
+Full typedoc site; rewriting all example READMEs; linking `docs/internal/` from entry docs.
+
+### Result
+
+Implementer onboarding path exists for try → embed → production patterns.
+
+### Next question
+
+Merge branch; owner Gate 4 unchanged.

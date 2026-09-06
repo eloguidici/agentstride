@@ -2,6 +2,21 @@
 
 Examples validate the API. Keep them small.
 
+## Start here
+
+| Path | Example | Why |
+| --- | --- | --- |
+| Hello (tools) | [`01-tool-agent`](./01-tool-agent) | Typed tool + fake model |
+| Live model | [`07-openai`](./07-openai) / [`08-live-tool`](./08-live-tool) | Real provider |
+| Human approval | [`20-human-approval`](./20-human-approval) | Propose → external approve |
+| Idempotency | [`21-side-effect-idempotency`](./21-side-effect-idempotency) | Safe retries on writes |
+| Tracing | [`19-opentelemetry-tracing`](./19-opentelemetry-tracing) | OTel outside core |
+| HTTP / Nest | [`18-enterprise-support-http`](./18-enterprise-support-http) or [`26-velum-grid-nestjs`](./26-velum-grid-nestjs) | Embed in a backend |
+
+Implementer guides: [`docs/GETTING_STARTED.md`](../docs/GETTING_STARTED.md), [`docs/guides/`](../docs/guides/).
+
+## Full catalog
+
 | Example | What it proves |
 | --- | --- |
 | `01-simple-agent` | Agent without tools |
