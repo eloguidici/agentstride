@@ -6,6 +6,7 @@
   "description": "Velum Grid multi-source alarm triage: normalize → categorize → ticket/page with idempotency",
   "scripts": {
     "start": "npm run build -w @agentstride/core && node app.mjs",
+    "start:http": "npm run build -w @agentstride/core && node http.mjs",
     "test": "npm run build -w @agentstride/core && node --test test/*.test.mjs"
   },
   "dependencies": {

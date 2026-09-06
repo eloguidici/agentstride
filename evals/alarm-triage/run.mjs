@@ -7,7 +7,13 @@ import {
   createTriageAgent,
   runTriage,
 } from "../../examples/23-alarm-triage/agents/triage-agent.mjs";
-import { resetAlarmStores } from "../../examples/23-alarm-triage/domain/incident-service.mjs";
+import {
+  getPageProposal,
+  openTicketService,
+  rejectPageProposal,
+  resetAlarmStores,
+  ticketCount,
+} from "../../examples/23-alarm-triage/domain/incident-service.mjs";
 import { createScriptedModel } from "../enterprise-support/scripted-model.mjs";
 import { aggregateScores, formatHumanSummary } from "../lib/aggregate.mjs";
 import { toolNamesFromEvents, uniqueToolNames } from "../lib/extract-tools.mjs";
@@ -27,7 +33,60 @@ function validateAlarmCase(item, index, ids) {
   return item;
 }
 
-function scoreAlarmCase({ caseDef, run, error, toolsCalled }) {
+async function applyPostAssert(caseDef, output, checks) {
+  const post = caseDef.postAssert;
+  if (!post) return;
+
+  if (post.reopenSameTicket) {
+    const again = await openTicketService({
+      ...post.reopenSameTicket,
+      requestId: "eval-reopen",
+      openedBy: "eval",
+    });
+    checks.push({
+      name: "post:reopenSameTicket",
+      pass: again.replayed === true,
+      detail: `replayed=${again.replayed}`,
+    });
+  }
+
+  if (post.rejectPage && output?.pageProposalId) {
+    rejectPageProposal({
+      proposalId: output.pageProposalId,
+      rejectedBy: post.rejectPage.rejectedBy,
+      roles: post.rejectPage.roles,
+    });
+  }
+
+  if (post.ticketCount !== undefined) {
+    const count = ticketCount();
+    checks.push({
+      name: "post:ticketCount",
+      pass: count === post.ticketCount,
+      detail: `expected ${post.ticketCount}, got ${count}`,
+    });
+  }
+
+  if (post.proposalStatus && output?.pageProposalId) {
+    const proposal = getPageProposal(output.pageProposalId);
+    checks.push({
+      name: "post:proposalStatus",
+      pass: proposal.status === post.proposalStatus,
+      detail: `expected ${post.proposalStatus}, got ${proposal.status}`,
+    });
+  }
+
+  if (post.pagedAfter !== undefined && output?.pageProposalId) {
+    const proposal = getPageProposal(output.pageProposalId);
+    checks.push({
+      name: "post:pagedAfter",
+      pass: proposal.paged === post.pagedAfter,
+      detail: `expected ${post.pagedAfter}, got ${proposal.paged}`,
+    });
+  }
+}
+
+async function scoreAlarmCase({ caseDef, run, error, toolsCalled }) {
   const expected = caseDef.expected;
   const checks = [];
   const output = run?.output;
@@ -66,6 +125,8 @@ function scoreAlarmCase({ caseDef, run, error, toolsCalled }) {
     });
   }
 
+  await applyPostAssert(caseDef, output, checks);
+
   const failures = checks.filter((c) => !c.pass).map((c) => `${c.name}: ${c.detail}`);
   return {
     caseId: caseDef.id,
@@ -94,7 +155,7 @@ export async function runAlarmTriageEvals(options = {}) {
       run = err?.agentRun ?? null;
     }
     const toolsCalled = uniqueToolNames(toolNamesFromEvents(run?.events ?? []));
-    const score = scoreAlarmCase({ caseDef, run, error, toolsCalled });
+    const score = await scoreAlarmCase({ caseDef, run, error, toolsCalled });
     caseResults.push({
       id: caseDef.id,
       pass: score.pass,
@@ -113,7 +174,6 @@ export async function runAlarmTriageEvals(options = {}) {
     failures: r.failures,
   }));
   const summary = aggregateScores(scores);
-  // Remap decisionAccuracy label mentally: category checks counted separately in checks.
   const payload = {
     domain: "alarm-triage",
     org: "Velum Grid",
