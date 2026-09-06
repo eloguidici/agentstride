@@ -1,0 +1,26 @@
+{
+  "name": "@agentstride/example-velum-grid-nestjs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NestJS HTTP surface for Velum Grid alarm triage + change gate",
+  "scripts": {
+    "build": "npm run build -w @agentstride/core -w @agentstride/nestjs && tsc -p tsconfig.json",
+    "start": "npm run build && node dist/main.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test test/http.test.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "@agentstride/nestjs": "*",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/platform-express": "^11.1.6",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

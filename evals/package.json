@@ -9,7 +9,8 @@
     "eval:enterprise-support": "npm run build -w @agentstride/core -w @agentstride/rag && node enterprise-support/run.mjs",
     "eval:human-approval": "npm run build -w @agentstride/core && node human-approval/run.mjs",
     "eval:alarm-triage": "npm run build -w @agentstride/core && node alarm-triage/run.mjs",
-    "eval:change-gate": "npm run build -w @agentstride/core && node change-gate/run.mjs"
+    "eval:change-gate": "npm run build -w @agentstride/core && node change-gate/run.mjs",
+    "eval:data-export": "npm run build -w @agentstride/core && node data-export/run.mjs"
   },
   "dependencies": {
     "@agentstride/core": "*",

@@ -30,6 +30,8 @@ Examples validate the API. Keep them small.
 | `22-usage-accounting` | Aggregate tokens/steps/tools; cost via external pricing only |
 | `23-alarm-triage` | Velum Grid: multi-source normalize → drop/ticket/proposePage + HTTP approve/reject |
 | `24-change-gate` | Velum Grid: multi-source change gate → record/proposeExecute + HTTP approve/reject |
+| `25-data-export` | Velum Grid: SAR / data-export gate → acknowledge/proposeExport + privacy approval |
+| `26-velum-grid-nestjs` | NestJS HTTP surface wrapping alarm triage + change-gate |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -58,4 +60,7 @@ npm test -w @agentstride/example-alarm-triage
 npm start -w @agentstride/example-change-gate
 npm run start:http -w @agentstride/example-change-gate
 npm test -w @agentstride/example-change-gate
+npm start -w @agentstride/example-data-export
+npm test -w @agentstride/example-data-export
+npm test -w @agentstride/example-velum-grid-nestjs
 ```
