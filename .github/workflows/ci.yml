@@ -1,16 +1,33 @@
 name: ci
 
+# Policy: develop locally; remote CI on PRs + main (not every feature push).
+# Docs: docs/engineering/GITHUB_ACTIONS_OPTIMIZATION.md
+
 on:
   push:
-    branches: [main, "feature/**"]
+    branches: [main]
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
   pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  # Keep job id/name "build-test" — may be referenced by required status checks.
   build-test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
+        # Official engines: Node >=20. Keep 20+22 for compatibility evidence.
+        # Primary savings come from trigger/concurrency/paths-ignore, not dropping 22.
         node-version: ["20", "22"]
     steps:
       - uses: actions/checkout@v4
