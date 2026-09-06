@@ -21,6 +21,7 @@ Do not publish LinkedIn/articles/npm or make the repo public without explicit ow
 | Growth + LinkedIn plans | **ready** under `docs/internal/` |
 | LinkedIn copy drafts | `docs/internal/linkedin-drafts/` |
 | Implementer docs | **on `main`** — `docs/GETTING_STARTED.md` + `docs/guides/` |
+| Public/npm packaging hygiene | **hardened** — see `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` |
 | Visibility / npm | **OWNER GATE 4 — awaiting owner** |
 
 ---

@@ -31,5 +31,18 @@
   "devDependencies": {
     "@agentstride/core": "*",
     "zod": "^4.5.4"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eloguidici/agentstride.git",
+    "directory": "packages/mcp"
+  },
+  "homepage": "https://github.com/eloguidici/agentstride#readme",
+  "bugs": {
+    "url": "https://github.com/eloguidici/agentstride/issues"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

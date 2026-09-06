@@ -9,7 +9,18 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const packagesDir = join(root, "packages");
-const requiredFields = ["name", "version", "description", "type", "exports", "files"];
+const requiredFields = [
+  "name",
+  "version",
+  "description",
+  "type",
+  "exports",
+  "files",
+  "license",
+  "repository",
+];
+/** First-wave packages (OWNER GATE 2). */
+const firstWave = new Set(["@agentstride/core", "@agentstride/openai"]);
 
 const errors = [];
 const warnings = [];
@@ -32,12 +43,36 @@ for (const dir of readdirSync(packagesDir, { withFileTypes: true })) {
     errors.push(`${label}: name should be under @agentstride/*`);
   }
 
+  if (pkg.license !== "MIT") {
+    warnings.push(`${label}: license is "${pkg.license}" (expected MIT)`);
+  }
+
   if (pkg.private === true) {
     warnings.push(`${label}: still private (expected until public release)`);
   }
 
+  if (firstWave.has(label)) {
+    if (pkg.publishConfig?.access !== "public") {
+      errors.push(`${label}: publishConfig.access must be "public" for scoped npm`);
+    }
+    if (!Array.isArray(pkg.files) || !pkg.files.includes("dist") || pkg.files.includes("src")) {
+      warnings.push(`${label}: prefer files=["dist"] only for first-wave publish`);
+    }
+    if (!existsSync(join(packagesDir, dir.name, "LICENSE"))) {
+      errors.push(`${label}: missing package LICENSE (npm pack does not use root LICENSE)`);
+    }
+    if (label === "@agentstride/openai") {
+      const peer = pkg.peerDependencies?.["@agentstride/core"];
+      if (!peer || peer === "*") {
+        errors.push(
+          `${label}: peerDependencies.@agentstride/core must be a semver range (not "*"); use "^0.0.0 || ^0.1.0" until launch, then prefer "^0.1.0"`,
+        );
+      }
+    }
+  }
+
   if (!existsSync(join(packagesDir, dir.name, "LICENSE")) && !existsSync(join(root, "LICENSE"))) {
-    warnings.push(`${label}: no package LICENSE (root LICENSE present is OK for monorepo)`);
+    warnings.push(`${label}: no package LICENSE (root LICENSE present is OK for non-first-wave)`);
   }
 
   if (!existsSync(join(packagesDir, dir.name, "README.md"))) {

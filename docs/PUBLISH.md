@@ -5,13 +5,17 @@ AgentStride packages remain **private** until an intentional public release.
 ## Checklist before first npm publish
 
 1. Repository visibility decision (still private by default).
-2. `npm ci && npm run typecheck && npm run test && npm run build`
-3. `npm run publish:check`
-4. Confirm no secrets in git history / `.env` ignored
-5. Bump versions from `0.0.0` with a real semver policy
-6. Remove `"private": true` from packages you intend to publish
-7. Ensure each package `README.md` documents install + minimal usage
-8. Tag release and publish under `@agentstride/*` (npm org access required)
+2. Execute `docs/internal/` disposition (remove/move before public).
+3. `npm ci && npm run typecheck && npm run test && npm run build` (or `npm install` if lockfile incomplete)
+4. `npm run publish:check`
+5. `npm run package:dry-run`
+6. Confirm no secrets in git / `.env` ignored
+7. Bump versions to `0.1.0` (Gate 3)
+8. Remove `"private": true` from `@agentstride/core` and `@agentstride/openai` only
+9. Ensure package `README.md` + `LICENSE` present in each publishable package
+10. Tag release and `npm publish` under `@agentstride/*` (`publishConfig.access` is already `public`)
+
+See `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md`.
 
 ## Local commands
 

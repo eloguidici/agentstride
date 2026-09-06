@@ -2,7 +2,7 @@
 
 Small TypeScript agent runtime: tools, structured output, runs, events, hooks/guards.
 
-Packages stay **private** until an explicit public release. Pre-1.0 freeze decisions: `docs/decisions/0013-pre-1.0-api-freeze.md`.
+Packages stay **private** until an explicit public release. When published: `npm install @agentstride/core`. Pre-1.0 freeze decisions: `docs/decisions/0013-pre-1.0-api-freeze.md`.
 
 ## Install (when published)
 

@@ -1,12 +1,14 @@
 # Contributing / maintaining AgentStride
 
-This repository is still **private**. Do not publish npm packages or change GitHub visibility without an explicit owner decision.
+This repository may remain **private** until the owner authorizes a public release. Do not publish npm packages or change GitHub visibility without that decision.
 
-## For contributors (when the repo is open)
+See launch readiness: `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` and `docs/narrative/LAUNCH_CHECKLIST.md`.
+
+## For contributors
 
 1. Prefer small, evidence-backed changes.  
-2. Run `npm run build`, `npm run typecheck`, and `npm test` for code changes.  
-3. Document meaningful decisions in `docs/development-log.md` and ADRs when the design changes.  
+2. For code: `npm run build`, `npm run typecheck`, `npm test`.  
+3. Document meaningful decisions in `docs/development-log.md` and ADRs when design changes.  
 4. Do not add workflow engines, policy engines, or new providers “for marketing.”
 
 ## Maintainer / launch docs
@@ -15,10 +17,16 @@ This repository is still **private**. Do not publish npm packages or change GitH
 - [Release readiness](docs/narrative/RELEASE_READINESS.md)  
 - [Publish checklist](docs/PUBLISH.md)  
 - [Launch checklist](docs/narrative/LAUNCH_CHECKLIST.md)  
-- [Internal docs disposition](docs/internal/INTERNAL_DOCS_DISPOSITION.md) (must leave before public)
+- [Public/npm readiness audit](docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md)
 
-## Implementer docs (public-facing)
+Before making the repository public, remove owner-private strategy notes under `docs/internal/` (see disposition checklist inside that folder). Do not link those files from the root README.
+
+## Implementer docs
 
 - [Getting started](docs/GETTING_STARTED.md)  
 - [Guides](docs/guides/README.md)  
 - Root [README](README.md)
+
+## Code of conduct
+
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)

@@ -755,6 +755,32 @@ Complete remaining autonomous private prep; stop at OWNER GATE 4. Do not publish
 
 Owner Gate 4: internal disposition + visibility/npm + optional post publishing.
 
+## 2026-09-06 - Public/npm readiness audit + packaging fixes
+
+### Context
+
+Owner asked for an exacting review against conditions to make the repo public and publish to npm.
+
+### Evidence
+
+Audit in `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md`. Gaps: missing package `license`/`repository`/`publishConfig`, no per-package LICENSE in tarball, openai peer `*`, `files` included `src`+maps, `docs/internal/` still present, soft public hygiene (CoC/SECURITY/release notes).
+
+### Decision
+
+Fix packaging metadata and first-wave pack contents while staying private. Do not bump version, remove `private`, or change visibility without explicit launch.
+
+### Rejected
+
+Publishing now; deleting `docs/internal/` without owner backup; new features.
+
+### Result
+
+`publish:check` stricter for Gate-2 packages; LICENSE copied into core/openai; release notes 0.1.0 drafted.
+
+### Next question
+
+Owner: disposition of `docs/internal/` then Gate 4 launch sequence.
+
 ## 2026-09-06 - Implementer-facing docs (P0–P3)
 
 ### Context
