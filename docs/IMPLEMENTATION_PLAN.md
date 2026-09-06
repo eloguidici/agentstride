@@ -255,7 +255,7 @@ The objective is to increase production credibility without turning AgentStride 
 
 ## Public productization + release decision
 
-Status: **Planned** (2026-09-06)
+Status: **Private prep complete — awaiting owner gates** (2026-09-06)
 
 Engineering release gate is green. Feature expansion is paused.
 
@@ -263,16 +263,17 @@ Detailed source of truth:
 
 `docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
 
-The next work is public productization while the repository remains private:
+Autonomous prep delivered:
 
-1. story selection recommendation;
+1. story selection **recommendation** (`PUBLIC_STORY_SELECTION.md`);
 2. public wording review;
 3. README productization;
-4. initial package scope recommendation;
-5. semver recommendation;
-6. public-repo hygiene;
-7. package dry run;
-8. owner-selected narrative drafts;
-9. launch checklist.
+4. package scope recommendation (conservative: core + openai);
+5. semver recommendation (`0.1.0`);
+6. repository hygiene notes;
+7. package dry run (core) green;
+8. launch checklist template (no irreversible steps).
+
+**Blocked on owner:** story selection, package scope, semver/license, visibility/npm, narrative drafts (PP-8).
 
 Repository visibility, npm publication, final story selection, final semver and license confirmation remain explicit owner decisions.

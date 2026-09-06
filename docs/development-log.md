@@ -595,3 +595,34 @@ Documented in `docs/engineering/GITHUB_ACTIONS_OPTIMIZATION.md`. Validate locall
 ### Next question
 
 Merge CI chore when ready; resume productization owner gates; avoid push spam.
+
+## 2026-09-06 - Public productization private prep (PP-1…PP-7)
+
+### Context
+
+Owner directed continuation from `main` using the public productization plan, without publishing or inventing features.
+
+### Evidence
+
+- `docs/narrative/PUBLIC_STORY_SELECTION.md` (5 recommended stories)
+- `PUBLIC_WORDING_REVIEW.md`; origins/vision clarifications
+- Root README productized
+- Package scope + versioning recommendations
+- Hygiene notes + launch checklist template
+- `npm run package:dry-run` passed for `@agentstride/core`
+
+### Decision
+
+Complete autonomous private productization prep; stop at owner gates. No `private: true` removal, no public repo, no npm, no story drafts until owner selects.
+
+### Rejected
+
+PP-8 drafts without selection; feature expansion; treating ADR 0013 as 1.0.
+
+### Result
+
+Handoff states autonomous work is complete; project pauses for owner decision.
+
+### Next question
+
+Owner gates 1–3 (stories, packages, semver/license), then optional PP-8 drafts.
