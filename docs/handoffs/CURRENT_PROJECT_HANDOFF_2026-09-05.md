@@ -11,6 +11,38 @@ Do not work directly on `main`.
 
 ---
 
+## 0. Multi-tool continuity rule
+
+AgentStride is intentionally being developed across different AI-assisted development environments.
+
+The project must be easy to continue from:
+
+- ChatGPT;
+- Codex;
+- Cursor;
+- or another coding assistant with repository access.
+
+No tool should depend on private conversational context that is not also written into the repository.
+
+**The repository is the shared memory.**
+
+Before leaving a meaningful development session, the active tool should:
+
+1. update `docs/development-log.md` with meaningful progress and decisions;
+2. update or create an ADR if an architectural decision was made;
+3. update `docs/IMPLEMENTATION_PLAN.md` if phases or priorities changed;
+4. update this current handoff when the next starting point changes materially;
+5. leave the working branch buildable/testable when practical;
+6. commit changes in coherent units with useful messages.
+
+A developer should be able to move from ChatGPT to Codex to Cursor and back without reconstructing the project from chat history.
+
+Do not assume that the next tool has access to the previous conversation.
+
+If something is important enough that the next tool needs to know it, put it in the repo.
+
+---
+
 ## 1. What AgentStride is
 
 AgentStride is a small TypeScript runtime for building AI agents without committing too early to a large framework.
@@ -491,3 +523,5 @@ Read, in this order:
 10. current core tests.
 
 Then continue from Phase 1 of the implementation plan without re-litigating decisions already marked Accepted unless code/tests reveal a real problem.
+
+Before ending your session, apply the multi-tool continuity rule from section 0 so the next tool can continue from the repository alone.
