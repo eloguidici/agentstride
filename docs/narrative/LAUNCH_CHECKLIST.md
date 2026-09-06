@@ -18,13 +18,13 @@ Audit: `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md`
 - [x] `SECURITY.md` + `CODE_OF_CONDUCT.md` present
 - [x] Owner-private strategy notes moved to `eloguidici/agentstride-notes` (removed from this tree)
 - [x] README / GETTING_STARTED “private” banners updated for public day
-- [ ] Repository visibility decision recorded
+- [x] Repository visibility decision recorded — **pending flip** (wording ready; GitHub still private until step 4)
 - [ ] npm org/`@agentstride` access verified **at launch time**
 
 ## Irreversible (owner only)
 
 - [ ] Make GitHub repository public
-- [ ] Bump `0.1.0` + remove `private: true` from `core` + `openai`
+- [x] Bump `0.1.0` + remove `private: true` from `core` + `openai` (in tree; not published yet)
 - [ ] `npm publish`
 - [ ] Publish LinkedIn / articles
 

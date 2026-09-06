@@ -1,7 +1,6 @@
 {
   "name": "@agentstride/openai",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.1.0",
   "type": "module",
   "description": "OpenAI model adapter for AgentStride",
   "main": "./dist/index.js",
@@ -21,7 +20,7 @@
     "test": "npm run build && node --test test/*.test.mjs"
   },
   "peerDependencies": {
-    "@agentstride/core": "^0.0.0 || ^0.1.0"
+    "@agentstride/core": "^0.1.0"
   },
   "devDependencies": {
     "@agentstride/core": "*"

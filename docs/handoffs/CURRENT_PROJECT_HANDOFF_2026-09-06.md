@@ -17,13 +17,12 @@ Do not publish LinkedIn/articles/npm or make the repo public without explicit ow
 | --- | --- |
 | Stories (draft Pack 1) | drafted — publish posts **awaiting owner** |
 | Package scope | **closed** — `core` + `openai` |
-| Semver + license | **closed** — `0.1.0` + MIT at launch (tree still `0.0.0`) |
-| Package dry-run | **green** |
+| Semver + license | **closed** — tree at **`0.1.0`** for core+openai (not published yet) |
+| Package dry-run | **green** (re-run after bump) |
 | Owner strategy / LinkedIn drafts | **moved** to `agentstride-notes` |
-| Implementer docs | on `main` — `docs/GETTING_STARTED.md` + `docs/guides/` |
-| Public/npm packaging hygiene | hardened — `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` |
-| Validation battery | on `main` — `npm run validate:battery` |
-| Visibility / npm | **OWNER GATE 4 — step by step with owner** |
+| Implementer docs | on `main` |
+| Public wording | Gate 4 step 1 done |
+| Visibility / npm | **step 2 done (version); next: verify suite → public → publish** |
 
 ---
 
