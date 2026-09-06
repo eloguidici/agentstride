@@ -626,3 +626,29 @@ Handoff states autonomous work is complete; project pauses for owner decision.
 ### Next question
 
 Owner gates 1–3 (stories, packages, semver/license), then optional PP-8 drafts.
+
+## 2026-09-06 - Validation battery (local health check)
+
+### Context
+
+Owner asked to test and analyze results before locking public stories.
+
+### Evidence
+
+`npm run validate:battery` → VERDICT GREEN (~7.6m); T0–T7 all pass; live T8 skipped without API keys. See `docs/engineering/VALIDATION_BATTERY_RESULTS.md`.
+
+### Decision
+
+Document battery plan + automation; treat offline evidence as healthy for productization confidence.
+
+### Rejected
+
+Using exhausted GitHub Actions for this pass; inventing new features from the battery.
+
+### Result
+
+GREEN local health across core, patterns, verticals, evals, demos, pack dry-run.
+
+### Next question
+
+Owner story selection (or optional live T8 when keys available).

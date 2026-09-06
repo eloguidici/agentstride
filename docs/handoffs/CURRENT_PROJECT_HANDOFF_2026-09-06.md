@@ -21,6 +21,8 @@ Engineering incubation for the current scope is complete (Tracks A–G, ADR 0013
 - concurrency + `workflow_dispatch`.
 Prefer local validation while Actions billing/minutes are constrained.
 
+**Validation battery:** `docs/engineering/VALIDATION_BATTERY.md` — last local run **GREEN** (`VALIDATION_BATTERY_RESULTS.md`). Prefer `npm run validate:battery` while Actions minutes are constrained.
+
 **Public Productization & Release Decision** private prep:
 
 | Phase | Artifact | State |
