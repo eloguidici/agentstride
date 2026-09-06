@@ -288,3 +288,35 @@ Working proof. Optional package not justified yet.
 ### Next question
 
 Track E: human approval as propose → approve → act without a workflow engine.
+
+## 2026-09-06 - Track E human approval
+
+### Context
+
+`requiresHumanApproval` was only a flag. We needed a real propose → external approve → execute path for production access.
+
+### Hypothesis
+
+Domain/application proposals + external approve/reject are enough; core and agents must not auto-approve.
+
+### Evidence
+
+- example 20: 15 tests; HTTP approve/reject; no approve tool on agent
+- evals/human-approval baseline 3/3
+- core unchanged
+
+### Decision
+
+Keep ProposedAction in domain. Agent only calls `proposeProductionAccess`.
+
+### Rejected
+
+Core ProposedAction; approval tool; policy/workflow engine; agent auto-approval.
+
+### Result
+
+Auditable human-in-the-loop without a platform. Narrative index started under `docs/narrative/`.
+
+### Next question
+
+Track F: domain-level idempotency for side effects under retries.
