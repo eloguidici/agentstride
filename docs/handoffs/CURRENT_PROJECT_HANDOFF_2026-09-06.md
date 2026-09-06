@@ -2,7 +2,7 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/private-polish-pack`**  
+Active feature branch: **`chore/release-gate`**  
 HEAD: see `git rev-parse HEAD` on the active branch  
 Repository visibility: **private** (do not make public / npm publish without explicit owner approval)
 
@@ -10,27 +10,32 @@ Do not develop on `main`.
 
 ---
 
-## Production validation progress
+## Status
 
-| Track | Status |
+| Area | Status |
 | --- | --- |
-| A–G | `main` |
-| H Pre-1.0 API | **in this PR** — ADR 0013 + types→dist + alias cleanup |
-| I Narrative/release | **prep only** — `docs/narrative/RELEASE_READINESS.md` (still private) |
+| Tracks A–G | `main` |
+| Track H | ADR 0013 on `main` |
+| Private verticals 23–26 | `main` |
+| Engineering release gate | **this branch** — full test/typecheck/publish:check green |
+| Track I / public | **blocked** — owner must pick stories + approve public/npm |
 
-**Private slices:** examples 23–26 (alarm, change-gate, data-export, Nest Velum).
+Source of truth: `docs/narrative/RELEASE_READINESS.md`  
+Notes: `docs/research/release-gate.md`
 
-Release gate: `docs/narrative/RELEASE_READINESS.md`
+---
+
+## Next (owner)
+
+1. Pick 3–5 stories from `docs/narrative/story-index.md` for a future public pack.
+2. Review `docs/origins.md` / `docs/vision.md` for public wording.
+3. Decide: stay private vs public vs npm scope.
 
 ---
 
 ## Useful commands
 
 ```bash
-npm test -w @agentstride/core
-npm test -w @agentstride/evals-internal
-npm run eval:data-export
-npm test -w @agentstride/example-data-export
-npm test -w @agentstride/example-velum-grid-nestjs
+npm run build && npm test && npm run typecheck
 npm run publish:check
 ```
