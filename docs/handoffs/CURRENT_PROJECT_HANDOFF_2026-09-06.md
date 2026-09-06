@@ -4,7 +4,7 @@ This document is the current source of truth for continuing AgentStride in anoth
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/opentelemetry-proof`** (Track D)  
+Active feature branch: **none** — next is Track E  
 Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
@@ -25,28 +25,29 @@ Do not make the repository public or publish npm packages unless explicitly requ
 | A Evaluation harness | `main` — PR #8 |
 | B Nested cancellation | `main` — PR #9 / ADR 0010 |
 | C Run causality | `main` — PR #10 / ADR 0011 |
-| D OpenTelemetry proof | **this branch** — ADR 0012 / example 19 |
-| E Human approval | **next after merge** |
-| F–I | pending |
+| D OpenTelemetry proof | `main` — PR #12 / ADR 0012 / example 19 |
+| E Human approval | **next** |
+| F Idempotent side-effects | pending |
+| G Usage accounting | pending |
+| H Pre-1.0 API | pending |
+| I Narrative/release | pending |
 
 Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
 
 ---
 
-## 2. This branch
+## 2. Next branch
 
-- `examples/19-opentelemetry-tracing` — AgentEvent → OTel spans
-- Privacy defaults (no prompts/tool payloads)
-- Nested spans via `parentRunId`
-- Core untouched by OTel
+`feature/human-approval`
 
-```bash
-npm test -w @agentstride/example-opentelemetry-tracing
-npm start -w @agentstride/example-opentelemetry-tracing
-```
+Validate propose → external approve → domain action **without** a workflow/policy engine.
 
 ---
 
-## 3. Next after merge
+## 3. Commands
 
-`feature/human-approval` — Track E
+```bash
+npm test -w @agentstride/example-opentelemetry-tracing
+npm test -w @agentstride/evals-internal
+npm test -w @agentstride/core
+```
