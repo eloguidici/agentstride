@@ -320,3 +320,33 @@ Auditable human-in-the-loop without a platform. Narrative index started under `d
 ### Next question
 
 Track F: domain-level idempotency for side effects under retries.
+
+## 2026-09-06 - Track F side-effect idempotency
+
+### Context
+
+Duplicate tool calls and lost responses can create duplicate business side effects.
+
+### Hypothesis
+
+Domain idempotency keys (`tenantId+requestId+action`) + in-flight dedupe suffice without a core framework.
+
+### Evidence
+
+Example 21: 6 tests covering duplicates, concurrency, lost response, and agent double-call.
+
+### Decision
+
+Keep idempotency in domain. Core unchanged.
+
+### Rejected
+
+Core idempotency framework; workflow engine.
+
+### Result
+
+One case per key; retries report `replayed: true`.
+
+### Next question
+
+Track G: usage aggregation for runs/evals without pricing in core.

@@ -241,8 +241,8 @@ Preferred order:
 2. nested cancellation — **done** (ADR 0010);
 3. run causality — **done** (ADR 0011);
 4. OpenTelemetry proof — **done** (ADR 0012 / example 19);
-5. human approval — **done on branch** (example 20);
-6. idempotent side-effect tools;
+5. human approval — **done** (example 20);
+6. idempotent side-effect tools — **done on branch** (example 21);
 7. usage accounting;
 8. pre-1.0 API stabilization;
 9. narrative/release decision.
