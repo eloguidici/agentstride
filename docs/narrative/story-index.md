@@ -13,5 +13,6 @@ Each row is a future public/tech narrative candidate grounded in repository arti
 | Correlation without a bus | ADR 0011, `docs/research/run-causality.md`, PR #10 |
 | OpenTelemetry without core lock-in | ADR 0012, example `19`, `docs/research/opentelemetry-proof.md`, PR #12 |
 | Human approval: the agent is not its own approver | example `20`, `docs/research/human-approval.md`, `evals/human-approval/` |
+| Side effects: knowing whether the tool already ran | example `21`, `docs/research/side-effect-idempotency.md` |
 
 Update this table when a track lands with durable evidence.
