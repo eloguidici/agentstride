@@ -27,6 +27,7 @@ Examples validate the API. Keep them small.
 | `19-opentelemetry-tracing` | AgentEvent → OpenTelemetry spans (proof; OTel not in core) |
 | `20-human-approval` | Propose → external approve → grant (agent is not its own approver) |
 | `21-side-effect-idempotency` | Idempotent createSupportCase under retries / duplicate tool calls |
+| `22-usage-accounting` | Aggregate tokens/steps/tools; cost via external pricing only |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -47,4 +48,6 @@ npm start -w @agentstride/example-human-approval
 npm test -w @agentstride/example-human-approval
 npm start -w @agentstride/example-side-effect-idempotency
 npm test -w @agentstride/example-side-effect-idempotency
+npm start -w @agentstride/example-usage-accounting
+npm test -w @agentstride/example-usage-accounting
 ```
