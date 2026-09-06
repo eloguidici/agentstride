@@ -626,3 +626,29 @@ Handoff states autonomous work is complete; project pauses for owner decision.
 ### Next question
 
 Owner gates 1–3 (stories, packages, semver/license), then optional PP-8 drafts.
+
+## 2026-09-06 - Narrative Pack 1 drafts (PP-8)
+
+### Context
+
+Owner asked to start with the stories after validation confidence.
+
+### Evidence
+
+Five drafts in `docs/narrative/drafts/` (origins, cancellation, correlation, human-approval, evals), each with LinkedIn angle + article outline + repo links.
+
+### Decision
+
+Treat recommended Pack 1 as owner-selected for drafting only. No external publication.
+
+### Rejected
+
+Publishing posts; inventing new runtime work; drafting pack-2 stories now.
+
+### Result
+
+PP-8 deliverable ready for owner review.
+
+### Next question
+
+Owner edits/approves drafts; still needs package/semver/visibility decisions before launch.
