@@ -250,3 +250,29 @@ Preferred order:
 Private evidence: examples `23`–`26` (Velum Grid) + evals.
 
 The objective is to increase production credibility without turning AgentStride into a large framework.
+
+---
+
+## Public productization + release decision
+
+Status: **Planned** (2026-09-06)
+
+Engineering release gate is green. Feature expansion is paused.
+
+Detailed source of truth:
+
+`docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+
+The next work is public productization while the repository remains private:
+
+1. story selection recommendation;
+2. public wording review;
+3. README productization;
+4. initial package scope recommendation;
+5. semver recommendation;
+6. public-repo hygiene;
+7. package dry run;
+8. owner-selected narrative drafts;
+9. launch checklist.
+
+Repository visibility, npm publication, final story selection, final semver and license confirmation remain explicit owner decisions.
