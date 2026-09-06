@@ -11,6 +11,7 @@ export type OpenAIModelOptions = Readonly<{
   apiKey?: string;
   model?: string;
   baseUrl?: string;
+  headers?: Readonly<Record<string, string>>;
   fetchImpl?: typeof fetch;
 }>;
 
@@ -34,22 +35,33 @@ type OpenAIChatResponse = {
 };
 
 /**
- * OpenAI Chat Completions adapter using fetch.
- * Keeps the openai SDK out of this package on purpose.
+ * OpenAI-compatible Chat Completions adapter using fetch.
+ * Works with OpenAI, OpenRouter, and other compatible gateways.
  */
 export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
-  const apiKey = options.apiKey ?? process.env.OPENAI_API_KEY;
-  const model = options.model ?? "gpt-4o-mini";
-  const baseUrl = (options.baseUrl ?? "https://api.openai.com/v1").replace(
-    /\/$/,
-    "",
-  );
+  const apiKey =
+    options.apiKey ??
+    process.env.OPENAI_API_KEY ??
+    process.env.OPENROUTER_API_KEY;
+  const model =
+    options.model ??
+    process.env.OPENAI_MODEL ??
+    process.env.OPENROUTER_MODEL ??
+    "gpt-4o-mini";
+  const baseUrl = (
+    options.baseUrl ??
+    process.env.OPENAI_BASE_URL ??
+    (process.env.OPENROUTER_API_KEY
+      ? "https://openrouter.ai/api/v1"
+      : "https://api.openai.com/v1")
+  ).replace(/\/$/, "");
   const fetchImpl = options.fetchImpl ?? fetch;
+  const extraHeaders = options.headers ?? {};
 
   return {
     async generate(request: ModelRequest): Promise<ModelResponse> {
       if (!apiKey) {
-        throw new Error("OPENAI_API_KEY is required");
+        throw new Error("OPENAI_API_KEY or OPENROUTER_API_KEY is required");
       }
 
       const body: Record<string, unknown> = {
@@ -70,6 +82,7 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
         headers: {
           authorization: `Bearer ${apiKey}`,
           "content-type": "application/json",
+          ...extraHeaders,
         },
         body: JSON.stringify(body),
       });
