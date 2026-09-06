@@ -167,6 +167,13 @@ Still intentional later:
 - npm publish under `@agentstride/*`
 - final public narrative polish
 
+Hardening added without publishing:
+
+- `docs/PUBLISH.md` + `npm run publish:check`
+- CI matrix (Node 20/22) + example smoke
+- Nest example auth/context + HTTP tests
+- N-agent orchestrator example (`16-orchestrator-n-agents`)
+
 ---
 
 ## Quality bar for every phase

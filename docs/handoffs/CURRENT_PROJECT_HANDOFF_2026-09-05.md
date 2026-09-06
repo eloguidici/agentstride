@@ -119,17 +119,17 @@ asAgentTool(otherAgent, { name, description })
 
 Prefer one of these focused follow-ups:
 
-1. open/merge PR to `main` (branch already pushed);
-2. deepen Nest app (auth/context middleware, more tools);
-3. harden CI and package publish readiness;
-4. only then consider public release.
+1. merge the open PR to `main` once reviewed;
+2. deepen A2A only if a real remote-agent use case appears;
+3. version bump + npm publish when explicitly requested;
+4. avoid growing core unless a use case forces it.
 
-Recently completed:
+Recently completed (this push):
 
-- owned MCP demo server + `connectMcpStdio` client;
-- live MCP example with OpenRouter;
-- real NestJS mini-app at `examples/12-nestjs-app`;
-- measured migration proof (`migration-shared`, examples 13/14/15).
+- `examples/16-orchestrator-n-agents` — orchestrator → 5 specialists + parallel `fanOut`;
+- Nest example hardened: `x-api-key`, `x-request-id` / `x-tenant-id`, HTTP tests with fake agent;
+- CI matrix Node 20/22 + `publish:check` + orchestrator smoke;
+- `docs/PUBLISH.md` readiness checklist (still not published).
 
 Avoid growing core unless a use case forces it.
 

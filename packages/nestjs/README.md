@@ -19,3 +19,10 @@ See `examples/12-nestjs-app`:
 - OpenRouter/OpenAI model
 - typed tool
 - injects `AgentStrideService`
+- optional `AGENT_API_KEY` + `x-api-key` guard
+- `x-request-id` / `x-tenant-id` request context middleware
+- HTTP tests with a fake agent (no live key required)
+
+```bash
+npm test -w @agentstride/example-nestjs-app
+```

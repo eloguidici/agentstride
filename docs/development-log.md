@@ -92,3 +92,11 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Phase 13: `@agentstride/migrate` portable tool helpers.
 - Phase 14 prep: MIT license, CI, architecture docs, `.env.example`, security/release notes.
 - Repository remains private; public publish is still an intentional later step.
+
+## 2026-09-06 - Orchestrator, Nest hardening, publish readiness
+
+- Added `examples/16-orchestrator-n-agents`: one orchestrator delegates to 5 specialists via `asAgentTool` and a parallel `fanOut` tool (`Promise.all`).
+- Hardened `examples/12-nestjs-app`: optional `AGENT_API_KEY` / `x-api-key` guard, `x-request-id` + `x-tenant-id` middleware, factory split for fake-agent HTTP tests.
+- CI now runs Node 20 + 22, `publish:check`, and an orchestrator smoke example.
+- Documented publish checklist in `docs/PUBLISH.md` without publishing packages.
+
