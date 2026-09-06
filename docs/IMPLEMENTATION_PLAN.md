@@ -242,9 +242,9 @@ Preferred order:
 3. run causality — **done** (ADR 0011);
 4. OpenTelemetry proof — **done** (ADR 0012 / example 19);
 5. human approval — **done** (example 20);
-6. idempotent side-effect tools — **done on branch** (example 21);
-7. usage accounting;
-8. pre-1.0 API stabilization;
-9. narrative/release decision.
+6. idempotent side-effect tools — **done** (example 21);
+7. usage accounting — **done on branch** (example 22);
+8. pre-1.0 API stabilization — **paused for owner decision**;
+9. narrative/release decision — **paused for owner decision**.
 
 The objective is to increase production credibility without turning AgentStride into a large framework.
