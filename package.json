@@ -12,6 +12,9 @@
     "build": "npm run build --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
   "engines": {
     "node": ">=20"
   }

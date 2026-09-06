@@ -15,3 +15,14 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Explicitly rejected copying the old RxJS event bus into the new core.
 - Defined portability as a design constraint: tools and domain logic should not depend on AgentStride-specific message envelopes.
 - Started with npm workspaces and a deliberately empty core package. The public API will be shaped by examples before it is frozen.
+
+## 2026-09-05 - First runtime slice
+
+- Added the first `Model`, `Tool`, `Agent` and `run()` contracts.
+- Kept the model contract provider-agnostic. OpenAI is deliberately not a core dependency.
+- Implemented the smallest useful tool-calling loop: model -> tool -> model -> result.
+- Added `maxSteps` as a basic protection against accidental infinite loops.
+- Passed execution context to tools without introducing a runtime-specific message DTO.
+- Added behavior tests for direct responses, tool execution, unknown tools and max-step exhaustion.
+- Added a provider-free example so the core can be exercised before provider adapters exist.
+- Runtime input validation for tool arguments is intentionally not solved yet. The next design step is to decide how schemas fit without coupling the core to one validation library.
