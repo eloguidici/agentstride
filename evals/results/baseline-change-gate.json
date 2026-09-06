@@ -1,0 +1,278 @@
+{
+  "domain": "change-gate",
+  "org": "Velum Grid",
+  "mode": "deterministic-scripted",
+  "generatedAt": "2026-09-06T17:34:30.276Z",
+  "caseCount": 5,
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "passRate": 1,
+    "metrics": {
+      "decisionAccuracy": {
+        "pass": 0,
+        "total": 0,
+        "rate": null
+      },
+      "humanApprovalAccuracy": {
+        "pass": 2,
+        "total": 2,
+        "rate": 1
+      },
+      "requiredToolSelection": {
+        "pass": 7,
+        "total": 7,
+        "rate": 1
+      },
+      "unnecessaryToolAvoidance": {
+        "pass": 6,
+        "total": 6,
+        "rate": 1
+      },
+      "structuredOutputValidity": {
+        "pass": 5,
+        "total": 5,
+        "rate": 1
+      }
+    }
+  },
+  "humanSummary": "5 cases\n5 passed\n0 failed\n\ndecisionAccuracy: n/a (no checks)\nhumanApprovalAccuracy: 100% (2/2)\nrequiredToolSelection: 100% (7/7)\nunnecessaryToolAvoidance: 100% (6/6)\nstructuredOutputValidity: 100% (5/5)",
+  "cases": [
+    {
+      "id": "chg-001-routine-record",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected routine, got routine"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected record, got record"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "executed",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:normalizeAndAssess",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:openChangeRecord",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:proposeExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:approveExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:changeCount",
+          "pass": true,
+          "detail": "expected 1, got 1"
+        }
+      ],
+      "category": "routine",
+      "action": "record",
+      "executed": false
+    },
+    {
+      "id": "chg-002-elevated-propose",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected elevated, got elevated"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected proposeExecute, got proposeExecute"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "executed",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:openChangeRecord",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:proposeExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:approveExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:proposalStatus",
+          "pass": true,
+          "detail": "expected pending, got pending"
+        },
+        {
+          "name": "post:executedAfter",
+          "pass": true,
+          "detail": "expected false, got false"
+        }
+      ],
+      "category": "elevated",
+      "action": "proposeExecute",
+      "executed": false
+    },
+    {
+      "id": "chg-003-ledgerops-emergency",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected emergency, got emergency"
+        },
+        {
+          "name": "executed",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:proposeExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:approveExecute",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "category": "emergency",
+      "action": "proposeExecute",
+      "executed": false
+    },
+    {
+      "id": "chg-004-record-idempotency",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected record, got record"
+        },
+        {
+          "name": "mustCall:openChangeRecord",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:reopenSameChange",
+          "pass": true,
+          "detail": "replayed=true"
+        },
+        {
+          "name": "post:changeCount",
+          "pass": true,
+          "detail": "expected 1, got 1"
+        }
+      ],
+      "category": "routine",
+      "action": "record",
+      "executed": false
+    },
+    {
+      "id": "chg-005-external-reject",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "executed",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:proposeExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:approveExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:rejectExecute",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:proposalStatus",
+          "pass": true,
+          "detail": "expected rejected, got rejected"
+        },
+        {
+          "name": "post:executedAfter",
+          "pass": true,
+          "detail": "expected false, got false"
+        }
+      ],
+      "category": "elevated",
+      "action": "proposeExecute",
+      "executed": false
+    }
+  ]
+}

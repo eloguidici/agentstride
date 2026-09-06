@@ -16,7 +16,8 @@
     "examples:smoke": "npm start -w @agentstride/example-orchestrator-n-agents",
     "eval:enterprise-support": "npm run eval:enterprise-support -w @agentstride/evals-internal",
     "eval:human-approval": "npm run eval:human-approval -w @agentstride/evals-internal",
-    "eval:alarm-triage": "npm run eval:alarm-triage -w @agentstride/evals-internal"
+    "eval:alarm-triage": "npm run eval:alarm-triage -w @agentstride/evals-internal",
+    "eval:change-gate": "npm run eval:change-gate -w @agentstride/evals-internal"
   },
   "devDependencies": {
     "@standard-schema/spec": "^1.1.0",
