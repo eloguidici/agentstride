@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "test": "npm run test --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
-    "typecheck": "npm run typecheck --workspaces --if-present",
+    "build": "npm run build -w @agentstride/core && npm run build --workspaces --if-present",
+    "typecheck": "npm run build -w @agentstride/core && npm run typecheck --workspaces --if-present",
     "publish:check": "node scripts/publish-check.mjs",
     "examples:smoke": "npm start -w @agentstride/example-orchestrator-n-agents"
   },
