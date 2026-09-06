@@ -22,6 +22,7 @@ Documented decisions:
 - [0010](0010-nested-agent-cancellation.md) - Nested agent cancellation via asAgentTool.
 - [0011](0011-run-causality.md) - Parent/child run causality (`parentRunId`).
 - [0012](0012-opentelemetry-out-of-core.md) - OpenTelemetry stays out of core.
+- [0013](0013-pre-1.0-api-freeze.md) - Pre-1.0 API freeze while repo stays private.
 
 Still guiding the roadmap:
 
@@ -29,4 +30,4 @@ Still guiding the roadmap:
 - RAG, MCP and NestJS live outside core;
 - local and remote agents should eventually share a common capability contract;
 - portability is a design constraint, not a promise added later;
-- repository stays private until Phase 14 is intentionally triggered for public release.
+- repository stays private until the owner explicitly approves public/npm (`docs/narrative/RELEASE_READINESS.md`).

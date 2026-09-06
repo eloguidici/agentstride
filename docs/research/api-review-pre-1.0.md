@@ -1,35 +1,41 @@
 # API review notes (pre-1.0)
 
-Captured during the 2026-09-06 stabilize / runtime-hardening pass, then updated with evidence from `examples/17-enterprise-support-agent`.
+Status: **Freeze decisions recorded in ADR 0013** (2026-09-06).  
+Repo remains **private**; no npm publish without explicit owner approval.
 
-No drive-by breaking changes unless a vertical slice cannot proceed.
+## Keep (stable)
 
-## Keep
+- `createAgent` / `defineTool` / `asAgentTool`
+- `AgentRun` as the success value; throw on failure with optional `error.agentRun`
+- Standard Schema for tools + structured output
+- Nested cancel + causality (ADR 0010 / 0011)
+- Optional packages outside core
 
-- `createAgent` / `defineTool` / `asAgentTool` — small and clear; sufficient for Receptionist → Security.
-- `AgentRun` as the success value; throw on failure with optional `error.agentRun`.
-- Standard Schema for tools + structured output.
-- Optional packages outside core (RAG used; memory/Nest/MCP unused on purpose).
+## Done in Track H
 
-## Clean later (non-urgent)
+| Item | Decision |
+| --- | --- |
+| `AgentRunResult` | **Removed** — use `AgentRun` |
+| `toMastraTool` / `toLangChainTool` | **Removed** — use `*ToolConfig` |
+| Package `exports.types` | **Switched** to `dist/index.d.ts` |
+| ADR | `docs/decisions/0013-pre-1.0-api-freeze.md` |
+
+## Legacy / postpone
 
 | Item | Note |
 | --- | --- |
-| `AgentRunResult` | Deprecated alias of `AgentRun` — remove after a deprecation window. Unused in the enterprise slice. |
-| `withTimeout` | Prefer `runWithDeadline`; keep until external callers migrate. |
-| Deprecated migrate helpers | `toMastraTool` / `toLangChainTool` — remove when unused. |
-| `AgentLike.run` options index signature | Loose `[key: string]: unknown` — tighten once remote agents stabilize. |
-| Reserved context key `abortSignal` | **Validated in slice:** cooperative tool cancel works. Avoid colliding domain keys. |
-| Package `exports.types` → `src/` | Incubation convenience for monorepo builds; switch to `dist/*.d.ts` before npm publish. |
-| `asAgentTool` signal forwarding | **Done** (ADR 0010): nested `run({ signal })` receives parent `context.abortSignal`. Cooperative work must still honor the signal. |
+| `withTimeout` | Prefer `runWithDeadline`; keep until callers migrate |
+| `AgentLike.run` options index | Loose `[key: string]: unknown` — postpone |
+| Reserved context key `abortSignal` | Keep; avoid colliding domain keys |
 
 ## Explicitly not public policy engines
 
-Hooks/guards stay thin. Role checks in the enterprise example live in **domain/permissions**, not core.
+Hooks/guards stay thin. Role checks live in domain (Velum Grid examples 23–26).
 
-## Evidence from enterprise slice
+## Exit criteria vs publish
 
-- Structured output + Zod schema in the example was straightforward.
-- Domain/tool split kept AgentStride out of business logic.
-- Event trace via `onEvent` was enough for a demo; no need for OTel yet.
-- No pressure to expand core public helpers for this case.
+- Public API reviewed: **yes** (ADR 0013)
+- Accidental aliases removed: **yes**
+- Package types publish-ready: **yes** (`dist/*.d.ts`)
+- Examples compile / tests: required on the Track H PR
+- **npm publish / public repo: blocked** until owner signs `docs/narrative/RELEASE_READINESS.md`

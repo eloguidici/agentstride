@@ -102,9 +102,6 @@ export type AgentRun<TOutput = unknown> = Readonly<{
   parentRunId?: string;
 }>;
 
-/** @deprecated Prefer AgentRun. Kept as an alias during the transition. */
-export type AgentRunResult<TOutput = unknown> = AgentRun<TOutput>;
-
 export interface AgentLike<I = string, O = AgentRun> {
   run(input: I, options?: {
     context?: AgentContext;
