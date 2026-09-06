@@ -36,6 +36,15 @@ export function createFakeTriageModel(scenario = "pulsebeat-crash") {
         text: "periodic health ping",
       },
     },
+    "ledgerflare-fail": {
+      origin: "ledgerflare",
+      envelope: {
+        id: "lf-902",
+        level: "ERROR",
+        component: "settlement-worker",
+        text: "settlement batch failed checksum mismatch",
+      },
+    },
   };
 
   return {

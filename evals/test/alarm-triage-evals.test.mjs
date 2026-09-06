@@ -7,7 +7,7 @@ describe("alarm-triage evals", () => {
   it("deterministic Velum Grid suite passes", async () => {
     const result = await runAlarmTriageEvals({ writeBaseline: false });
     assert.equal(result.summary.failed, 0, result.humanSummary);
-    assert.ok(result.caseCount >= 4);
+    assert.ok(result.caseCount >= 7);
     assert.ok(result.cases.every((c) => c.paged !== true));
   });
 });
