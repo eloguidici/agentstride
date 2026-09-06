@@ -1,4 +1,4 @@
-# AgentStride - Public Productization and Release Decision Plan
+﻿# AgentStride - Public Productization and Release Decision Plan
 
 Date: 2026-09-06  
 Status: Private preparation in progress / autonomous prep landing on `docs/public-productization-prep`  
@@ -22,7 +22,7 @@ The repository remains the shared memory between ChatGPT, Codex, Cursor and othe
 
 At the beginning of this phase, the repository should already contain:
 
-- production validation Tracks A–G;
+- production validation Tracks Aâ€“G;
 - pre-1.0 API freeze decisions (ADR 0013);
 - enterprise and Velum Grid vertical slices;
 - deterministic eval baselines;
@@ -144,7 +144,7 @@ Do not publish anything yet.
 
 ## Recommended initial story set
 
-Prepare a recommendation around 3–5 stories from `docs/narrative/story-index.md`.
+Prepare a recommendation around 3â€“5 stories from `docs/narrative/story-index.md`.
 
 Recommended default shortlist:
 
@@ -209,7 +209,7 @@ Evidence:
 ## Tasks
 
 1. Review all story-index candidates.
-2. Recommend a first 3–5 story sequence.
+2. Recommend a first 3â€“5 story sequence.
 3. For each candidate create a short editorial brief:
    - problem;
    - technical insight;
@@ -354,7 +354,7 @@ A real small agent should remain easy to understand.
 
 ### 4. Why AgentStride
 
-Prefer 4–6 evidence-backed bullets:
+Prefer 4â€“6 evidence-backed bullets:
 
 - small provider-agnostic core;
 - typed portable tools;
@@ -487,7 +487,7 @@ Provide a recommendation, but do not remove `private: true`.
 
 # OWNER GATE 2 - Package scope
 
-**CLOSED 2026-09-06 — Option A:** initial npm surface (when launch approved) = `@agentstride/core` + `@agentstride/openai` only.
+**CLOSED 2026-09-06 â€” Option A:** initial npm surface (when launch approved) = `@agentstride/core` + `@agentstride/openai` only.
 
 No package may be made publishable solely because the recommendation exists. Still requires explicit launch authorization.
 
@@ -851,7 +851,7 @@ At that point, if the owner has not authorized launch, the correct action is to 
 
 Distribution and early-adoption planning is documented privately in:
 
-`docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
+`https://github.com/eloguidici/agentstride-notes (private vault)`
 
 This document may guide launch preparation, channel strategy, first-user goals and post-launch measurement.
 
@@ -867,6 +867,7 @@ Public productization should also consider the owner's professional objective: A
 
 Internal guidance:
 
-`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+`https://github.com/eloguidici/agentstride-notes (private vault)`
 
 Use it when preparing LinkedIn/profile drafts and launch sequencing, but do not expose the internal career strategy automatically when the repository becomes public.
+

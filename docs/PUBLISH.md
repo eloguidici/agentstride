@@ -5,7 +5,7 @@ AgentStride packages remain **private** until an intentional public release.
 ## Checklist before first npm publish
 
 1. Repository visibility decision (still private by default).
-2. Execute `docs/internal/` disposition (remove/move before public).
+2. Owner-private strategy notes live in `eloguidici/agentstride-notes` (not in this tree).
 3. `npm ci && npm run typecheck && npm run test && npm run build` (or `npm install` if lockfile incomplete)
 4. `npm run publish:check`
 5. `npm run package:dry-run`

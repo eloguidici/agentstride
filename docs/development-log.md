@@ -714,7 +714,7 @@ Engineering and private productization reached a point where future success depe
 
 Added an internal growth/distribution strategy:
 
-`docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
+`owner private notes vault (agentstride-notes)`
 
 ### Important constraint
 
@@ -730,7 +730,7 @@ AgentStride is also intended to provide visible evidence of backend + agentic AI
 
 Added:
 
-`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+`owner private notes vault (agentstride-notes)`
 
 ### Constraint
 
@@ -744,7 +744,7 @@ Dry-run covered core only; needed Gate-2 packages + tsc consumer and explicit in
 
 ### Evidence
 
-- `docs/internal/INTERNAL_DOCS_DISPOSITION.md` + `linkedin-drafts/`
+- `owner private notes vault (agentstride-notes)` + `linkedin-drafts/`
 - Extended `scripts/package-dry-run.mjs` — core+openai pack/install/`tsc --noEmit`/runtime GREEN
 
 ### Decision
@@ -755,6 +755,28 @@ Complete remaining autonomous private prep; stop at OWNER GATE 4. Do not publish
 
 Owner Gate 4: internal disposition + visibility/npm + optional post publishing.
 
+## 2026-09-06 - Owner notes migrated to agentstride-notes
+
+### Context
+
+Owner created private vault `eloguidici/agentstride-notes` for strategy/career notes so the product repo can go public cleanly.
+
+### Evidence
+
+Content formerly under owner-private strategy docs copied to agentstride-notes; removed from AgentStride tree; references updated.
+
+### Decision
+
+Product repo holds engineering/product docs only. Owner strategy lives in agentstride-notes. Optional git history rewrite to purge former paths.
+
+### Rejected
+
+Leaving strategy docs in AgentStride “as private folder name”; Drive-only backup without git vault.
+
+### Next question
+
+History scrub + Gate 4 launch when owner authorizes.
+
 ## 2026-09-06 - Public/npm readiness audit + packaging fixes
 
 ### Context
@@ -763,7 +785,7 @@ Owner asked for an exacting review against conditions to make the repo public an
 
 ### Evidence
 
-Audit in `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md`. Gaps: missing package `license`/`repository`/`publishConfig`, no per-package LICENSE in tarball, openai peer `*`, `files` included `src`+maps, `docs/internal/` still present, soft public hygiene (CoC/SECURITY/release notes).
+Audit in `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md`. Gaps found at the time: missing package metadata, peer `*`, shipping `src` in packs; owner-private strategy docs were still in-tree then (later moved to agentstride-notes).
 
 ### Decision
 
@@ -771,7 +793,7 @@ Fix packaging metadata and first-wave pack contents while staying private. Do no
 
 ### Rejected
 
-Publishing now; deleting `docs/internal/` without owner backup; new features.
+Publishing now; deleting owner-private notes (agentstride-notes) without owner backup; new features.
 
 ### Result
 
@@ -779,7 +801,7 @@ Publishing now; deleting `docs/internal/` without owner backup; new features.
 
 ### Next question
 
-Owner: disposition of `docs/internal/` then Gate 4 launch sequence.
+Owner: disposition of owner-private notes (agentstride-notes) then Gate 4 launch sequence.
 
 ## 2026-09-06 - Implementer-facing docs (P0–P3)
 
@@ -797,7 +819,7 @@ Ship thin evidence-backed guides in English (same as root README); keep ADRs as 
 
 ### Rejected
 
-Full typedoc site; rewriting all example READMEs; linking `docs/internal/` from entry docs.
+Full typedoc site; rewriting all example READMEs; linking owner-private notes (agentstride-notes) from entry docs.
 
 ### Result
 

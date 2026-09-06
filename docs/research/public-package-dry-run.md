@@ -1,7 +1,7 @@
-# Public package dry-run (`@agentstride/core` + `@agentstride/openai`)
+﻿# Public package dry-run (`@agentstride/core` + `@agentstride/openai`)
 
 Date: 2026-09-06  
-Status: **Passed locally** — no npm publish  
+Status: **Passed locally** â€” no npm publish  
 Script: `scripts/package-dry-run.mjs`  
 Aligns with OWNER GATE 2 (core + openai only)
 
@@ -49,7 +49,7 @@ The script:
 
 ## Notes
 
-- Packages remain `"private": true` — pack works locally; publish still forbidden.
+- Packages remain `"private": true` â€” pack works locally; publish still forbidden.
 - Live OpenAI is **not** exercised; adapter import + types are.
 - Versions in tarballs remain `0.0.0` until authorized launch bump to `0.1.0`.
 
@@ -71,8 +71,9 @@ Record dry-run as green for Gate-2 packaging readiness prep (install + tsc + run
 
 ## Risk
 
-Consumers on older Node — engines say `>=20`. Slow first `npm install` in temp dirs on constrained networks.
+Consumers on older Node â€” engines say `>=20`. Slow first `npm install` in temp dirs on constrained networks.
 
 ## Next question
 
-Owner Gate 4: visibility / npm after `docs/internal/` disposition.
+Owner Gate 4: visibility / npm (owner notes already in agentstride-notes).
+

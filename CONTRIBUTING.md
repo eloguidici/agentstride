@@ -19,7 +19,7 @@ See launch readiness: `docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md` and `docs
 - [Launch checklist](docs/narrative/LAUNCH_CHECKLIST.md)  
 - [Public/npm readiness audit](docs/engineering/PUBLIC_NPM_READINESS_AUDIT.md)
 
-Before making the repository public, remove owner-private strategy notes under `docs/internal/` (see disposition checklist inside that folder). Do not link those files from the root README.
+Owner-private strategy and career notes are **not** in this repository. They live in the separate private vault `eloguidici/agentstride-notes`.
 
 ## Implementer docs
 
