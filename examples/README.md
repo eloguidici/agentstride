@@ -24,6 +24,7 @@ Examples validate the API. Keep them small.
 | `16-orchestrator-n-agents` | Orchestrator → 5 specialists (ask* + parallel fanOut) |
 | `17-enterprise-support-agent` | Real-world slice: Receptionist + security + RAG + structured case result |
 | `18-enterprise-support-http` | Nest HTTP surface for the enterprise slice (`POST /support/run`) |
+| `19-opentelemetry-tracing` | AgentEvent → OpenTelemetry spans (proof; OTel not in core) |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -38,4 +39,6 @@ npm start -w @agentstride/example-enterprise-support-agent
 npm test -w @agentstride/example-enterprise-support-agent
 npm start -w @agentstride/example-enterprise-support-http
 npm test -w @agentstride/example-enterprise-support-http
+npm start -w @agentstride/example-opentelemetry-tracing
+npm test -w @agentstride/example-opentelemetry-tracing
 ```
