@@ -27,9 +27,10 @@ Only the owner can flip those switches.
 
 - [x] `docs/narrative/story-index.md` indexes evidence
 - [x] `docs/narrative/evidence/` maps stories → artifacts
-- [x] Story **recommendation** prepared (`PUBLIC_STORY_SELECTION.md`) — not owner-selected
+- [x] Story **recommendation** prepared (`PUBLIC_STORY_SELECTION.md`)
+- [x] Pack 1 stories drafted (`docs/narrative/drafts/`) — **not published**
 - [x] Public wording review prepared (`PUBLIC_WORDING_REVIEW.md`)
-- [ ] Owner picks which stories ship first externally
+- [ ] Owner reviews/edits drafts before any external post
 - [ ] Origins / vision accepted by owner for public visibility
 
 ## Explicit owner decisions still required
