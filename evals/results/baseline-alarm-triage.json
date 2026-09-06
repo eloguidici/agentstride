@@ -2,11 +2,11 @@
   "domain": "alarm-triage",
   "org": "Velum Grid",
   "mode": "deterministic-scripted",
-  "generatedAt": "2026-09-06T16:40:54.065Z",
-  "caseCount": 4,
+  "generatedAt": "2026-09-06T17:11:00.902Z",
+  "caseCount": 7,
   "summary": {
-    "total": 4,
-    "passed": 4,
+    "total": 7,
+    "passed": 7,
     "failed": 0,
     "passRate": 1,
     "metrics": {
@@ -16,28 +16,28 @@
         "rate": null
       },
       "humanApprovalAccuracy": {
-        "pass": 4,
-        "total": 4,
+        "pass": 6,
+        "total": 6,
         "rate": 1
       },
       "requiredToolSelection": {
-        "pass": 7,
-        "total": 7,
+        "pass": 12,
+        "total": 12,
         "rate": 1
       },
       "unnecessaryToolAvoidance": {
-        "pass": 4,
-        "total": 4,
+        "pass": 6,
+        "total": 6,
         "rate": 1
       },
       "structuredOutputValidity": {
-        "pass": 4,
-        "total": 4,
+        "pass": 7,
+        "total": 7,
         "rate": 1
       }
     }
   },
-  "humanSummary": "4 cases\n4 passed\n0 failed\n\ndecisionAccuracy: n/a (no checks)\nhumanApprovalAccuracy: 100% (4/4)\nrequiredToolSelection: 100% (7/7)\nunnecessaryToolAvoidance: 100% (4/4)\nstructuredOutputValidity: 100% (4/4)",
+  "humanSummary": "7 cases\n7 passed\n0 failed\n\ndecisionAccuracy: n/a (no checks)\nhumanApprovalAccuracy: 100% (6/6)\nrequiredToolSelection: 100% (12/12)\nunnecessaryToolAvoidance: 100% (6/6)\nstructuredOutputValidity: 100% (7/7)",
   "cases": [
     {
       "id": "alarm-001-ping-drop",
@@ -223,6 +223,166 @@
           "name": "mustNotCall:approvePage",
           "pass": true,
           "detail": "ok"
+        }
+      ],
+      "category": "incident",
+      "action": "page",
+      "paged": false
+    },
+    {
+      "id": "alarm-005-ledgerflare-incident",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected incident, got incident"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected page, got page"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:normalizeAndAssess",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:openTicket",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCall:proposePage",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:ticketCount",
+          "pass": true,
+          "detail": "expected 1, got 1"
+        },
+        {
+          "name": "post:proposalStatus",
+          "pass": true,
+          "detail": "expected pending, got pending"
+        }
+      ],
+      "category": "incident",
+      "action": "page",
+      "paged": false
+    },
+    {
+      "id": "alarm-006-ticket-idempotency",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected warning, got warning"
+        },
+        {
+          "name": "action",
+          "pass": true,
+          "detail": "expected ticket, got ticket"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:openTicket",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:reopenSameTicket",
+          "pass": true,
+          "detail": "replayed=true"
+        },
+        {
+          "name": "post:ticketCount",
+          "pass": true,
+          "detail": "expected 1, got 1"
+        }
+      ],
+      "category": "warning",
+      "action": "ticket",
+      "paged": false
+    },
+    {
+      "id": "alarm-007-external-reject-keeps-unpaged",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "completed"
+        },
+        {
+          "name": "category",
+          "pass": true,
+          "detail": "expected incident, got incident"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "paged",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:proposePage",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:approvePage",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:rejectPage",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "post:proposalStatus",
+          "pass": true,
+          "detail": "expected rejected, got rejected"
+        },
+        {
+          "name": "post:pagedAfter",
+          "pass": true,
+          "detail": "expected false, got false"
         }
       ],
       "category": "incident",

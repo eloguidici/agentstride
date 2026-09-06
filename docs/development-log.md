@@ -410,3 +410,33 @@ Portable ops vertical slice reusing Tracks E/F patterns.
 ### Next question
 
 More private use cases, or resume H/I?
+
+## 2026-09-06 - Velum Grid alarm triage HTTP deepen
+
+### Context
+
+Owner asked to deepen the private slice: HTTP surface + approve/reject end-to-end + stronger evals.
+
+### Hypothesis
+
+Same domain can be exposed over minimal Node HTTP without Nest or core changes; evals can assert post-run domain state (idempotent reopen, reject).
+
+### Evidence
+
+Example 23 `http.mjs` + HTTP tests (12 total example tests); evals 7/7 including ledgerflare, ticket idempotency, external reject.
+
+### Decision
+
+Keep HTTP minimal (pattern of example 20). Roles `admin` | `sre-approver` only. No Nest for this deepen.
+
+### Rejected
+
+Nest wrapper for this slice; putting approve tools on the agent.
+
+### Result
+
+Propose → external decide is now demonstrable over HTTP and covered by evals.
+
+### Next question
+
+Another private vertical, Nest packaging of this slice, or H/I?
