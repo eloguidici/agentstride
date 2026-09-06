@@ -1,3 +1,4 @@
+import { parseToolInput } from "./schema.js";
 import type { Tool } from "./tool.js";
 import type {
   AgentContext,
@@ -36,6 +37,7 @@ export function createAgent(config: AgentConfig): Agent {
   const toolDefinitions: ToolDefinition[] = Object.values(tools).map((tool) => ({
     name: tool.name,
     description: tool.description,
+    ...(tool.parameters !== undefined ? { parameters: tool.parameters } : {}),
   }));
 
   return {
@@ -98,5 +100,10 @@ async function executeTool(
     throw new Error(`Model requested unknown tool: ${call.name}`);
   }
 
-  return tool.execute(call.input, context);
+  const input =
+    tool.inputSchema === undefined
+      ? call.input
+      : await parseToolInput(tool.inputSchema, call.input, tool.name);
+
+  return tool.execute(input, context);
 }

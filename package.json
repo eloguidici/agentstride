@@ -13,7 +13,9 @@
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "devDependencies": {
-    "typescript": "^5.8.3"
+    "@standard-schema/spec": "^1.1.0",
+    "typescript": "^5.8.3",
+    "zod": "^4.5.4"
   },
   "engines": {
     "node": ">=20"

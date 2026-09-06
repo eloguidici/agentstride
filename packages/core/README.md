@@ -1,20 +1,23 @@
 # @agentstride/core
 
-This package will contain the smallest set of primitives required to run an AgentStride agent.
+Smallest set of primitives required to run an AgentStride agent.
 
 The API is intentionally not frozen yet.
 
-Before adding abstractions here, we will test them against the initial use cases documented in `docs/use-cases.md`.
+Currently available:
 
-Current candidates:
+- `createAgent()`
+- `defineTool()` with optional Standard Schema `inputSchema`
+- `Model` contract
+- execution context
+- `ToolInputValidationError`
 
-- Agent
-- Tool
-- Model
-- Context
-- AgentRun
-- AgentEvent
+Still ahead in core:
+
 - structured output
+- AgentRun / lifecycle events
 - hooks / guards
 
-If a concept can live in an integration package instead of the core, that is the preferred direction.
+Integrations such as providers, RAG, MCP and NestJS belong in separate packages.
+
+See `docs/decisions/0005-tool-input-schemas.md` for the schema decision.
