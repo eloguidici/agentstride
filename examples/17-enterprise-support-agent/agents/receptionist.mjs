@@ -103,7 +103,9 @@ export function createReceptionistTools(securityAgent) {
  */
 export function createReceptionistAgent(model, options = {}) {
   const securityModel = options.securityModel ?? model;
-  const securityAgent = createSecurityAgent(securityModel);
+  const securityAgent = createSecurityAgent(securityModel, {
+    ...(options.onSecurityEvent ? { onEvent: options.onSecurityEvent } : {}),
+  });
   const tools = createReceptionistTools(securityAgent);
 
   const agent = createAgent({
