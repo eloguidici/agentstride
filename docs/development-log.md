@@ -144,3 +144,12 @@ Added `examples/17-enterprise-support-agent`:
 
 Next step recommendation: merge this branch, then either embed the slice behind Nest HTTP or tighten `asAgentTool` signal forwarding **only if** a product cancel path needs nested abort.
 
+## 2026-09-06 - Enterprise slice behind Nest HTTP
+
+Added `examples/18-enterprise-support-http`:
+
+- Reuses example 17 domain/agents via dynamic import (Nest stays out of domain).
+- `POST /support/run` with api-key + tenant/user/roles/request-id headers.
+- Fake mode for CI; AbortSignal from HTTP close.
+- Confirmed embedding does not require core changes.
+
