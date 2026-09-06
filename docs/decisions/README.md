@@ -17,7 +17,8 @@ Documented decisions:
 - [0005](0005-tool-input-schemas.md) - validate tool inputs with Standard Schema, not a Zod hard dependency;
 - [0006](0006-structured-output.md) - validate structured output in core via Standard Schema;
 - [0007](0007-agent-run-events.md) - AgentRun lifecycle events without a bus;
-- [0008](0008-hooks-and-guards.md) - thin hooks and guards, not a policy engine.
+- [0008](0008-hooks-and-guards.md) - thin hooks and guards, not a policy engine;
+- [0009](0009-abort-signal-cancellation.md) - AbortSignal for timeout and cancellation.
 
 Still guiding the roadmap:
 

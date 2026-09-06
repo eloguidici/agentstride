@@ -176,6 +176,21 @@ Hardening added without publishing:
 
 ---
 
+## Stabilize track (post–Phase 14 incubation)
+
+Status: **In progress** on `feature/runtime-hardening` (2026-09-06)
+
+Goal: harden runtime behavior before more features.
+
+- failed `AgentRun` preserves real progress
+- `AbortSignal` / timeout cancellation semantics
+- failure-path tests
+- OpenAI adapter cancellation + honest structured-output docs
+- migrate Zod trade-off documented
+- API cleanup notes for a future 1.0 (no drive-by breaking changes)
+
+---
+
 ## Quality bar for every phase
 
 Before closing a phase:
