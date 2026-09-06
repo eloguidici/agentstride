@@ -704,3 +704,36 @@ Gates 2–3 closed. Still private; no npm publish.
 ### Next question
 
 Owner: draft review and/or visibility + npm launch decision (irreversible).
+
+## 2026-09-06 - Internal growth and promotion strategy
+
+### Context
+
+Engineering and private productization reached a point where future success depends increasingly on developer discovery and adoption rather than more runtime features.
+
+### Decision
+
+Added an internal growth/distribution strategy:
+
+`docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
+
+It documents:
+
+- growth flywheel;
+- positioning;
+- GitHub conversion;
+- narrative-led launch;
+- LinkedIn/Hacker News/Reddit/community strategy;
+- npm discovery;
+- first-user / first-100-star milestones;
+- adoption metrics;
+- launch sequence;
+- anti-patterns.
+
+### Important constraint
+
+The strategy is private planning material. Before the repository becomes public it must be explicitly reviewed and removed, moved or converted.
+
+### Narrative value
+
+This captures not only how AgentStride was engineered, but how the project planned to transition from technical proof to real developer adoption.
