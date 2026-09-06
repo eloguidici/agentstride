@@ -21,6 +21,7 @@ Documented decisions:
 - [0009](0009-abort-signal-cancellation.md) - AbortSignal for timeout and cancellation.
 - [0010](0010-nested-agent-cancellation.md) - Nested agent cancellation via asAgentTool.
 - [0011](0011-run-causality.md) - Parent/child run causality (`parentRunId`).
+- [0012](0012-opentelemetry-out-of-core.md) - OpenTelemetry stays out of core.
 
 Still guiding the roadmap:
 
