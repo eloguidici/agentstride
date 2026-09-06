@@ -247,6 +247,6 @@ Preferred order:
 8. pre-1.0 API stabilization — **paused for owner decision**;
 9. narrative/release decision — **paused for owner decision**.
 
-Post-pause private evidence: example `23-alarm-triage` (Velum Grid) — see `docs/research/alarm-triage.md`.
+Post-pause private evidence: example `23-alarm-triage` + `24-change-gate` (Velum Grid) — see research notes.
 
 The objective is to increase production credibility without turning AgentStride into a large framework.

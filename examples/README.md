@@ -29,6 +29,7 @@ Examples validate the API. Keep them small.
 | `21-side-effect-idempotency` | Idempotent createSupportCase under retries / duplicate tool calls |
 | `22-usage-accounting` | Aggregate tokens/steps/tools; cost via external pricing only |
 | `23-alarm-triage` | Velum Grid: multi-source normalize → drop/ticket/proposePage + HTTP approve/reject |
+| `24-change-gate` | Velum Grid: multi-source change gate → record/proposeExecute + HTTP approve/reject |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -54,4 +55,7 @@ npm test -w @agentstride/example-usage-accounting
 npm start -w @agentstride/example-alarm-triage
 npm run start:http -w @agentstride/example-alarm-triage
 npm test -w @agentstride/example-alarm-triage
+npm start -w @agentstride/example-change-gate
+npm run start:http -w @agentstride/example-change-gate
+npm test -w @agentstride/example-change-gate
 ```
