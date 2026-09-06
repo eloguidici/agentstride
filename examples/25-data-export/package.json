@@ -1,0 +1,16 @@
+{
+  "name": "@agentstride/example-data-export",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Velum Grid data-export / SAR gate with external privacy approval",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core && node app.mjs",
+    "start:http": "npm run build -w @agentstride/core && node http.mjs",
+    "test": "npm run build -w @agentstride/core && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "zod": "^4.5.4"
+  }
+}

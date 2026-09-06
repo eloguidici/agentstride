@@ -229,7 +229,7 @@ Pause feature growth and reassess if any of the following happens:
 
 ## Production validation + narrative track
 
-Status: **In progress** — Tracks A–G on `main`; H/I paused; private slice **Velum Grid alarm triage** on `feature/alarm-triage` (2026-09-06)
+Status: **In progress** — Tracks A–G on `main`; Track H decisions in ADR 0013; Track I = private release prep only; verticals 23–26 on `feature/private-polish-pack` (2026-09-06)
 
 Detailed source of truth:
 
@@ -244,9 +244,9 @@ Preferred order:
 5. human approval — **done** (example 20);
 6. idempotent side-effect tools — **done** (example 21);
 7. usage accounting — **done** (example 22);
-8. pre-1.0 API stabilization — **paused for owner decision**;
-9. narrative/release decision — **paused for owner decision**.
+8. pre-1.0 API stabilization — **ADR 0013** (repo still private);
+9. narrative/release decision — **prep only** (`docs/narrative/RELEASE_READINESS.md`); public/npm **blocked**.
 
-Post-pause private evidence: example `23-alarm-triage` + `24-change-gate` (Velum Grid) — see research notes.
+Private evidence: examples `23`–`26` (Velum Grid) + evals.
 
 The objective is to increase production credibility without turning AgentStride into a large framework.

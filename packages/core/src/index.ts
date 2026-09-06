@@ -43,7 +43,6 @@ export type {
   AgentLike,
   AgentMessage,
   AgentRun,
-  AgentRunResult,
   AgentRunStatus,
   InferSchemaOutput,
   Memory,
