@@ -36,6 +36,9 @@ export type AgentHooks = Readonly<{
 /** Reserved context key for tools that opt into cooperative cancellation. */
 export const ABORT_SIGNAL_CONTEXT_KEY = "abortSignal";
 
+/** Reserved context key exposing the current AgentRun id to tools (e.g. asAgentTool). */
+export const AGENT_RUN_ID_CONTEXT_KEY = "agentRunId";
+
 export function assertToolAllowed(
   toolName: string,
   allowedTools: readonly string[] | undefined,
@@ -172,6 +175,16 @@ export function withAbortSignalContext(
   return {
     ...context,
     [ABORT_SIGNAL_CONTEXT_KEY]: signal,
+  };
+}
+
+export function withAgentRunIdContext(
+  context: AgentContext,
+  runId: string,
+): AgentContext {
+  return {
+    ...context,
+    [AGENT_RUN_ID_CONTEXT_KEY]: runId,
   };
 }
 

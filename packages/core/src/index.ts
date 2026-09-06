@@ -27,6 +27,7 @@ export {
 
 export {
   ABORT_SIGNAL_CONTEXT_KEY,
+  AGENT_RUN_ID_CONTEXT_KEY,
   assertToolAllowed,
   createRunId,
   runWithDeadline,

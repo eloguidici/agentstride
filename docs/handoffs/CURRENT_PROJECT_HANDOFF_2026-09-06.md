@@ -4,7 +4,7 @@ This document is the current source of truth for continuing AgentStride in anoth
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active feature branch: **`feature/nested-cancellation`** (Track B)  
+Active feature branch: **`feature/run-causality`** (Track C)  
 Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
@@ -20,17 +20,17 @@ Do not make the repository public or publish npm packages unless explicitly requ
 
 ## 1. Completed
 
-Already on `main`:
+On `main`:
 
-- foundation through enterprise Nest HTTP;
-- Track A evaluation harness (`evals/`, 22 cases, baseline).
+- Track A evaluation harness
+- Track B nested cancellation (ADR 0010)
 
-On this branch (Track B):
+On this branch (Track C):
 
-- `asAgentTool` forwards `context.abortSignal` → nested `run({ signal })`
-- ADR 0010 + research note `docs/research/nested-cancellation.md`
-- Core tests: `packages/core/test/nested-cancellation.test.mjs`
-- No cancellation bus; no new public AgentLike options
+- `parentRunId` on `AgentRun` / `AgentRunOptions` / `run:start`
+- reserved `context.agentRunId`; `asAgentTool` sets parent automatically
+- ADR 0011 + `docs/research/run-causality.md`
+- Core + example 17 integration coverage
 
 Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
 
@@ -38,13 +38,11 @@ Plan: `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
 
 ## 2. Next track after merge
 
-**Track C — Parent/child run causality**
+**Track D — OpenTelemetry proof**
 
-Branch suggestion: `feature/run-causality`
+Branch suggestion: `feature/opentelemetry-proof`
 
-Likely minimum: `parentRunId` for local `asAgentTool` delegation.
-
-Do not skip to workflows / full A2A / new providers.
+Example/proof only — do not make OTel a core dependency.
 
 ---
 
@@ -52,7 +50,6 @@ Do not skip to workflows / full A2A / new providers.
 
 ```bash
 npm test -w @agentstride/core
-npm test -w @agentstride/evals-internal
 npm test -w @agentstride/example-enterprise-support-agent
 ```
 

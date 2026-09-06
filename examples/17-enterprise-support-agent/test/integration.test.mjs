@@ -18,11 +18,13 @@ describe("integration receptionist + security + tools", () => {
   it("emits lifecycle events across delegation", async () => {
     resetSupportCaseService();
     const events = [];
+    const securityEvents = [];
     const receptionist = createReceptionistAgent(
       createFakeEnterpriseModel("happy"),
       {
         securityModel: createFakeSecurityModel(),
         onEvent: (event) => events.push(event),
+        onSecurityEvent: (event) => securityEvents.push(event),
       },
     );
 
@@ -44,6 +46,13 @@ describe("integration receptionist + security + tools", () => {
     assert.ok(
       events.some((e) => e.type === "tool:start" && e.toolName === "createSupportCase"),
     );
+
+    const parentStart = events.find((e) => e.type === "run:start");
+    const nestedStart = securityEvents.find((e) => e.type === "run:start");
+    assert.ok(parentStart);
+    assert.ok(nestedStart);
+    assert.equal(parentStart.parentRunId, undefined);
+    assert.equal(nestedStart.parentRunId, parentStart.runId);
   });
 
   it("support tool failure attaches partial agentRun", async () => {
