@@ -26,27 +26,20 @@ Do not rely on the previous assistant's chat context. The next environment may o
 
 ## Phase 1 - Typed tools and runtime schemas
 
+Status: **Done** (2026-09-05)
+
 ### Goal
 
 Make tools genuinely safe and ergonomic at the boundary between an LLM and application code.
 
-### Work
+### Outcome
 
-- evaluate schema strategy;
-- document the chosen approach in an ADR;
-- add typed input schema support to `defineTool()`;
-- validate model-provided tool input at runtime;
-- preserve TypeScript inference;
-- determine how provider adapters can obtain JSON Schema or equivalent tool definitions;
-- decide whether tool output validation belongs in this phase or later;
-- add tests for valid and invalid input;
-- update the example to demonstrate inferred tool input.
-
-### Constraints
-
-- do not tie business code to model-provider types;
-- do not make the core dependent on a large validation abstraction unless the DX gain justifies it;
-- avoid creating an AgentStride-specific schema language unless necessary.
+- ADR 0005 accepted: Standard Schema V1 for validation/inference; Standard JSON Schema V1 for provider parameters when available.
+- Zod is the recommended authoring library, not a core dependency.
+- `defineTool({ inputSchema })` infers `execute` input types.
+- Invalid model tool args fail with `ToolInputValidationError` before `execute`.
+- `ToolDefinition.parameters` carries derived JSON Schema for future provider adapters.
+- Tool output validation deferred.
 
 ### Done when
 

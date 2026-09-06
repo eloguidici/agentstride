@@ -154,9 +154,12 @@ Current public concepts:
 - `AgentContext`
 - `AgentMessage`
 - `ToolCall`
+- `ToolDefinition` (includes optional `parameters` JSON Schema)
 - `AgentRunResult`
 - `createAgent()`
-- `defineTool()`
+- `defineTool({ inputSchema })`
+- `ToolInputValidationError`
+- Standard Schema helpers (`parseToolInput`, `getSchemaJsonSchema`)
 
 Current execution loop:
 
@@ -194,6 +197,7 @@ The loop currently supports:
 - user input;
 - multiple model steps;
 - tool calls;
+- runtime validation of tool input when `inputSchema` is present;
 - passing tool output back to the model;
 - execution context passed to tools;
 - max-step protection;
@@ -214,13 +218,17 @@ Current behavior covered:
 1. direct model response without tools;
 2. tool execution and sending the result back to the model;
 3. unknown tool failure;
-4. max-step exhaustion.
+4. max-step exhaustion;
+5. JSON Schema derivation from Standard JSON Schema tools;
+6. valid typed tool input;
+7. invalid typed tool input rejected before `execute`;
+8. tools without `inputSchema` remain unvalidated.
 
 At the time of the last implementation pass:
 
 ```text
-4 tests
-4 passed
+8 tests
+8 passed
 0 failed
 ```
 
@@ -273,6 +281,16 @@ Execution events may exist later for tracing and observability.
 Core depends on a small `Model` contract.
 
 Provider packages should translate SDK-specific messages and tool formats.
+
+### ADR 0005 - Tool input schemas via Standard Schema
+
+Tool inputs validate through Standard Schema V1.
+
+When the schema also supports Standard JSON Schema V1, `ToolDefinition.parameters` is derived for provider adapters.
+
+Zod is recommended for authoring, not required by core.
+
+Tool output validation is deferred.
 
 ---
 
@@ -387,60 +405,48 @@ If the core starts growing toward those areas, stop and reassess.
 
 ---
 
-## 10. Next unresolved design question
+## 10. Current next step
 
-The next important design task is **typed runtime validation for tool input/output**.
+Phase 1 (typed tools / schemas) is complete.
 
-Current tools are generically typed in TypeScript, but model tool calls arrive as `unknown`.
+Continue from **Phase 2 - Structured output** in `docs/IMPLEMENTATION_PLAN.md`.
 
-We need to decide how runtime schemas work.
+Desired direction:
 
-Possible directions to evaluate:
+```ts
+const result = await agent.run("Analyze customer", {
+  output: schema
+});
+```
 
-1. depend directly on Zod;
-2. define a tiny AgentStride schema contract and provide a Zod adapter;
-3. support Standard Schema / a library-neutral schema interface if technically appropriate;
-4. initially support input validation only, then output validation later.
+Design notes already constrained by ADR 0005:
 
-Do not choose based on fashion.
+- reuse Standard Schema for validation/inference;
+- keep provider-specific structured-output APIs inside adapters;
+- do not couple callers to OpenAI/Anthropic SDK types.
 
-Evaluate:
+After Phase 2, the plan order remains:
 
-- API simplicity;
-- TypeScript inference;
-- runtime validation;
-- JSON Schema generation for LLM tool definitions;
-- portability;
-- dependency weight;
-- compatibility with Zod-heavy TypeScript projects;
-- future provider adapters.
+3. AgentRun / lifecycle events;
+4. hooks and basic guards;
+5. first real model provider adapter;
+6. stronger examples;
+7. optional RAG;
+8. MCP;
+9. memory;
+10. NestJS;
+11. local multi-agent / Receptionist;
+12. A2A;
+13. migration examples;
+14. public-release preparation.
 
-Document the decision as an ADR before making it foundational.
+Do not jump directly to RAG/MCP/A2A before the core API is stable enough.
 
 ---
 
 ## 11. Implementation plan
 
 The detailed plan lives in `docs/IMPLEMENTATION_PLAN.md`.
-
-High-level order:
-
-1. schema + typed tool contract;
-2. structured output;
-3. execution/run model and lifecycle events;
-4. hooks and basic guards;
-5. first real model provider adapter;
-6. stronger examples;
-7. optional RAG;
-8. MCP;
-9. memory interface/adapters;
-10. NestJS integration;
-11. local agent delegation / Receptionist example;
-12. remote agent / A2A exploration;
-13. migration examples toward Mastra and LangChain/LangGraph;
-14. public-release preparation.
-
-Do not jump directly to RAG/MCP/A2A before the core API is stable enough.
 
 ---
 
