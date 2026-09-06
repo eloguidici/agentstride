@@ -229,7 +229,7 @@ Pause feature growth and reassess if any of the following happens:
 
 ## Production validation + narrative track
 
-Status: **In progress** — Tracks A–B on `main`; Track C on `feature/run-causality` (2026-09-06)
+Status: **In progress** — Tracks A–C on `main`; Track D on `feature/opentelemetry-proof` (2026-09-06)
 
 Detailed source of truth:
 
@@ -239,8 +239,8 @@ Preferred order:
 
 1. evaluation harness — **done**;
 2. nested cancellation — **done** (ADR 0010);
-3. run causality — **done on branch** (ADR 0011);
-4. OpenTelemetry proof;
+3. run causality — **done** (ADR 0011);
+4. OpenTelemetry proof — **done on branch** (ADR 0012 / example 19);
 5. human approval;
 6. idempotent side-effect tools;
 7. usage accounting;
