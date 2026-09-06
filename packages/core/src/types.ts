@@ -34,6 +34,8 @@ export type ModelRequest = Readonly<{
   messages: readonly AgentMessage[];
   tools: readonly ToolDefinition[];
   outputSchema?: JsonSchemaObject;
+  /** Cooperative cancellation; providers should pass this to fetch when possible. */
+  signal?: AbortSignal;
 }>;
 
 export type ModelResponse = Readonly<{

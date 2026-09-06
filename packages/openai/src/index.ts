@@ -94,6 +94,7 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
           ...extraHeaders,
         },
         body: JSON.stringify(body),
+        ...(request.signal ? { signal: request.signal } : {}),
       });
 
       let json = (await response.json()) as OpenAIChatResponse;
@@ -106,6 +107,11 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
           json.error?.message ?? "",
         )
       ) {
+        if (request.signal?.aborted) {
+          throw request.signal.reason instanceof Error
+            ? request.signal.reason
+            : new Error("OpenAI request aborted");
+        }
         delete body.response_format;
         response = await fetchImpl(`${baseUrl}/chat/completions`, {
           method: "POST",
@@ -115,6 +121,7 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
             ...extraHeaders,
           },
           body: JSON.stringify(body),
+          ...(request.signal ? { signal: request.signal } : {}),
         });
         json = (await response.json()) as OpenAIChatResponse;
       }
