@@ -4,7 +4,7 @@ This document is the current source of truth for continuing AgentStride in anoth
 
 Repository: `eloguidici/agentstride`  
 Default / consolidated branch: **`main`**  
-Active feature branch (stabilize): **`feature/runtime-hardening`**  
+Active feature branch: **`feature/real-world-validation`**  
 Repository visibility: **private** (still)
 
 Do not develop feature work directly on `main`.  
@@ -15,150 +15,68 @@ Do not publish npm packages unless explicitly requested.
 
 ## 0. Multi-tool continuity rule
 
-AgentStride is intentionally being developed across different AI-assisted development environments.
-
-The project must be easy to continue from:
-
-- ChatGPT;
-- Codex;
-- Cursor;
-- or another coding assistant with repository access.
-
-No tool should depend on private conversational context that is not also written into the repository.
-
-**The repository is the shared memory.**
-
-Before leaving a meaningful development session, the active tool should:
-
-1. update `docs/development-log.md` with meaningful progress and decisions;
-2. update or create an ADR if an architectural decision was made;
-3. update `docs/IMPLEMENTATION_PLAN.md` if phases or priorities changed;
-4. update this current handoff when the next starting point changes materially;
-5. leave the working branch buildable/testable when practical;
-6. commit changes in coherent units with useful messages.
+**The repository is the shared memory.** Update development-log, ADRs, this handoff, and keep the branch buildable before ending a session.
 
 ---
 
-## 1. Mode: stabilize (not build)
+## 1. Mode: real-world validation
 
-Foundation phases 1–14 are incubated and merged to `main` (PRs #1 and #2).
+Foundation + runtime hardening are on `main` (through PR #3 / `9c17481`).
 
-Current mode is **runtime hardening / stabilize**:
-
-- fix design inconsistencies and edge cases;
-- strengthen failure paths, timeout/cancellation, tests;
-- keep optional packages decoupled;
-- **do not** add large features, new packages, workflows, extra providers, or public publish.
+Current mode validates that existing primitives solve a small **enterprise** case without growing core.
 
 ---
 
-## 2. What is done
+## 2. Vertical slice status
 
-| Phase | Status | Notes |
-| --- | --- | --- |
-| 1 Typed tools/schemas | Done | ADR 0005 |
-| 2 Structured output | Done | ADR 0006 |
-| 3 AgentRun/events | Done | ADR 0007 |
-| 4 Hooks/guards | Done | ADR 0008 |
-| 5 OpenAI provider | Done | `@agentstride/openai` (fetch / OpenRouter-compatible) |
-| 6 Examples | Done | including live OpenRouter + Nest + orchestrator |
-| 7 RAG | Done | `@agentstride/rag` |
-| 8 MCP | Minimal done | stdio client + bridge; not a full MCP platform |
-| 9 Memory | Done | core `Memory` + `@agentstride/memory` |
-| 10 NestJS | Minimal done | `@agentstride/nestjs` + `examples/12-nestjs-app` |
-| 11 Local multi-agent | Done | `AgentLike`, `asAgentTool`, receptionist + `16-orchestrator-n-agents` |
-| 12 A2A | Explored | experimental remote `AgentLike` sketch only |
-| 13 Migration | Done (measured) | `@agentstride/migrate` + examples 13–15 |
-| 14 Public release prep | Prepared | CI green; **not published** |
+Example: `examples/17-enterprise-support-agent`
 
----
+- Domain separated from AgentStride
+- ReceptionistAgent → SecurityAgent (`asAgentTool`) + customer/case tools + in-memory RAG
+- Structured output, context/roles, event trace, AbortSignal demo tool
+- Offline tests (domain / behavior / integration / cancellation)
+- Optional `start:live` (not CI)
+- Memory / Nest / MCP / migrate / A2A not used (documented as unused on purpose)
+- **No core code changes** in this branch
 
-## 3. Packages
+### Findings (short)
 
-- `@agentstride/core`
-- `@agentstride/openai`
-- `@agentstride/rag`
-- `@agentstride/mcp`
-- `@agentstride/memory`
-- `@agentstride/nestjs`
-- `@agentstride/a2a` (experimental)
-- `@agentstride/migrate`
+- API was enough for the slice.
+- Nested `asAgentTool` does not forward `signal` as `run` option (context only) — document; change only with product need.
+- Lookup misses should return data, not always throw, if you want structured decisions.
 
 ---
 
-## 4. Core API highlights
+## 3. Phases (unchanged)
 
-```ts
-const agent = createAgent({
-  model,
-  tools,
-  hooks,
-  onEvent,
-  maxSteps,
-  timeoutMs,
-  allowedTools,
-  deniedTools,
-  memory,
-});
+Phases 1–14 remain as incubated on `main`. See prior handoff history and `docs/IMPLEMENTATION_PLAN.md`.
 
-const result = await agent.run("...", {
-  context,
-  output: schema,
-  threadId,
-  memory,
-  signal, // AbortSignal (hardening)
-});
-```
+---
 
-On failure, `run()` still throws; the thrown error may include `error.agentRun` with partial progress (steps, messages, events, timing).
+## 4. Next useful work (evidence-based)
 
-Delegation:
+1. Merge `feature/real-world-validation` when CI is green.
+2. Optional: expose this slice behind Nest HTTP (compose with example 12 patterns).
+3. Optional: `asAgentTool` signal forwarding **only if** cancel must reach nested models.
+4. Avoid new packages/features until another real use case forces them.
+5. Publish/public only when explicitly requested.
 
-```ts
-asAgentTool(otherAgent, { name, description })
+---
+
+## 5. Commands
+
+```bash
+npm test -w @agentstride/example-enterprise-support-agent
+npm start -w @agentstride/example-enterprise-support-agent
+npm run start:live -w @agentstride/example-enterprise-support-agent
 ```
 
 ---
 
-## 5. Next useful work (after merge)
-
-1. Merge `feature/runtime-hardening` when CI is green.
-2. Use AgentStride in a real backend before growing core again.
-3. Deepen A2A only if a real remote-agent use case appears.
-4. npm publish / public repo only when explicitly requested.
-
-Hardening already on this branch (see development-log):
-
-- failed `AgentRun` keeps real `steps` / messages / events;
-- `AbortSignal` + `timeoutMs` via ADR 0009;
-- failure-path tests;
-- OpenAI fetch cancellation + honest structured-output docs;
-- migrate Zod trade-off documented;
-- pre-1.0 API review notes.
-
----
-
-## 6. Quality snapshot
-
-- `main` includes foundation + CI fix (build core first; types from `src/` during incubation).
-- Repo remains private; `.env` is gitignored.
-- Live OpenRouter examples exist; Nest HTTP tests use a fake agent.
-
----
-
-## 7. Read order for the next tool
+## 6. Read order
 
 1. this handoff;
-2. `docs/IMPLEMENTATION_PLAN.md`;
-3. `docs/development-log.md`;
-4. ADRs in `docs/decisions/` (including any 0009+ from hardening);
-5. `packages/core/src/`;
-6. optional package you need to extend.
-
-Branch rules:
-
-- default work branch for this stage: `feature/runtime-hardening` (or a newer feature branch from `main`);
-- do not commit feature work directly to `main`;
-- do not make the repository public yet.
-
-Before ending a session, apply the multi-tool continuity rule from section 0.
+2. `examples/17-enterprise-support-agent/README.md`;
+3. `docs/development-log.md` (real-world validation entry);
+4. `docs/research/api-review-pre-1.0.md`;
+5. `packages/core/src/` only if a change is evidenced.
