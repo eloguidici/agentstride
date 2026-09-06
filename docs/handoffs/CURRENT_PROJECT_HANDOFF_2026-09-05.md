@@ -119,8 +119,8 @@ asAgentTool(otherAgent, { name, description })
 
 Prefer one of these focused follow-ups:
 
-1. deepen Nest app (auth/context middleware, more tools);
-2. concrete Mastra / LangChain migration examples with measured reuse;
+1. open/merge PR to `main` (branch already pushed);
+2. deepen Nest app (auth/context middleware, more tools);
 3. harden CI and package publish readiness;
 4. only then consider public release.
 
@@ -128,7 +128,8 @@ Recently completed:
 
 - owned MCP demo server + `connectMcpStdio` client;
 - live MCP example with OpenRouter;
-- real NestJS mini-app at `examples/12-nestjs-app`.
+- real NestJS mini-app at `examples/12-nestjs-app`;
+- measured migration proof (`migration-shared`, examples 13/14/15).
 
 Avoid growing core unless a use case forces it.
 

@@ -1,5 +1,19 @@
 # @agentstride/migrate
 
-Helpers that extract portable tool contracts for migration toward Mastra or LangChain.
+Portability helpers from AgentStride tools toward other frameworks.
 
-These helpers do not claim automatic migration. They make the reusable part explicit: name, description, parameters, execute.
+```ts
+import { toMastraToolConfig, toLangChainToolConfig } from "@agentstride/migrate";
+
+const mastraConfig = toMastraToolConfig(tool);
+const langchainConfig = toLangChainToolConfig(tool);
+```
+
+These helpers extract the reusable contract:
+
+- name / id
+- description
+- schema
+- execute / func
+
+See `examples/migration-shared` and examples `13` / `14` / `15` for a measured reuse demo.
