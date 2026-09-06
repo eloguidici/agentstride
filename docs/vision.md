@@ -2,6 +2,9 @@
 
 AgentStride should make it easy to build a useful agent without forcing the project into a large framework from day one.
 
+> Build simple. Grow deliberately.  
+> Start lightweight. Stay if it is enough. Graduate if it is not.
+
 The main goal is not to have fewer features than other frameworks.
 
 The goal is to make complexity optional.
