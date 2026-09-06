@@ -1,23 +1,54 @@
 # @agentstride/core
 
-Smallest set of primitives required to run an AgentStride agent.
+Small TypeScript agent runtime: tools, structured output, runs, events, hooks/guards.
 
-The API is intentionally not frozen yet.
+Packages stay **private** until an explicit public release. Pre-1.0 freeze decisions: `docs/decisions/0013-pre-1.0-api-freeze.md`.
 
-Currently available:
+## Install (when published)
 
-- `createAgent()`
-- `defineTool()` with optional Standard Schema `inputSchema`
-- `Model` contract
-- execution context
-- `ToolInputValidationError`
+```bash
+npm install @agentstride/core
+```
 
-Still ahead in core:
+Until then, use the monorepo workspace.
 
-- structured output
-- AgentRun / lifecycle events
-- hooks / guards
+## Minimal usage
 
-Integrations such as providers, RAG, MCP and NestJS belong in separate packages.
+```ts
+import { createAgent, defineTool } from "@agentstride/core";
+import { z } from "zod";
 
-See `docs/decisions/0005-tool-input-schemas.md` for the schema decision.
+const echo = defineTool({
+  name: "echo",
+  description: "Echo text",
+  inputSchema: z.object({ text: z.string() }),
+  execute: ({ text }) => ({ text }),
+});
+
+const agent = createAgent({
+  model,
+  instructions: "Use tools when needed.",
+  tools: { echo },
+});
+
+const run = await agent.run("hello", {
+  output: z.object({ reply: z.string() }),
+});
+```
+
+## Stable surface (keep)
+
+- `createAgent`, `defineTool`, `asAgentTool`
+- `AgentRun` as the success value (failures throw; optional `error.agentRun`)
+- Standard Schema for tool input + structured output
+- AbortSignal / `runWithDeadline`, nested cancel, `parentRunId` causality
+
+## Out of core
+
+Providers, RAG, MCP, NestJS, migrate helpers — separate packages.
+
+## Docs
+
+- Vision / architecture: `docs/vision.md`, `docs/architecture.md`
+- Decisions: `docs/decisions/`
+- Release posture: `docs/narrative/RELEASE_READINESS.md`
