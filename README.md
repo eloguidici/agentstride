@@ -1,22 +1,49 @@
 # AgentStride
 
-AgentStride is a lightweight TypeScript runtime for building portable AI agents without committing too early to a large framework.
+**A small, production-minded TypeScript runtime for portable AI agents — without adopting heavy orchestration too early.**
 
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** repository is **private** while the public productization pack is prepared. Packages remain unpublished (`private: true`). Pre-1.0 freeze decisions: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** repository is **private**. Packages remain unpublished (`private: true`). Planned first npm surface (when authorized): `@agentstride/core` + `@agentstride/openai` at `0.1.0` (MIT). Freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
-## What it is
+---
 
-A small **provider-agnostic** core (`createAgent`, `defineTool`, structured output, `AgentRun` events, cooperative cancellation, local delegation) plus **optional** packages for OpenAI-compatible models, RAG helpers, memory, MCP, NestJS and migration adapters.
+## The problem
 
-Domain logic stays in your application. AgentStride does not ship a workflow engine, hosted control plane or policy framework.
+Most agent stacks fail for *operational* reasons, not because the model cannot call a tool:
 
-## Quick start
+- complexity (buses, graphs, control planes) arrives before the product needs it;
+- tools get tied to framework message DTOs and stop being portable;
+- cancelling the outer `await` does not stop nested model/tool work;
+- “human approval” is faked inside the agent loop;
+- side effects run twice when the model retries or the response is lost;
+- unit tests of tools never measure whether the **agent decided** correctly.
+
+AgentStride keeps a small embeddable runtime and pushes domain, policy, and approvals into **your** application.
+
+## What it adds
+
+| Capability | What it does |
+| --- | --- |
+| **Small core** | `createAgent`, `defineTool`, structured output, `AgentRun` + lifecycle events — understandable in an afternoon |
+| **Portable tools** | `execute(input, context)` — no runtime message DTOs required ([ADR 0002](docs/decisions/0002-tools-are-portable.md)) |
+| **No global bus** | Local delegation + optional `parentRunId` instead of an event fabric ([ADR 0003](docs/decisions/0003-no-event-bus-in-core.md), [0011](docs/decisions/0011-run-causality.md)) |
+| **Cooperative cancel** | `AbortSignal` through nested agents — not `Promise.race` theater ([ADR 0009](docs/decisions/0009-abort-signal-cancellation.md)–[0010](docs/decisions/0010-nested-agent-cancellation.md)) |
+| **Provider-agnostic `Model`** | Bring any adapter; `@agentstride/openai` is the first practical one |
+| **Optional packages** | RAG, memory, MCP, NestJS, migrate — beside core, not inside it |
+| **Production patterns (examples)** | Human approval, idempotent writes, OTel bridge, Nest HTTP, decision evals — **evidence, not a certificate** |
+
+Domain logic stays in your app. AgentStride does **not** ship a workflow engine, hosted control plane, or policy framework.
+
+## Start here
+
+1. Read the [layer model](docs/guides/00-layers.md) (Agent / Model / Tool / AgentRun / app).  
+2. Follow [Getting started](docs/GETTING_STARTED.md).  
+3. Pick one path from [Examples — Start here](examples/README.md).
 
 ```bash
-npm install   # monorepo / local workspace today
+npm install          # monorepo / local workspace today
 npm run build
 ```
 
@@ -42,43 +69,43 @@ const run = await agent.run("Find customer 42", {
 });
 ```
 
-Eventual public install (not enabled yet):
+After an authorized launch:
 
 ```bash
 npm install @agentstride/core @agentstride/openai
 ```
 
-## Why AgentStride
+Prove packaging locally without publishing:
 
-- **Small core** — understandable in an afternoon ([vision](docs/vision.md), [architecture](docs/architecture.md)).
-- **Portable tools** — `execute(input, context)`; no runtime message DTOs required ([ADR 0002](docs/decisions/0002-tools-are-portable.md)).
-- **Standard Schema** for tool input and structured output ([ADR 0005](docs/decisions/0005-tool-input-schemas.md) / [0006](docs/decisions/0006-structured-output.md)).
-- **Explicit runs** — `AgentRun` + lifecycle events without a global bus ([ADR 0003](docs/decisions/0003-no-event-bus-in-core.md), [0007](docs/decisions/0007-agent-run-events.md)).
-- **Cancellation & causality** — `AbortSignal` including nested agents; optional `parentRunId` ([ADR 0009](docs/decisions/0009-abort-signal-cancellation.md)–[0011](docs/decisions/0011-run-causality.md)).
-- **Optional integrations** — OpenAI adapter, RAG, memory, MCP, NestJS live outside core.
+```bash
+npm run package:dry-run
+```
 
-## Production evidence (examples, not a certificate)
-
-These slices show patterns we care about in real backends. They do **not** mean every deployment is “production-ready.”
-
-| Concern | Where |
-| --- | --- |
-| Deterministic decision evals | [`evals/`](evals/), [research](docs/research/evaluation-harness.md) |
-| Human approval (agent ≠ approver) | [example 20](examples/20-human-approval/), evals |
-| Idempotent side effects | [example 21](examples/21-side-effect-idempotency/) |
-| OpenTelemetry without core lock-in | [example 19](examples/19-opentelemetry-tracing/), [ADR 0012](docs/decisions/0012-opentelemetry-out-of-core.md) |
-| Nest / enterprise HTTP | [examples 17–18](examples/), [26](examples/26-velum-grid-nestjs/) |
-| Near-real ops / compliance demos | Velum Grid examples 23–25 |
+---
 
 ## Architecture
 
 ```text
-User → Agent → Model ⇄ Tools → AgentRun (+ events)
+Your app (domain, HTTP, approve/reject, idempotency)
+        │
+        ▼
+   Agent ──► Model ⇄ Tools ──► AgentRun (+ events)
                  │
                  └─ optional: openai | rag | memory | mcp | nestjs
 ```
 
-See [architecture](docs/architecture.md) and [origins](docs/origins.md) for the Receptionist / no-bus story.
+More detail: [architecture](docs/architecture.md), [origins](docs/origins.md) (Receptionist / why the bus left).
+
+## Production evidence (not a certificate)
+
+| Concern | Where |
+| --- | --- |
+| Decision evals | [`evals/`](evals/), [guide](docs/guides/06-evals.md) |
+| Human approval (agent ≠ approver) | [example 20](examples/20-human-approval/), [guide](docs/guides/03-human-approval.md) |
+| Idempotent side effects | [example 21](examples/21-side-effect-idempotency/), [guide](docs/guides/04-idempotent-side-effects.md) |
+| OpenTelemetry without core lock-in | [example 19](examples/19-opentelemetry-tracing/), [ADR 0012](docs/decisions/0012-opentelemetry-out-of-core.md) |
+| Nest / HTTP embed | [examples 18](examples/18-enterprise-support-http/) / [26](examples/26-velum-grid-nestjs/), [guide](docs/guides/07-nestjs-embed.md) |
+| Ops / compliance demos | Velum Grid [23](examples/23-alarm-triage/)–[25](examples/25-data-export/) |
 
 ## When not to use AgentStride
 
@@ -87,39 +114,39 @@ Prefer a larger framework or platform when you already need:
 - durable distributed workflows / long-running graphs;
 - a hosted agent control plane (deploy, sessions UI, sandboxes);
 - a broad provider/integration catalog as the product;
-- marketplace, scheduler or channel product features.
+- marketplace, scheduler, or channel product features.
 
 AgentStride is for teams that want a **small embeddable runtime** inside their own backend.
 
 ## Portability / graduate path
 
-Tools are designed to stay portable. `@agentstride/migrate` exposes config helpers toward other ecosystems — with honest Zod/schema trade-offs documented in that package. Do not treat migration percentages in demos as marketing claims.
+Tools stay portable by design. `@agentstride/migrate` helps toward other ecosystems — with honest schema trade-offs in that package. Do not treat demo reuse percentages as marketing claims.
 
 ## Packages
 
 | Package | Role | First-release posture |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **Selected** (Gate 2) — publish at launch as `0.1.0` |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **Selected** (Gate 2) |
-| `@agentstride/rag` / `memory` / `mcp` / `nestjs` | Optional | Deferred |
-| `@agentstride/a2a` | Experimental remote sketch | Deferred |
-| `@agentstride/migrate` | Portability helpers | Deferred |
+| `@agentstride/core` | Runtime | **Selected** — `0.1.0` at launch |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **Selected** |
+| `rag` / `memory` / `mcp` / `nestjs` | Optional | Deferred |
+| `a2a` | Experimental remote sketch | Deferred |
+| `migrate` | Portability helpers | Deferred |
 
-Owner selected Gate 2 Option A. Nothing is published yet (`private: true`, versions still `0.0.0`). See [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md) and [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
+Nothing is published yet. See [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md) and [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
 
 ## Docs
 
 **Implementers**
 
 - [Getting started](docs/GETTING_STARTED.md)
-- [Guides](docs/guides/README.md) (layers, cancellation, approval, Nest, …)
+- [Guides](docs/guides/README.md)
 - [Architecture](docs/architecture.md) · [Vision](docs/vision.md)
-- [Decision log (ADRs)](docs/decisions/README.md)
+- [ADRs](docs/decisions/README.md)
 - [Examples — Start here](examples/README.md)
 
 **Maintainers / launch**
 
-- [Current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md)
+- [Handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md)
 - [Release readiness](docs/narrative/RELEASE_READINESS.md)
 - [Publish checklist](docs/PUBLISH.md)
 
