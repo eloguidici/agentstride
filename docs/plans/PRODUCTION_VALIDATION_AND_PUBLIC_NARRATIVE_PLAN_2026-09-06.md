@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Track A done; Track B (nested cancellation) on `feature/nested-cancellation`  
+Status: In progress — Tracks A–B on `main`; Track C (run causality) on `feature/run-causality`
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -447,7 +447,10 @@ Capture before/after behavior.
 
 # Track C - Parent/child run correlation and causality
 
-Priority: P1
+Priority: P1  
+Status: **Done** (2026-09-06)  
+Branch: `feature/run-causality`  
+ADR: `docs/decisions/0011-run-causality.md`
 
 ## C.1 Why this matters
 
@@ -541,6 +544,8 @@ Preserve:
 - no global registry required in core;
 - no event bus;
 - Receptionist example demonstrates it.
+
+**Exit check (2026-09-06):** met — `parentRunId` + example 17 integration assert + ADR 0011.
 
 ---
 
