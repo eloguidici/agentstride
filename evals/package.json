@@ -6,7 +6,8 @@
   "description": "Internal deterministic evaluation harness (not a public package)",
   "scripts": {
     "test": "npm run build -w @agentstride/core -w @agentstride/rag && node --test test/*.test.mjs",
-    "eval:enterprise-support": "npm run build -w @agentstride/core -w @agentstride/rag && node enterprise-support/run.mjs"
+    "eval:enterprise-support": "npm run build -w @agentstride/core -w @agentstride/rag && node enterprise-support/run.mjs",
+    "eval:human-approval": "npm run build -w @agentstride/core && node human-approval/run.mjs"
   },
   "dependencies": {
     "@agentstride/core": "*",
