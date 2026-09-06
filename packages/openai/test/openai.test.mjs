@@ -6,6 +6,8 @@ import { createOpenAIModel } from "../dist/index.js";
 test("createOpenAIModel maps chat completions through fetch", async () => {
   const model = createOpenAIModel({
     apiKey: "test-key",
+    model: "gpt-4o-mini",
+    baseUrl: "https://api.openai.com/v1",
     fetchImpl: async (_url, init) => {
       const body = JSON.parse(String(init?.body));
       assert.equal(body.model, "gpt-4o-mini");
