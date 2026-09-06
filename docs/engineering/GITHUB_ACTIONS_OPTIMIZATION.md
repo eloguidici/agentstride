@@ -105,7 +105,7 @@ Only one job family, but it is heavy: full monorepo build + typecheck + all work
 1. Rewrote triggers in `.github/workflows/ci.yml` as above.  
 2. Added concurrency group.  
 3. Added documentation under `docs/engineering/`.  
-4. Updated current handoff + development-log.
+4. Updated engineering notes as needed.
 
 ## New CI architecture
 
