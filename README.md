@@ -14,11 +14,9 @@
 Most agent stacks fail for *operational* reasons, not because the model cannot call a tool:
 
 - complexity (buses, graphs, control planes) arrives before the product needs it;
-- tools get tied to framework message DTOs and stop being portable;
-- cancelling the outer `await` does not stop nested model/tool work;
-- “human approval” is faked inside the agent loop;
-- side effects run twice when the model retries or the response is lost;
-- unit tests of tools never measure whether the **agent decided** correctly.
+- tools get glued to framework DTOs — and cancel/`await` timeouts fail to stop nested work;
+- “approval” and writes happen inside the agent loop without real app control or idempotency;
+- tests prove tools work, not that the **agent decided** correctly.
 
 AgentStride keeps a small embeddable runtime and pushes domain, policy, and approvals into **your** application.
 
@@ -124,31 +122,24 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 ## Packages
 
-| Package | Role | First-release posture |
+| Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **Selected** — `0.1.0` at launch |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **Selected** |
-| `rag` / `memory` / `mcp` / `nestjs` | Optional | Deferred |
+| `@agentstride/core` | Runtime | Intended at launch (`0.1.0`) |
+| `@agentstride/openai` | OpenAI-compatible `Model` | Intended at launch |
+| `rag` / `memory` / `mcp` / `nestjs` | Optional | Later |
 | `a2a` | Experimental remote sketch | Deferred |
-| `migrate` | Portability helpers | Deferred |
+| `migrate` | Portability helpers | Later |
 
-Nothing is published yet. See [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md) and [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
+Nothing is published yet (`private: true`, versions `0.0.0`). Details: [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md), [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
 
 ## Docs
-
-**Implementers**
 
 - [Getting started](docs/GETTING_STARTED.md)
 - [Guides](docs/guides/README.md)
 - [Architecture](docs/architecture.md) · [Vision](docs/vision.md)
 - [ADRs](docs/decisions/README.md)
 - [Examples — Start here](examples/README.md)
-
-**Maintainers / launch**
-
-- [Handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-06.md)
-- [Release readiness](docs/narrative/RELEASE_READINESS.md)
-- [Publish checklist](docs/PUBLISH.md)
+- Maintainers: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
