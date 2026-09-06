@@ -164,3 +164,37 @@ Merged to `main` as PR #5. Real-world validation track for this slice is closed 
 - Added `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`.
 - Planned evaluation, nested cancellation, run causality, OpenTelemetry proof, human approval, idempotent side effects, usage accounting and pre-1.0 API stabilization.
 - Made narrative evidence capture part of the Definition of Done for future tracks so future public notes can be grounded in commits, tests, ADRs and measurements.
+
+## 2026-09-06 - Track A evaluation harness
+
+### Context
+
+Functional tests proved the runtime. They did not systematically score whether the enterprise support path made the right business decisions.
+
+### Hypothesis
+
+A private deterministic harness over example 17 would measure decisions without a public evals package or core growth.
+
+### Evidence
+
+- 22 scripted cases across customer / security / support-case / behavior
+- Scorers for decision, human-approval flag, mustCall/mustNotCall, nested tools, expected failures
+- Baseline: 22/22 pass; decision/tool/structured-output metrics at 100% in scripted mode
+- Artifact: `evals/results/baseline-enterprise-support.json`
+- Note: `docs/research/evaluation-harness.md`
+
+### Decision
+
+Ship internal `evals/` workspace; keep models scripted for CI; reuse example 17; add only `onSecurityEvent` for nested tool visibility.
+
+### Rejected
+
+Public `@agentstride/evals`, live-first scoring, LLM-as-judge, core eval APIs.
+
+### Result
+
+We can fail a case with `caseId` + check reason. Core unchanged.
+
+### Next question
+
+Track B: nested cancellation across `asAgentTool`.
