@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: In progress — Tracks A–D on `main`; Track E (human approval) on `feature/human-approval`
+Status: In progress — Tracks A–E on `main`; Track F (idempotency) on `feature/side-effect-idempotency`
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -728,7 +728,10 @@ Capture distinction between guardrails and approval.
 
 # Track F - Side-effect resilience and idempotency
 
-Priority: P1/P2
+Priority: P1/P2  
+Status: **Done** (2026-09-06)  
+Branch: `feature/side-effect-idempotency`  
+Research: `docs/research/side-effect-idempotency.md`
 
 ## F.1 Why
 
@@ -785,6 +788,8 @@ Do not create a generic core idempotency framework unless repeated evidence dema
 - pattern documented;
 - side-effect failure cases reproduced/tested;
 - no workflow engine introduced.
+
+**Exit check (2026-09-06):** met — example 21; core unchanged.
 
 ---
 
