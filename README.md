@@ -58,3 +58,11 @@ More details: [docs/origins.md](docs/origins.md)
 - [Roadmap](docs/roadmap.md)
 - [Decision log](docs/decisions/README.md)
 - [Development log](docs/development-log.md)
+
+## Development continuity
+
+AgentStride may be worked on from different development environments, including ChatGPT, Codex and Cursor.
+
+The repository is intentionally documented so a new session can continue from the codebase rather than depending on previous chat history.
+
+Start with [the current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-05.md) and [the implementation plan](docs/IMPLEMENTATION_PLAN.md).
