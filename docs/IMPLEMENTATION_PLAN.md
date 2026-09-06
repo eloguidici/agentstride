@@ -224,3 +224,27 @@ Pause feature growth and reassess if any of the following happens:
 - agent-to-agent support requires a global bus;
 - documentation becomes more elaborate than the implementation;
 - features are added because competitors have them rather than because use cases need them.
+
+---
+
+## Production validation + narrative track
+
+Status: **Planned** (2026-09-06)
+
+Detailed source of truth:
+
+`docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
+
+Preferred order:
+
+1. evaluation harness;
+2. nested cancellation;
+3. run causality;
+4. OpenTelemetry proof;
+5. human approval;
+6. idempotent side-effect tools;
+7. usage accounting;
+8. pre-1.0 API stabilization;
+9. narrative/release decision.
+
+The objective is to increase production credibility without turning AgentStride into a large framework.

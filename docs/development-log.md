@@ -155,3 +155,12 @@ Added `examples/18-enterprise-support-http`:
 
 Merged to `main` as PR #5. Real-world validation track for this slice is closed until a new product need appears.
 
+
+## 2026-09-06 - Production validation and narrative plan
+
+- Reviewed `main` after the enterprise support and Nest HTTP validation slices were merged.
+- Confirmed that the realistic support path did not force a core API expansion; this is now treated as evidence that the current core boundary is healthy.
+- Shifted the next roadmap from feature expansion to production validation.
+- Added `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`.
+- Planned evaluation, nested cancellation, run causality, OpenTelemetry proof, human approval, idempotent side effects, usage accounting and pre-1.0 API stabilization.
+- Made narrative evidence capture part of the Definition of Done for future tracks so future public notes can be grounded in commits, tests, ADRs and measurements.
