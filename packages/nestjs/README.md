@@ -1,12 +1,21 @@
 # @agentstride/nestjs
 
-Optional NestJS integration.
+Optional NestJS integration helpers plus a real example app.
+
+## Package
 
 ```ts
-AgentStrideModule.forRoot({
-  model,
-  tools,
-})
+import { AgentStrideService, AGENTSTRIDE_AGENT } from "@agentstride/nestjs";
 ```
 
-The package returns a Nest-compatible dynamic module object without requiring `@nestjs/common` at build time for AgentStride itself. In a Nest app, install `@nestjs/common` and import `AgentStrideModule` as usual.
+`AgentStrideModule.forRoot(...)` returns a Nest-compatible dynamic module object.
+
+## Real example
+
+See `examples/12-nestjs-app`:
+
+- NestJS HTTP server
+- `POST /agent/run`
+- OpenRouter/OpenAI model
+- typed tool
+- injects `AgentStrideService`

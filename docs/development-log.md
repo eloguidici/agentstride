@@ -55,7 +55,13 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Updated the fake-model example to pass a Zod schema and show parameters reaching the model.
 - Tests: 8 passing, including valid input, invalid input, untyped tools, and JSON Schema derivation.
 
-## 2026-09-05 - Live OpenRouter vertical slices
+## 2026-09-05 - MCP client demo and NestJS mini-app
+
+- Added an AgentStride-owned demo MCP server (`examples/mcp-demo-server`) with `echo` and `add`. Did not modify any personal MCP projects outside the repo.
+- Extended `@agentstride/mcp` with `connectMcpStdio()` and MCP result unwrapping.
+- Added `examples/11-live-mcp` proving OpenRouter + MCP tools end-to-end.
+- Added `examples/12-nestjs-app`, a real NestJS HTTP service exposing `POST /agent/run` and injecting AgentStride via `@agentstride/nestjs`.
+
 
 - Confirmed OpenRouter works with `@agentstride/openai`.
 - Added `examples/08-live-tool`: real tool calling (`findCustomer`) against OpenRouter.

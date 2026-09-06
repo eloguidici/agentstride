@@ -1,0 +1,14 @@
+{
+  "name": "@agentstride/example-mcp-demo-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Tiny demo MCP server owned by AgentStride (not related to personal C:\\mcp)",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.3",
+    "zod": "^4.5.4"
+  }
+}

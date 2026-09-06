@@ -14,6 +14,9 @@ Examples validate the API. Keep them small.
 | `08-live-tool` | Live tool calling against OpenRouter |
 | `09-live-structured` | Live structured output against OpenRouter |
 | `10-live-receptionist` | Live ReceptionistAgent delegation against OpenRouter |
+| `mcp-demo-server` | Tiny owned MCP server (`echo`, `add`) |
+| `11-live-mcp` | Live OpenRouter agent using the demo MCP server |
+| `12-nestjs-app` | Real NestJS HTTP app embedding AgentStride |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -21,4 +24,6 @@ Live examples load `.env` from the repo root via `examples/_shared/live-model.mj
 npm start -w @agentstride/example-live-tool
 npm start -w @agentstride/example-live-structured
 npm start -w @agentstride/example-live-receptionist
+npm start -w @agentstride/example-live-mcp
+npm start -w @agentstride/example-nestjs-app
 ```
