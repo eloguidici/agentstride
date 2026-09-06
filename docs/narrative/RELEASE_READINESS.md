@@ -1,7 +1,8 @@
 # Release readiness (private until explicit approval)
 
-Status: **NOT READY FOR PUBLIC / npm**  
-Date: 2026-09-06
+Status: **ENGINEERING GATE GREEN — still NOT public / npm**  
+Date: 2026-09-06  
+Verified on branch `chore/release-gate` (commit of this update)
 
 This checklist prepares a future release. Completing it does **not** authorize:
 
@@ -17,10 +18,10 @@ Only the owner can flip those switches.
 - [x] Private verticals: alarm-triage (23), change-gate (24), data-export (25)
 - [x] Nest surface for Velum ops (26)
 - [x] Pre-1.0 API freeze decisions (ADR 0013)
-- [ ] Full monorepo `npm test` green on the release candidate commit
-- [ ] `npm run publish:check` green
-- [ ] No secrets in tree; `.env` ignored
-- [ ] Package READMEs adequate for external consumers
+- [x] Full monorepo `npm test` green (all workspaces `# fail 0`; also `npm run build` + `npm run typecheck`)
+- [x] `npm run publish:check` green (private flags still expected)
+- [x] No secrets in tree; `.env` / `.env.*` gitignored; only `.env.example` placeholders tracked; tests use local `test-secret` / `test-key`
+- [x] Package READMEs present for all `packages/*` (core/rag/memory refreshed for external-reader clarity)
 
 ## Narrative gate
 
@@ -38,4 +39,4 @@ Only the owner can flip those switches.
 
 ## Current posture
 
-**Private. Perfect first. Public later — only when the owner says so.**
+**Private. Engineering polish done. Public later — only when the owner says so.**
