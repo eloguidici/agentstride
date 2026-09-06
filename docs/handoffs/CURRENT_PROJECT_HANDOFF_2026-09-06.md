@@ -120,12 +120,21 @@ asAgentTool(otherAgent, { name, description })
 
 ---
 
-## 5. Next useful work (after this harden branch)
+## 5. Next useful work (after merge)
 
-1. Finish / merge `feature/runtime-hardening` when CI is green.
-2. Only then consider product use or publish prep — not new core features by default.
+1. Merge `feature/runtime-hardening` when CI is green.
+2. Use AgentStride in a real backend before growing core again.
 3. Deepen A2A only if a real remote-agent use case appears.
 4. npm publish / public repo only when explicitly requested.
+
+Hardening already on this branch (see development-log):
+
+- failed `AgentRun` keeps real `steps` / messages / events;
+- `AbortSignal` + `timeoutMs` via ADR 0009;
+- failure-path tests;
+- OpenAI fetch cancellation + honest structured-output docs;
+- migrate Zod trade-off documented;
+- pre-1.0 API review notes.
 
 ---
 

@@ -10,6 +10,8 @@ import { AgentStrideService, AGENTSTRIDE_AGENT } from "@agentstride/nestjs";
 
 `AgentStrideModule.forRoot(...)` returns a Nest-compatible dynamic module object.
 
+Nest stays out of `@agentstride/core`. Auth, request context and HTTP tests live in `examples/12-nestjs-app` (optional `AGENT_API_KEY`, `x-request-id` / `x-tenant-id`).
+
 ## Real example
 
 See `examples/12-nestjs-app`:
