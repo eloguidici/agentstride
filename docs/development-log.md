@@ -54,3 +54,20 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - Deferred tool output validation until structured output / harder boundaries justify it.
 - Updated the fake-model example to pass a Zod schema and show parameters reaching the model.
 - Tests: 8 passing, including valid input, invalid input, untyped tools, and JSON Schema derivation.
+
+## 2026-09-05 - Phases 2-14 incubation sweep
+
+- Phase 2: structured output via `run(input, { output })`, ADRs 0006, fallback JSON parsing.
+- Phase 3: `AgentRun`, run ids, lifecycle events, `onEvent` callback (ADR 0007).
+- Phase 4: hooks + guards (`timeoutMs`, allow/deny tools) (ADR 0008).
+- Phase 5: `@agentstride/openai` adapter.
+- Phase 6: expanded examples (simple, structured, receptionist, document analysis, backend, openai).
+- Phase 7: `@agentstride/rag` with in-memory retriever.
+- Phase 8: `@agentstride/mcp` tool bridge (does not reimplement MCP).
+- Phase 9: `Memory` in core + `@agentstride/memory` in-memory adapter.
+- Phase 10: `@agentstride/nestjs` `AgentStrideModule.forRoot`.
+- Phase 11: `AgentLike`, `asAgentTool`, Receptionist example.
+- Phase 12: A2A research notes + experimental `@agentstride/a2a` remote AgentLike.
+- Phase 13: `@agentstride/migrate` portable tool helpers.
+- Phase 14 prep: MIT license, CI, architecture docs, `.env.example`, security/release notes.
+- Repository remains private; public publish is still an intentional later step.

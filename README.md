@@ -2,60 +2,62 @@
 
 AgentStride is a small TypeScript runtime for building AI agents without committing too early to a large framework.
 
-The idea is simple: start with the smallest set of primitives that lets you build something useful, and only add complexity when the problem actually needs it.
+> Build simple. Grow deliberately.
 
-This project is still in incubation and the repository is private for now.
+This repository is still private while the API stabilizes.
 
-## What we are trying to solve
+## Install (workspace / local)
 
-In early agent projects there is usually a bad choice between two extremes:
+```bash
+npm install
+npm run build
+```
 
-- write ad-hoc model calls that become hard to maintain;
-- adopt a large framework before you fully understand the problem.
+Eventual public consumption model:
 
-AgentStride is an attempt to sit in the middle.
+```bash
+npm install @agentstride/core
+```
 
-The core should stay small enough to understand quickly. Tools, prompts, schemas and domain logic should remain portable. RAG, MCP, memory, NestJS and remote-agent support should be optional layers, not reasons to make the core bigger.
+Optional packages:
 
-If AgentStride is enough, stay on it.
+- `@agentstride/openai`
+- `@agentstride/rag`
+- `@agentstride/mcp`
+- `@agentstride/memory`
+- `@agentstride/nestjs`
+- `@agentstride/a2a`
+- `@agentstride/migrate`
 
-If the system grows into something that needs durable workflows, complex state graphs or a larger platform, moving to something like Mastra or LangGraph should not require rewriting the business logic.
+## Quick start
 
-## Current direction
+```ts
+import { createAgent, defineTool } from "@agentstride/core";
+import { z } from "zod";
 
-The core is expected to revolve around a few concepts:
+const findCustomer = defineTool({
+  name: "findCustomer",
+  description: "Find a customer by id",
+  inputSchema: z.object({ id: z.string() }),
+  execute: ({ id }) => ({ id, name: "Ada" }),
+});
 
-- Agent
-- Tool
-- Model
-- Context
-- AgentRun
-- AgentEvent
-- structured output
-- hooks and guards
+const agent = createAgent({
+  model,
+  tools: { findCustomer },
+});
 
-That list is intentionally short.
-
-## Where this came from
-
-AgentStride is influenced by an older multi-agent architecture I built for an enterprise use case.
-
-That system had concepts such as `AutonomousAgent`, `AutonomousIAAgent`, `ReceptionistAgent`, `AgentEvent`, correlation IDs and fan-out/fan-in coordination.
-
-Some of those ideas aged well. Some of the implementation did not.
-
-This project is a chance to keep the useful parts and simplify the rest.
-
-More details: [docs/origins.md](docs/origins.md)
+const result = await agent.run("Find customer 42");
+```
 
 ## Docs
 
 - [Vision](docs/vision.md)
-- [Origins and lessons learned](docs/origins.md)
+- [Architecture](docs/architecture.md)
+- [Origins](docs/origins.md)
 - [Use cases](docs/use-cases.md)
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-05.md)
-- [Roadmap](docs/roadmap.md)
 - [Decision log](docs/decisions/README.md)
 - [Development log](docs/development-log.md)
 
@@ -66,3 +68,7 @@ AgentStride may be worked on from different development environments, including 
 The repository is intentionally documented so a new session can continue from the codebase rather than depending on previous chat history.
 
 Start with [the current handoff](docs/handoffs/CURRENT_PROJECT_HANDOFF_2026-09-05.md) and [the implementation plan](docs/IMPLEMENTATION_PLAN.md).
+
+## License
+
+MIT. The repository remains private until an intentional public release.
