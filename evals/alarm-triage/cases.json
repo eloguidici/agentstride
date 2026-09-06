@@ -275,5 +275,254 @@
       "mustCall": ["proposePage"],
       "mustNotCall": ["approvePage"]
     }
+  },
+  {
+    "id": "alarm-005-ledgerflare-incident",
+    "category": "incident",
+    "input": "Triage Velum Grid ledgerflare settlement fail",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-005",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "origin": "ledgerflare",
+                  "envelope": {
+                    "id": "lf-902",
+                    "level": "ERROR",
+                    "component": "settlement-worker",
+                    "text": "settlement batch failed checksum mismatch"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openTicket",
+              "input": {
+                "fingerprint": "ledgerflare:lf-902",
+                "source": "ledgerflare",
+                "team": "payments",
+                "summary": "settlement batch failed checksum mismatch"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "proposePage",
+              "input": {
+                "fingerprint": "ledgerflare:lf-902",
+                "source": "ledgerflare",
+                "team": "payments",
+                "reason": "settlement failure"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "incident",
+            "severity": "high",
+            "action": "page",
+            "source": "ledgerflare",
+            "team": "payments",
+            "fingerprint": "ledgerflare:lf-902",
+            "ticketId": "VG-TCK-5001",
+            "pageProposalId": "vg-page-1",
+            "summary": "Payments incident; page proposed.",
+            "requiresHumanApproval": true,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "incident",
+      "action": "page",
+      "paged": false,
+      "requiresHumanApproval": true,
+      "mustCall": ["normalizeAndAssess", "openTicket", "proposePage"]
+    },
+    "postAssert": {
+      "ticketCount": 1,
+      "proposalStatus": "pending"
+    }
+  },
+  {
+    "id": "alarm-006-ticket-idempotency",
+    "category": "warning",
+    "input": "Triage Velum Grid cpu warning idempotency",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-006",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "source": "pulsebeat",
+                  "host": "api-edge-3",
+                  "severity": "warning",
+                  "message": "cpu above 85% for 5m",
+                  "eventId": "pb-1002"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openTicket",
+              "input": {
+                "fingerprint": "pulsebeat:pb-1002",
+                "source": "pulsebeat",
+                "team": "platform",
+                "summary": "cpu above 85% for 5m"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "warning",
+            "severity": "medium",
+            "action": "ticket",
+            "source": "pulsebeat",
+            "team": "platform",
+            "fingerprint": "pulsebeat:pb-1002",
+            "ticketId": "VG-TCK-5001",
+            "pageProposalId": null,
+            "summary": "Warning ticket opened.",
+            "requiresHumanApproval": false,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "warning",
+      "action": "ticket",
+      "paged": false,
+      "mustCall": ["openTicket"]
+    },
+    "postAssert": {
+      "ticketCount": 1,
+      "reopenSameTicket": {
+        "fingerprint": "pulsebeat:pb-1002",
+        "source": "pulsebeat",
+        "team": "platform",
+        "summary": "cpu above 85% for 5m"
+      }
+    }
+  },
+  {
+    "id": "alarm-007-external-reject-keeps-unpaged",
+    "category": "incident",
+    "input": "Triage Velum Grid crash then reject page",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "triage-bot",
+      "requestId": "eval-al-007",
+      "roles": ["sre"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "source": "pulsebeat",
+                  "host": "api-edge-1",
+                  "severity": "critical",
+                  "message": "process crash loop detected",
+                  "eventId": "pb-1003"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openTicket",
+              "input": {
+                "fingerprint": "pulsebeat:pb-1003",
+                "source": "pulsebeat",
+                "team": "platform",
+                "summary": "process crash loop detected"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "proposePage",
+              "input": {
+                "fingerprint": "pulsebeat:pb-1003",
+                "source": "pulsebeat",
+                "team": "platform",
+                "reason": "crash loop"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "incident",
+            "severity": "high",
+            "action": "page",
+            "source": "pulsebeat",
+            "team": "platform",
+            "fingerprint": "pulsebeat:pb-1003",
+            "ticketId": "VG-TCK-5001",
+            "pageProposalId": "vg-page-1",
+            "summary": "Page proposed; awaiting reject in postAssert.",
+            "requiresHumanApproval": true,
+            "paged": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "status": "completed",
+      "category": "incident",
+      "paged": false,
+      "requiresHumanApproval": true,
+      "mustCall": ["proposePage"],
+      "mustNotCall": ["approvePage", "rejectPage"]
+    },
+    "postAssert": {
+      "rejectPage": {
+        "rejectedBy": "sre-lead-mira",
+        "roles": ["sre-approver"]
+      },
+      "proposalStatus": "rejected",
+      "pagedAfter": false
+    }
   }
 ]
