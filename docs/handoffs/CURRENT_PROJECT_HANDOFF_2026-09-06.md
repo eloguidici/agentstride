@@ -3,12 +3,12 @@
 This document is the current source of truth for continuing AgentStride in another session or tool.
 
 Repository: `eloguidici/agentstride`  
-Default branch: **`main`** @ `3e31993` (PR #5 merged)  
-Active feature branch: **none** — start a new branch for the next task  
-Repository visibility: **private** (still)
+Default branch: **`main`** @ `c92a7c0`  
+Planning branch: **`docs/production-validation-plan`**  
+Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
-Do not make the repository public or publish npm unless explicitly requested.
+Do not make the repository public or publish npm packages unless explicitly requested.
 
 ---
 
@@ -16,46 +16,101 @@ Do not make the repository public or publish npm unless explicitly requested.
 
 **The repository is the shared memory.**
 
----
-
-## 1. Where we are
-
-Real-world validation of the enterprise support path is **done for the current slice**:
-
-| Track | Status |
-| --- | --- |
-| Runtime hardening (abort/timeout/failed runs) | `main` — PR #3 |
-| Enterprise domain + Receptionist slice | `main` — PR #4 (`examples/17`) |
-| Nest HTTP surface | `main` — PR #5 (`examples/18`) |
-
-Core remains frozen: no drive-by API changes. Nest stays out of `@agentstride/core`. Domain in example 17 has no AgentStride imports.
-
-Proven end-to-end (offline/fake):
-
-1. Pure domain services (customer / security / support case / RAG / permissions)
-2. Receptionist → SecurityAgent via `asAgentTool` + tools + structured Zod result
-3. Same slice behind Nest `POST /support/run` with api-key, tenant/user/roles/request-id, and HTTP close → `AbortSignal`
-
-Known gap (documented, not urgent): `asAgentTool` forwards `context` but not `run({ signal })` to the nested agent.
+AgentStride may be continued from ChatGPT, Codex or Cursor. The next tool must be able to continue from repository state alone.
 
 ---
 
-## 2. Next useful work (pick one when needed)
+## 1. Completed tracks
 
-1. Forward `AbortSignal` in `asAgentTool` **only if** nested cancel is a product requirement (ADR + tests).
-2. Another real use case that forces a core/package change — otherwise do not invent features.
-3. Publish / make public **only** when explicitly requested.
-4. Avoid mini-LangChain, workflow engines, RxJS buses, and A2A expansion without a concrete need.
+Already merged to `main`:
+
+- foundation;
+- runtime hardening;
+- schemas / structured output;
+- AgentRun/events;
+- hooks/guards;
+- OpenAI-compatible adapter;
+- RAG/MCP/memory/Nest incubation packages;
+- local delegation / ReceptionistAgent;
+- migration proof;
+- experimental remote AgentLike / A2A research;
+- enterprise support vertical slice (`examples/17`);
+- Nest HTTP surface (`examples/18`).
+
+The enterprise slice validated that domain logic can remain free of AgentStride imports and that this realistic backend scenario did not require core growth.
 
 ---
 
-## 3. Commands
+## 2. Next-stage plan
 
-```bash
-npm test -w @agentstride/example-enterprise-support-agent
-npm start -w @agentstride/example-enterprise-support-agent
-npm test -w @agentstride/example-enterprise-support-http
-npm start -w @agentstride/example-enterprise-support-http
-```
+The next development track is defined in:
 
-Live HTTP: set `OPENROUTER_API_KEY` or `OPENAI_API_KEY`, unset `ENTERPRISE_FAKE`. Default port `3200`.
+`docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
+
+Read it before starting new work.
+
+Strategy:
+
+> production validation, not feature expansion.
+
+Recommended order:
+
+1. evaluation harness;
+2. nested cancellation;
+3. parent/child run causality;
+4. OpenTelemetry proof;
+5. human approval pattern;
+6. idempotent side-effect tools;
+7. usage accounting;
+8. pre-1.0 API stabilization;
+9. narrative/release decision.
+
+Do not skip directly to workflows, full A2A, browser, voice, scheduler or additional providers.
+
+---
+
+## 3. Narrative requirement
+
+Documentation is part of the work.
+
+Every track must capture:
+
+- problem;
+- hypothesis;
+- evidence;
+- decision;
+- rejected alternatives;
+- result;
+- next question.
+
+This evidence is intended to support future technical notes, GitHub documentation, LinkedIn posts and interviews.
+
+Do not reconstruct a story later from memory.
+
+---
+
+## 4. First recommended implementation branch
+
+After this planning branch is merged, start from latest `main`:
+
+`feature/evaluation-harness`
+
+Start Track A from the production validation plan.
+
+Core should remain frozen unless evaluation evidence forces a change.
+
+---
+
+## 5. End-of-session rule
+
+Before handing to another tool:
+
+- run relevant build/typecheck/tests;
+- update development log;
+- update ADRs;
+- update plan status;
+- update this handoff;
+- capture narrative evidence;
+- commit coherent work.
+
+The next tool may not have access to the previous conversation.
