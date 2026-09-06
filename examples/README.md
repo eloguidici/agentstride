@@ -1,16 +1,19 @@
 # Examples
 
-Examples are part of the design process, not just documentation.
+Examples validate the API. Keep them small.
 
-The first examples should force the core API to prove that it is actually simple.
+| Example | What it proves |
+| --- | --- |
+| `01-simple-agent` | Agent without tools |
+| `01-tool-agent` | Typed tool + fake model (original vertical slice) |
+| `03-structured-output` | Validated `result.output` |
+| `04-receptionist` | Local delegation / nostalgic ReceptionistAgent |
+| `05-document-analysis` | Retrieval + structured output |
+| `06-backend-integration` | Embedded backend-style agent with guards/hooks |
+| `07-openai` | Real provider adapter via `OPENAI_API_KEY` |
 
-Planned sequence:
+Run:
 
-1. simple agent;
-2. typed tool;
-3. structured output;
-4. receptionist / delegation;
-5. document analysis;
-6. backend integration.
-
-The `receptionist` example is also a small reference to the earlier multi-agent system that influenced AgentStride.
+```bash
+npm start -w @agentstride/example-simple-agent
+```

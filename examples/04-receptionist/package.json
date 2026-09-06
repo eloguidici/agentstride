@@ -1,0 +1,13 @@
+{
+  "name": "@agentstride/example-receptionist",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core && node index.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "zod": "^4.5.4"
+  }
+}

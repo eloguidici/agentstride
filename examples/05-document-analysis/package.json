@@ -1,0 +1,14 @@
+{
+  "name": "@agentstride/example-document-analysis",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core -w @agentstride/rag && node index.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "@agentstride/rag": "*",
+    "zod": "^4.5.4"
+  }
+}
