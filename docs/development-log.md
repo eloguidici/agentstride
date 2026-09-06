@@ -500,3 +500,33 @@ Private polish pack on `feature/private-polish-pack`.
 ### Next question
 
 Owner reviews RELEASE_READINESS; merge when green; public only later by explicit ask.
+
+## 2026-09-06 - Release gate engineering pass
+
+### Context
+
+Owner approved closing the private engineering gate before any public move.
+
+### Hypothesis
+
+Full monorepo test/typecheck + secrets audit + package README refresh is enough to mark engineering ready while staying private.
+
+### Evidence
+
+`npm test` / `build` / `typecheck` / `publish:check` green; `.env` ignored; READMEs updated; `docs/research/release-gate.md`.
+
+### Decision
+
+Check engineering boxes in RELEASE_READINESS. Leave narrative picks and public/npm to the owner.
+
+### Rejected
+
+Publishing; opening the repo; adding platform/control-plane scope.
+
+### Result
+
+Private polish engineering complete on `chore/release-gate`.
+
+### Next question
+
+Owner: story selection + origins/vision wording, then decide public posture.
