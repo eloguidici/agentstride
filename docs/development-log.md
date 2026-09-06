@@ -98,3 +98,28 @@ It is not meant to duplicate Git history. It exists to preserve context that may
 - CI was failing on typecheck because package `exports` point at `dist/` before build, and core inference required missing `@types/node`.
 - Workflow now builds before typecheck; root adds `@types/node`; inference tsconfig no longer forces Node types.
 
+## 2026-09-06 - Runtime hardening (stabilize)
+
+Switched from build mode to stabilize on `feature/runtime-hardening`.
+
+Docs:
+
+- New handoff `CURRENT_PROJECT_HANDOFF_2026-09-06.md` (main is source of truth; old handoff superseded).
+- Phase 13 marked Done consistently; stabilize track noted in the implementation plan.
+- ADR 0009: AbortSignal for timeout/cancellation.
+- API review notes in `docs/research/api-review-pre-1.0.md`.
+
+Core:
+
+- Failed runs attach `error.agentRun` with real `steps`, messages, events, timing, and last assistant text when present (no more hard-coded `steps: 0`).
+- `runWithDeadline` combines `timeoutMs` and `AgentRunOptions.signal`; models get `ModelRequest.signal`; tools may read reserved `context.abortSignal`.
+- Typed errors: `AgentRunTimeoutError`, `AgentAbortError`, `ToolExecutionError` (kept the set small).
+- Internal split of model/tool steps for readability without new public abstractions.
+- Expanded failure-path tests.
+
+OpenAI / migrate / Nest / A2A:
+
+- OpenAI adapter forwards AbortSignal to fetch; README clarifies structured output is not schema enforcement.
+- Migrate package documents Zod-shaped target APIs vs Standard Schema in core (no new converter).
+- Nest remains example-driven; A2A remains an experimental remote AgentLike sketch.
+
