@@ -60,3 +60,5 @@ Nested tools are visible only because example 17 now forwards `onSecurityEvent`.
 ## Next question
 
 Does nested cancellation across `asAgentTool` need a core fix (Track B), and can evals later assert abort behavior as an expected failure mode?
+
+**Update:** Track B shipped (ADR 0010). Evals abort scenarios remain optional later.
