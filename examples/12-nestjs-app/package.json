@@ -7,7 +7,8 @@
   "scripts": {
     "build": "npm run build -w @agentstride/core -w @agentstride/openai -w @agentstride/nestjs && tsc -p tsconfig.json",
     "start": "npm run build && node dist/main.js",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test test/http.test.mjs"
   },
   "dependencies": {
     "@agentstride/core": "*",

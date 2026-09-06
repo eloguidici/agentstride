@@ -18,6 +18,11 @@ async function bootstrap() {
   await app.listen(port);
   console.log(`AgentStride Nest app listening on http://localhost:${port}`);
   console.log(`POST /agent/run  body: { "input": "..." }`);
+  if (process.env.AGENT_API_KEY) {
+    console.log("Auth: send header x-api-key");
+  } else {
+    console.log("Auth: AGENT_API_KEY unset (open local demo)");
+  }
 }
 
 bootstrap();

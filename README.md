@@ -52,6 +52,7 @@ const result = await agent.run("Find customer 42");
 
 ## Docs
 
+- [Publish readiness](docs/PUBLISH.md)
 - [Vision](docs/vision.md)
 - [Architecture](docs/architecture.md)
 - [Origins](docs/origins.md)

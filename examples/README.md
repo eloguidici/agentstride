@@ -16,11 +16,12 @@ Examples validate the API. Keep them small.
 | `10-live-receptionist` | Live ReceptionistAgent delegation against OpenRouter |
 | `mcp-demo-server` | Tiny owned MCP server (`echo`, `add`) |
 | `11-live-mcp` | Live OpenRouter agent using the demo MCP server |
-| `12-nestjs-app` | Real NestJS HTTP app embedding AgentStride |
+| `12-nestjs-app` | Real NestJS HTTP app embedding AgentStride (API key + request context) |
 | `migration-shared` | Portable domain for migration demos |
 | `13-migration-baseline` | AgentStride baseline + reuse metric |
 | `14-migrate-mastra` | Same domain via Mastra tool config |
 | `15-migrate-langchain` | Same domain via LangChain tool config |
+| `16-orchestrator-n-agents` | Orchestrator → 5 specialists (ask* + parallel fanOut) |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -30,4 +31,5 @@ npm start -w @agentstride/example-live-structured
 npm start -w @agentstride/example-live-receptionist
 npm start -w @agentstride/example-live-mcp
 npm start -w @agentstride/example-nestjs-app
+npm start -w @agentstride/example-orchestrator-n-agents
 ```
