@@ -440,3 +440,33 @@ Propose → external decide is now demonstrable over HTTP and covered by evals.
 ### Next question
 
 Another private vertical, Nest packaging of this slice, or H/I?
+
+## 2026-09-06 - Velum Grid change-gate (private vertical #2)
+
+### Context
+
+Owner merged alarm-triage HTTP (#19) and asked for another private near-real vertical.
+
+### Hypothesis
+
+Proactive change execution can reuse normalize + idempotent record + proposeExecute + external approval without core changes.
+
+### Evidence
+
+Example 24 (shipyard / wiredesk / ledgerops); domain/agent/HTTP tests; `evals/change-gate` 5/5.
+
+### Decision
+
+Same org **Velum Grid**. Roles `admin` | `change-approver`. Minimal HTTP. Core unchanged. H/I still paused.
+
+### Rejected
+
+ACME; auto-execute; Nest for this slice.
+
+### Result
+
+Second ops vertical complementary to reactive alarm triage.
+
+### Next question
+
+More private use cases, Nest packaging, or resume H/I?
