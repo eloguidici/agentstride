@@ -1,5 +1,7 @@
 import type { StandardJSONSchemaV1, StandardSchemaV1 } from "@standard-schema/spec";
 
+import { formatIssuePath } from "./schema-format.js";
+
 export type { StandardSchemaV1 } from "@standard-schema/spec";
 
 export type JsonSchemaObject = Readonly<Record<string, unknown>>;
@@ -69,20 +71,4 @@ function formatValidationMessage(
     .join("; ");
 
   return `Invalid input for tool "${toolName}": ${details}`;
-}
-
-function formatIssuePath(
-  path: SchemaIssue["path"],
-): string | undefined {
-  if (!path || path.length === 0) {
-    return undefined;
-  }
-
-  return path
-    .map((segment) =>
-      typeof segment === "object" && segment !== null && "key" in segment
-        ? String(segment.key)
-        : String(segment),
-    )
-    .join(".");
 }
