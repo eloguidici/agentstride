@@ -123,3 +123,24 @@ OpenAI / migrate / Nest / A2A:
 - Migrate package documents Zod-shaped target APIs vs Standard Schema in core (no new converter).
 - Nest remains example-driven; A2A remains an experimental remote AgentLike sketch.
 
+## 2026-09-06 - Real-world validation slice
+
+Mode shift: **framework design → real-world validation** on `feature/real-world-validation`.
+
+Added `examples/17-enterprise-support-agent`:
+
+- Pure `domain/` (customer, security, cases, permissions, knowledge) with zero AgentStride imports.
+- `ReceptionistAgent` delegates to `SecurityAgent` via `asAgentTool`; tools wrap domain; in-memory RAG for access policy.
+- Structured support result; context (`tenantId`, `userId`, `requestId`, `roles`); no auto-grant of production access.
+- Offline fake model + optional live script; memory intentionally unused.
+
+### Ergonomics findings (`problem → example → possible solution`)
+
+1. **Nested cancel signal** — Outer `run({ signal })` aborts the receptionist wait, but `asAgentTool` only forwards `context`, not `options.signal`, so the specialist model may not see `ModelRequest.signal`. *Possible solution (not done):* `asAgentTool` maps `context.abortSignal` into `run({ signal })`. Evidence only; core left unchanged.
+2. **Reserved `abortSignal` key** — Cooperative tools work; domain authors must avoid colliding keys. Still acceptable vs widening `Tool.execute`.
+3. **Lookup misses as throws** — Throwing from `findCustomer` aborted the whole run before structured `customer-not-found`. Fixed in the **example** by returning `{ found: false }` (app/adapter choice, not core).
+4. **Trace ergonomics** — Manual `onEvent` printer is enough; OTel still not justified.
+5. **Features not needed** — Memory, Nest, MCP, migrate, A2A unused here without pain.
+
+Next step recommendation: merge this branch, then either embed the slice behind Nest HTTP or tighten `asAgentTool` signal forwarding **only if** a product cancel path needs nested abort.
+
