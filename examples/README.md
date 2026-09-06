@@ -22,6 +22,7 @@ Examples validate the API. Keep them small.
 | `14-migrate-mastra` | Same domain via Mastra tool config |
 | `15-migrate-langchain` | Same domain via LangChain tool config |
 | `16-orchestrator-n-agents` | Orchestrator → 5 specialists (ask* + parallel fanOut) |
+| `17-enterprise-support-agent` | Real-world slice: Receptionist + security + RAG + structured case result |
 
 Live examples load `.env` from the repo root via `examples/_shared/live-model.mjs`.
 
@@ -32,4 +33,6 @@ npm start -w @agentstride/example-live-receptionist
 npm start -w @agentstride/example-live-mcp
 npm start -w @agentstride/example-nestjs-app
 npm start -w @agentstride/example-orchestrator-n-agents
+npm start -w @agentstride/example-enterprise-support-agent
+npm test -w @agentstride/example-enterprise-support-agent
 ```
