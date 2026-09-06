@@ -2,61 +2,40 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active implementation branch: **none** (productization prep landing)  
+Active implementation branch: **`docs/narrative-drafts-pack1`**  
+Also open: `chore/validation-battery` (PR #26) if not yet merged  
 Repository visibility: **private**
 
 Do not develop directly on `main`.  
-Do not make the repository public or publish npm packages without explicit owner approval.
+Do not publish LinkedIn/articles/npm or make the repo public without explicit owner approval.
 
 ---
 
 ## Status
 
-Engineering incubation for the current scope is complete (Tracks A–G, ADR 0013, verticals 23–26, release-gate green).
+- Engineering incubation complete; Actions optimized; validation battery plan exists (GREEN run on PR #26).
+- **Pack 1 narrative drafts ready** under `docs/narrative/drafts/` (01–05). Not published.
 
-**GitHub Actions** optimized on `main` (`docs/engineering/GITHUB_ACTIONS_OPTIMIZATION.md`):
-- no full CI on every feature push;
-- PR + non-doc `main` runs keep `build-test` (Node 20/22);
-- docs-only changes skip heavy CI;
-- concurrency + `workflow_dispatch`.
-Prefer local validation while Actions billing/minutes are constrained.
-
-**Public Productization & Release Decision** private prep:
-
-| Phase | Artifact | State |
-| --- | --- | --- |
-| PP-1 Story selection | `docs/narrative/PUBLIC_STORY_SELECTION.md` | recommended (not owner-selected) |
-| PP-2 Wording review | `docs/narrative/PUBLIC_WORDING_REVIEW.md` | done |
-| PP-3 README | root `README.md` | productized |
-| PP-4 Package scope | `docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md` | recommend core+openai |
-| PP-5 Semver | `docs/narrative/VERSIONING_RECOMMENDATION.md` | recommend `0.1.0` |
-| PP-6 Hygiene | `docs/narrative/PUBLIC_REPO_HYGIENE.md` | done |
-| PP-7 Dry run | `docs/research/public-package-dry-run.md` | core pack consumer **passed** |
-| PP-8 Drafts | — | **blocked** until owner selects stories |
-| PP-9 Launch checklist | `docs/narrative/LAUNCH_CHECKLIST.md` | template only |
-
-Plan: `docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+| Gate | State |
+| --- | --- |
+| Stories for drafting | Pack 1 selected + drafted |
+| Draft review / publish posts | **awaiting owner** |
+| Package scope / semver / visibility / npm | **awaiting owner** |
 
 ---
 
-## Owner gates (stop here)
+## What to read
 
-1. **Stories** — pick from recommended set in `PUBLIC_STORY_SELECTION.md`
-2. **Package scope** — confirm conservative core+openai or alternative
-3. **Semver + license** — confirm `0.1.0` (rec) + MIT
-4. **Visibility / npm / LinkedIn** — explicit only
-
-**The engineering and private productization work that can be done autonomously is complete. The project should pause here for an owner decision.**
-
-Do not invent another runtime feature phase while waiting.
+- Drafts index: `docs/narrative/drafts/README.md`
+- Selection: `docs/narrative/PUBLIC_STORY_SELECTION.md`
+- Plan: `docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
 
 ---
 
-## Useful commands (local)
+## Owner next
 
-```bash
-npm run build && npm run typecheck && npm test
-npm run publish:check
-npm run package:dry-run
-npm run examples:smoke
-```
+1. Review/edit the five drafts.  
+2. Decide whether any post may go live (still private repo by default).  
+3. Still open: packages (`core`+`openai`?), `0.1.0`+MIT, public vs private.
+
+**Do not invent a new engineering feature phase while reviewing drafts.**
