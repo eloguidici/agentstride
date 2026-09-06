@@ -5,7 +5,7 @@
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** First public release — `@agentstride/core` + `@agentstride/openai` at **`0.1.0`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.1`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ---
 
@@ -41,13 +41,18 @@ Domain logic stays in your app. AgentStride does **not** ship a workflow engine,
 3. Pick one path from [Examples — Start here](examples/README.md).
 
 ```bash
-npm install          # monorepo / local workspace today
-npm run build
+npm install @agentstride/core @agentstride/openai
 ```
 
 ```ts
 import { createAgent, defineTool } from "@agentstride/core";
+import { createOpenAIModel } from "@agentstride/openai";
 import { z } from "zod";
+
+const model = createOpenAIModel({
+  apiKey: process.env.OPENAI_API_KEY,
+  model: "gpt-4o-mini",
+});
 
 const findCustomer = defineTool({
   name: "findCustomer",
@@ -57,7 +62,7 @@ const findCustomer = defineTool({
 });
 
 const agent = createAgent({
-  model, // any object implementing the Model contract
+  model,
   instructions: "Use tools when helpful.",
   tools: { findCustomer },
 });
@@ -67,15 +72,7 @@ const run = await agent.run("Find customer 42", {
 });
 ```
 
-```bash
-npm install @agentstride/core @agentstride/openai   # after npm publish of 0.1.0
-```
-
-Prove packaging locally without publishing:
-
-```bash
-npm run package:dry-run
-```
+Working in this monorepo: `npm install && npm run build`.
 
 ---
 
@@ -122,13 +119,13 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 | Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **`0.1.0`** |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.0`** |
-| `rag` / `memory` / `mcp` / `nestjs` | Optional | Later |
-| `a2a` | Experimental remote sketch | Deferred |
-| `migrate` | Portability helpers | Later |
+| `@agentstride/core` | Runtime | **`0.1.1`** |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.1`** |
+| `rag` / `memory` / `mcp` / `nestjs` | Optional | Unpublished (in-repo) |
+| `a2a` | Experimental remote sketch | Unpublished |
+| `migrate` | Portability helpers | Unpublished |
 
-Scope and versioning notes: [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md), [versioning](docs/narrative/VERSIONING_RECOMMENDATION.md).
+npm: [`@agentstride/core`](https://www.npmjs.com/package/@agentstride/core) · [`@agentstride/openai`](https://www.npmjs.com/package/@agentstride/openai)
 
 ## Docs
 
@@ -136,8 +133,9 @@ Scope and versioning notes: [package scope](docs/narrative/INITIAL_PACKAGE_SCOPE
 - [Guides](docs/guides/README.md)
 - [Architecture](docs/architecture.md) · [Vision](docs/vision.md)
 - [ADRs](docs/decisions/README.md)
+- [Release notes](docs/RELEASE_NOTES.md)
 - [Examples — Start here](examples/README.md)
-- Maintainers: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Maintainers: [CONTRIBUTING.md](CONTRIBUTING.md) · [PUBLISH.md](docs/PUBLISH.md)
 
 ## License
 

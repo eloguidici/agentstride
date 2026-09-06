@@ -1,8 +1,24 @@
 # Release notes
 
-## 0.1.0 (planned — not published yet)
+## 0.1.1 (docs)
 
-First intended public cut of:
+Documentation alignment for the published packages:
+
+- Package READMEs use absolute GitHub links (usable from the npm package page)
+- Install snippets assume `@agentstride/core` / `@agentstride/openai` are on the registry
+- Owner/process docs moved out of the product repo
+
+No runtime API changes.
+
+```bash
+npm install @agentstride/core@0.1.1 @agentstride/openai@0.1.1
+```
+
+---
+
+## 0.1.0
+
+First public cut of:
 
 - `@agentstride/core`
 - `@agentstride/openai`
@@ -17,7 +33,7 @@ License: MIT. Pre-1.0: breaking changes may occur before 1.0 with release notes.
 - OpenAI-compatible Chat Completions adapter via `fetch` (no `openai` SDK required)
 - Evidence examples for human approval, idempotent side effects, OTel bridge, Nest/HTTP embed, decision evals
 
-### Install (after publish)
+### Install
 
 ```bash
 npm install @agentstride/core @agentstride/openai
@@ -36,6 +52,6 @@ Incubation used `0.0.0` private packages. There is no supported upgrade path fro
 
 ## 0.0.0-incubation (historical)
 
-Private incubation snapshot prior to Gate 2/3 decisions.
+Private incubation snapshot prior to the first public cut.
 
 Included core runtime, optional packages, examples, Nest HTTP demos, and publish readiness tooling — without public npm.

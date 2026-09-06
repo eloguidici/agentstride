@@ -2,15 +2,13 @@
 
 Small TypeScript agent runtime: tools, structured output, runs, events, hooks/guards.
 
-Install: `npm install @agentstride/core` (public `0.1.0`). Pre-1.0 freeze decisions: `docs/decisions/0013-pre-1.0-api-freeze.md`.
-
-## Install (when published)
-
 ```bash
 npm install @agentstride/core
 ```
 
-Until then, use the monorepo workspace.
+Pair with a `Model` adapter — typically [`@agentstride/openai`](https://www.npmjs.com/package/@agentstride/openai).
+
+Pre-1.0 freeze: [ADR 0013](https://github.com/eloguidici/agentstride/blob/main/docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ## Minimal usage
 
@@ -36,7 +34,7 @@ const run = await agent.run("hello", {
 });
 ```
 
-## Stable surface (keep)
+## Stable surface
 
 - `createAgent`, `defineTool`, `asAgentTool`
 - `AgentRun` as the success value (failures throw; optional `error.agentRun`)
@@ -45,12 +43,16 @@ const run = await agent.run("hello", {
 
 ## Out of core
 
-Providers, RAG, MCP, NestJS, migrate helpers — separate packages.
+Providers, RAG, MCP, NestJS, migrate helpers — separate packages (most unpublished in `0.1.x`).
 
 ## Docs
 
-- Getting started: `docs/GETTING_STARTED.md`
-- Layers + guides: `docs/guides/`
-- Vision / architecture: `docs/vision.md`, `docs/architecture.md`
-- Decisions: `docs/decisions/`
-- Release posture: `docs/narrative/RELEASE_READINESS.md`
+- [Getting started](https://github.com/eloguidici/agentstride/blob/main/docs/GETTING_STARTED.md)
+- [Guides](https://github.com/eloguidici/agentstride/tree/main/docs/guides)
+- [Architecture](https://github.com/eloguidici/agentstride/blob/main/docs/architecture.md) · [Vision](https://github.com/eloguidici/agentstride/blob/main/docs/vision.md)
+- [ADRs](https://github.com/eloguidici/agentstride/tree/main/docs/decisions)
+- [Monorepo README](https://github.com/eloguidici/agentstride#readme)
+
+## License
+
+MIT

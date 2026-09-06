@@ -1,9 +1,9 @@
 ﻿# Public package dry-run (`@agentstride/core` + `@agentstride/openai`)
 
 Date: 2026-09-06  
-Status: **Passed locally** — no npm publish  
+Status: **Passed locally** — packages since published as `0.1.0`  
 Script: `scripts/package-dry-run.mjs`  
-Aligns with OWNER GATE 2 (core + openai only)  
+Scope: `@agentstride/core` + `@agentstride/openai`  
 Current tarball versions: **`0.1.0`**
 
 ## Goal
@@ -52,7 +52,7 @@ Re-run after clean rebuild; see also `validate:battery` T7 (GREEN).
 
 ## Notes
 
-- First-wave packages are **not** `private` and version **`0.1.0`**; local pack works; **`npm publish` still owner-only**.
+- First-wave packages are published at **`0.1.0`**; this script remains useful as a regression check before later releases.
 - Live OpenAI is **not** exercised; adapter import + types are.
 - Deferred packages remain `0.0.0` / private and are out of this dry-run.
 
@@ -78,4 +78,4 @@ Consumers on older Node — engines say `>=20`. Slow first `npm install` in temp
 
 ## Next question
 
-Owner Gate 4: visibility / npm (owner notes already in agentstride-notes).
+Keep `npm run package:dry-run` green before each subsequent publish.

@@ -19,7 +19,7 @@ const requiredFields = [
   "license",
   "repository",
 ];
-/** First-wave packages (OWNER GATE 2). */
+/** First-wave public packages. */
 const firstWave = new Set(["@agentstride/core", "@agentstride/openai"]);
 
 const errors = [];

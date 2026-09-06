@@ -18,12 +18,12 @@ Example 25 + HTTP + evals; roles `admin` | `privacy-officer`.
 
 ## Decision
 
-Org **Velum Grid**. Agent never exports. Repo stays private.
+Org **Velum Grid**. Agent never exports.
 
 ## Rejected
 
 Auto-export; ACME; putting privacy policy in core.
 
-## Next question
+## Related
 
-Owner release readiness only after polish gates in `docs/narrative/RELEASE_READINESS.md`.
+Example 25 and evals under `evals/`.

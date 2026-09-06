@@ -1,7 +1,7 @@
 # API review notes (pre-1.0)
 
 Status: **Freeze decisions recorded in ADR 0013** (2026-09-06).  
-Repo remains **private**; no npm publish without explicit owner approval.
+First public packages: `@agentstride/core@0.1.0` and `@agentstride/openai@0.1.0`.
 
 ## Keep (stable)
 
@@ -38,4 +38,4 @@ Hooks/guards stay thin. Role checks live in domain (Velum Grid examples 23–26)
 - Accidental aliases removed: **yes**
 - Package types publish-ready: **yes** (`dist/*.d.ts`)
 - Examples compile / tests: required on the Track H PR
-- **npm publish / public repo: blocked** until owner signs `docs/narrative/RELEASE_READINESS.md`
+- **First public npm surface:** `@agentstride/core` + `@agentstride/openai` @ `0.1.0`

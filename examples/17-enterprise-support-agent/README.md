@@ -96,7 +96,7 @@ npm run start:live -w @agentstride/example-enterprise-support-agent
 
 ## What this example taught us
 
-See `docs/development-log.md` and updates in `docs/research/api-review-pre-1.0.md`.
+See `docs/research/api-review-pre-1.0.md` and ADR 0010 / 0011.
 
 Short version:
 
