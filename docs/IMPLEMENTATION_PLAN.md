@@ -28,437 +28,133 @@ Do not rely on the previous assistant's chat context. The next environment may o
 
 Status: **Done** (2026-09-05)
 
-### Goal
-
-Make tools genuinely safe and ergonomic at the boundary between an LLM and application code.
-
-### Outcome
-
-- ADR 0005 accepted: Standard Schema V1 for validation/inference; Standard JSON Schema V1 for provider parameters when available.
-- Zod is the recommended authoring library, not a core dependency.
-- `defineTool({ inputSchema })` infers `execute` input types.
-- Invalid model tool args fail with `ToolInputValidationError` before `execute`.
-- `ToolDefinition.parameters` carries derived JSON Schema for future provider adapters.
-- Tool output validation deferred.
-
-### Done when
-
-A tool can declare its input contract once and get:
-
-- compile-time inference;
-- runtime validation;
-- provider-usable schema information.
+See ADR 0005.
 
 ---
 
 ## Phase 2 - Structured output
 
-### Goal
+Status: **Done** (2026-09-05)
 
-Allow an agent run to return validated structured data, not only text.
-
-Desired direction:
-
-```ts
-const result = await agent.run("Analyze customer", {
-  output: schema
-});
-```
-
-### Work
-
-- design structured-output contract;
-- decide whether validation belongs in core;
-- keep provider-specific structured-output APIs inside adapters;
-- support fallback validation where appropriate;
-- add tests;
-- add a document-analysis-style example.
-
-### Done when
-
-A caller can request typed structured output without becoming coupled to a provider SDK.
+- `run(input, { output: schema })`
+- validates `ModelResponse.output` or JSON text fallback
+- ADR 0006
 
 ---
 
 ## Phase 3 - AgentRun and execution lifecycle
 
-### Goal
+Status: **Done** (2026-09-05)
 
-Move from a minimal `steps + messages` return value toward an explicit execution model without over-engineering it.
-
-### Candidate concepts
-
-- run id;
-- status;
-- steps;
-- model calls;
-- tool calls;
-- timestamps / duration;
-- usage metadata where providers expose it;
-- error state.
-
-### Nostalgic continuity
-
-This is one place where ideas from the old `TaskMemory` model can evolve into a cleaner `AgentRun`.
-
-### Work
-
-- design `AgentRun`;
-- add stable run identifiers;
-- preserve simple `result.text`;
-- add lifecycle events such as:
-  - run:start
-  - model:start
-  - model:end
-  - tool:start
-  - tool:end
-  - run:end
-  - run:error
-- do **not** reintroduce a global event bus.
-
-### Done when
-
-The runtime can be observed without requiring an external observability platform.
+- `AgentRun` with id/status/timing/events
+- lifecycle events via `onEvent` (no bus)
+- ADR 0007
 
 ---
 
 ## Phase 4 - Hooks and basic guards
 
-### Goal
+Status: **Done** (2026-09-05)
 
-Allow applications to add cross-cutting behavior without modifying core execution logic.
-
-Candidate hooks:
-
-- beforeRun;
-- beforeModel;
-- afterModel;
-- beforeTool;
-- afterTool;
-- onError.
-
-Candidate guards:
-
-- max steps;
-- timeout;
-- tool allow/deny;
-- optional approval marker;
-- eventually max cost when provider metadata exists.
-
-### Work
-
-- keep APIs composable;
-- avoid building a policy engine;
-- test ordering and failure behavior;
-- document when hooks vs guards should be used.
+- hooks: before/after run/model/tool + onError
+- guards: maxSteps, timeoutMs, allowedTools, deniedTools
+- ADR 0008
 
 ---
 
 ## Phase 5 - First real provider adapter
 
-### Preferred first provider
+Status: **Done** (2026-09-05)
 
-OpenAI, unless implementation research gives a strong reason otherwise.
-
-Package direction:
-
-`@agentstride/openai`
-
-### Goal
-
-Prove that the core `Model` abstraction works against a real provider without leaking provider details.
-
-### Work
-
-- message translation;
-- tool schema translation;
-- tool call translation;
-- text output;
-- structured output support if Phase 2 is ready;
-- usage metadata;
-- error normalization only where it adds value;
-- integration example using environment variables;
-- no secrets in repository.
-
-### Important
-
-Keep the existing fake-model example.
+- `@agentstride/openai` via fetch (no SDK required)
+- fake-model example retained
 
 ---
 
 ## Phase 6 - Examples as API tests
 
-Build examples that each validate a real use case.
+Status: **Done** (2026-09-05)
 
-Suggested order:
-
-### 01 - simple agent
-
-No tools.
-
-### 02 - typed tool
-
-One business tool with schema validation.
-
-### 03 - structured output
-
-Analysis returning a typed object.
-
-### 04 - receptionist
-
-Nostalgic reference to the original system.
-
-A coordinator chooses among specialized capabilities.
-
-### 05 - document analysis
-
-Becomes the first RAG-oriented vertical slice later.
-
-### 06 - backend integration
-
-Example shaped like a normal backend service, not a chatbot.
-
-Examples should remain small.
-
-If an example needs excessive ceremony, treat that as feedback on the API.
+Examples under `examples/` cover simple, typed tool, structured output, receptionist, document analysis, backend integration and OpenAI.
 
 ---
 
 ## Phase 7 - RAG as an optional layer
 
-Package direction:
+Status: **Done** (2026-09-05)
 
-`@agentstride/rag`
-
-### Goal
-
-Support retrieval without turning AgentStride into a document-processing platform.
-
-Candidate minimal contract:
-
-```ts
-interface Retriever {
-  retrieve(query: string, options?: RetrieveOptions): Promise<Document[]>;
-}
-```
-
-### Possible first integrations
-
-- in-memory documents;
-- local files;
-- pgvector adapter later.
-
-### Avoid
-
-- building our own vector database;
-- dozens of loaders;
-- dozens of splitters;
-- large embedding abstractions too early.
-
-A LangChain Retriever bridge could be valuable later because it supports the portability story.
+- `@agentstride/rag` with `Retriever` + in-memory implementation
 
 ---
 
 ## Phase 8 - MCP
 
-Package direction:
+Status: **Done** (minimal) (2026-09-05)
 
-`@agentstride/mcp`
-
-### Goal
-
-Expose MCP tools/resources to an AgentStride agent without polluting core.
-
-Ideal user experience should be approximately:
-
-```ts
-const server = await mcp(...);
-
-const agent = createAgent({
-  model,
-  tools: {
-    ...server.tools()
-  }
-});
-```
-
-### Avoid
-
-Do not redesign MCP.
-
-Adapt it into AgentStride's existing capability/tool model.
+- `@agentstride/mcp` bridge from MCP-shaped tools into AgentStride tools
+- does not reimplement MCP protocol/client
 
 ---
 
 ## Phase 9 - Memory
 
-### Goal
+Status: **Done** (2026-09-05)
 
-Support conversation/execution persistence through a small interface.
-
-Candidate direction:
-
-```ts
-interface Memory {
-  load(threadId: string): Promise<AgentMessage[]>;
-  save(threadId: string, messages: readonly AgentMessage[]): Promise<void>;
-}
-```
-
-### Packages later
-
-- in-memory default/example;
-- Redis;
-- Postgres if justified.
-
-### Avoid
-
-Do not start with a taxonomy of semantic/episodic/observational memory.
+- `Memory` interface in core
+- `@agentstride/memory` in-memory adapter
+- `run(..., { threadId, memory })`
 
 ---
 
 ## Phase 10 - NestJS integration
 
-Package direction:
+Status: **Done** (minimal) (2026-09-05)
 
-`@agentstride/nestjs`
-
-This is strategically useful because AgentStride is TypeScript/backend oriented.
-
-### Goal
-
-Make AgentStride feel natural inside an existing NestJS application without making NestJS part of core.
-
-Possible API:
-
-```ts
-AgentStrideModule.forRoot(...)
-```
-
-or providers/factories if that is simpler.
-
-### Work
-
-- dependency injection;
-- model/provider registration;
-- tool providers;
-- context integration;
-- lifecycle integration.
-
-Keep this package optional.
+- `@agentstride/nestjs` `AgentStrideModule.forRoot`
 
 ---
 
 ## Phase 11 - Local multi-agent delegation
 
-### Goal
+Status: **Done** (2026-09-05)
 
-Reintroduce one of the strongest ideas from the original project in a simpler form.
-
-Desired abstraction:
-
-```ts
-interface AgentLike<I = unknown, O = unknown> {
-  run(input: I, context?: AgentContext): Promise<O>;
-}
-```
-
-Then a coordinator should be able to treat another agent as a capability.
-
-### Receptionist example
-
-Build an official `ReceptionistAgent` example as a deliberate historical reference.
-
-Possible specialists:
-
-- security;
-- support;
-- work order / operations.
-
-Do not recreate the old event bus.
-
-Prefer explicit delegation.
+- `AgentLike`, `asAgentTool`
+- Receptionist example
 
 ---
 
 ## Phase 12 - Remote agents / A2A
 
-Not core v1.
+Status: **Explored** (2026-09-05)
 
-### Goal
-
-Explore whether local and remote agents can share the same `AgentLike` concept.
-
-Possible future package:
-
-`@agentstride/a2a`
-
-### Research first
-
-- current A2A standard;
-- authentication;
-- capability discovery;
-- streaming/task lifecycle;
-- error semantics.
-
-Only implement after local agent delegation is clean.
+- research notes in `docs/research/a2a.md`
+- experimental `@agentstride/a2a` remote AgentLike
+- full protocol client still deferred
 
 ---
 
 ## Phase 13 - Migration / portability proof
 
-This is strategically important.
+Status: **Started** (2026-09-05)
 
-### Goal
-
-Demonstrate that AgentStride does not trap business logic.
-
-Build migration examples toward:
-
-- Mastra;
-- LangChain / LangGraph.
-
-Focus on reuse of:
-
-- tools;
-- schemas;
-- prompts;
-- domain services;
-- retrievers where reasonable.
-
-Possible helpers later:
-
-- `toMastraTool()`;
-- `toLangChainTool()`.
-
-Do not fake metrics.
-
-If code reuse is measured publicly, calculate it from real examples.
+- `@agentstride/migrate` portable tool helpers
+- full Mastra/LangChain wrapper examples still thin by design
 
 ---
 
 ## Phase 14 - Public release preparation
 
-The repository remains private until this phase is intentionally triggered.
+Status: **Prepared, not published** (2026-09-05)
 
-Before public release:
+Done locally:
 
-- strong but concise README;
-- clear package installation path;
-- meaningful examples;
-- architecture docs;
-- ADRs;
-- tests;
-- CI;
-- lint/typecheck/build;
-- no secrets;
-- `.env.example` only;
-- license decision (MIT vs Apache 2.0);
-- npm scope/package availability;
-- contribution guide if useful;
-- security policy if useful;
-- first release notes;
-- public narrative prepared from the actual development log.
+- README, architecture, ADRs, CI, MIT license, `.env.example`, security notes, draft release notes
+
+Still intentional later:
+
+- make repository public
+- npm publish under `@agentstride/*`
+- final public narrative polish
 
 ---
 
