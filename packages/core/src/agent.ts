@@ -8,6 +8,7 @@ import {
   lastAssistantText,
   runWithDeadline,
   withAbortSignalContext,
+  withAgentRunIdContext,
   type AgentHooks,
   type HookContext,
 } from "./runtime-helpers.js";
@@ -35,6 +36,8 @@ export type AgentRunOptions = Readonly<{
   memory?: Memory;
   /** Cancel this run; also combined with timeoutMs when set. */
   signal?: AbortSignal;
+  /** Immediate parent AgentRun id when this run was started via local delegation. */
+  parentRunId?: string;
 }>;
 
 export type AgentConfig = Readonly<{
@@ -147,6 +150,9 @@ export function createAgent(config: AgentConfig): Agent {
             startedAt,
             events,
             error,
+            ...(options.parentRunId !== undefined
+              ? { parentRunId: options.parentRunId }
+              : {}),
           }),
         });
       }
@@ -198,9 +204,19 @@ async function executeAgentLoop(args: LoopArgs): Promise<AgentRun> {
     setSteps,
   } = args;
 
-  const toolContext = withAbortSignalContext(context, signal);
+  const toolContext = withAgentRunIdContext(
+    withAbortSignalContext(context, signal),
+    runId,
+  );
 
-  emit({ type: "run:start", runId, input });
+  emit({
+    type: "run:start",
+    runId,
+    input,
+    ...(options.parentRunId !== undefined
+      ? { parentRunId: options.parentRunId }
+      : {}),
+  });
   await config.hooks?.beforeRun?.(hookBase());
   throwIfAborted(signal);
 
@@ -278,6 +294,9 @@ async function executeAgentLoop(args: LoopArgs): Promise<AgentRun> {
         messages,
         startedAt,
         events,
+        ...(options.parentRunId !== undefined
+          ? { parentRunId: options.parentRunId }
+          : {}),
       });
     }
 
