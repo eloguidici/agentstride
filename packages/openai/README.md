@@ -31,3 +31,9 @@ When `request.outputSchema` is present, this adapter may:
 That is **not** native schema enforcement. AgentStride core always validates structured output with Standard Schema (`run(input, { output })`). Treat provider JSON mode as a hint only.
 
 No secrets belong in the repository. Use environment variables.
+
+## Docs
+
+- Getting started: `docs/GETTING_STARTED.md`
+- Core package: `@agentstride/core`
+- Guides: `docs/guides/`

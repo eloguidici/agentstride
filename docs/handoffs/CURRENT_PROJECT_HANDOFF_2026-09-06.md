@@ -2,7 +2,7 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active branch (this work): **`docs/private-productization-completion`**  
+Active branch: **`docs/implementer-facing-docs`** (also: `docs/private-productization-completion` may still need merge)  
 Also open: `chore/validation-battery` (PR #26) — conflicting; rebase later  
 Repository visibility: **private**
 
@@ -13,49 +13,30 @@ Do not publish LinkedIn/articles/npm or make the repo public without explicit ow
 
 ## Status
 
-Private productization, growth planning, and career-positioning prep that can be done autonomously is complete.
-
-| Gate | State |
+| Track | State |
 | --- | --- |
-| Stories (draft Pack 1) | drafted on `main` — publish posts **awaiting owner** |
-| Package scope | **closed** — `core` + `openai` |
-| Semver + license | **closed** — `0.1.0` + MIT at launch (tree still `0.0.0`) |
-| Package dry-run | **green** — install + `tsc` + runtime for core+openai |
-| Growth + LinkedIn prep | **ready under `docs/internal/`** (private) |
-| Visibility / npm | **OWNER GATE 4 — awaiting owner** |
+| Productization Gates 2–3 | closed (`core`+`openai`, `0.1.0`+MIT at launch) |
+| Private growth / LinkedIn prep | ready under `docs/internal/` |
+| Package dry-run | green (core+openai + tsc) |
+| **Implementer docs (P0–P3)** | **landed on this branch** |
+| Gate 4 visibility / npm | **awaiting owner** |
 
 ---
 
-## What landed in this completion pass
+## Implementer docs (new)
 
-- `docs/internal/` — growth strategy, career/LinkedIn plan, LinkedIn drafts, disposition checklist  
-- Extended `npm run package:dry-run` for Gate-2 packages + TypeScript consumer  
-- Hygiene update: internal docs must leave before public flip  
+Plan: `docs/plans/IMPLEMENTER_DOCS_PLAN_2026-09-06.md`
 
----
-
-## What to read
-
-- Handoff stop: this file  
-- Growth: `docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`  
-- LinkedIn: `docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`  
-- Before public: `docs/internal/INTERNAL_DOCS_DISPOSITION.md`  
-- Dry-run: `docs/research/public-package-dry-run.md`  
-- Launch: `docs/narrative/LAUNCH_CHECKLIST.md`  
-- Plan: `docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
+- `docs/GETTING_STARTED.md`
+- `docs/guides/` (layers + cookbook)
+- Examples “Start here” + README/package entry links
 
 ---
 
-## Owner next (Gate 4)
+## Owner next
 
-1. Review/edit Pack 1 drafts and LinkedIn drafts (publish only with explicit OK).  
-2. Confirm `docs/internal/` disposition (**recommend remove/move out before public**).  
-3. Decide: keep **private** vs make **public** + bump to `0.1.0` + npm publish.
+1. Merge implementer-docs (+ productization-completion if not on `main`).  
+2. Gate 4: private vs public; dispose `docs/internal/` before public.  
+3. Optional: edit Pack 1 / LinkedIn drafts before any post.
 
-**Do not invent a new engineering feature phase.**
-
----
-
-## Stop statement
-
-**The engineering, private productization, growth planning and career-positioning preparation that can be done autonomously is complete. The project should pause here for an owner decision.**
+**The engineering and private productization prep that can be done autonomously remains complete; implementer docs were an agreed docs-only follow-up. Pause for owner Gate 4 when merges are done.**
