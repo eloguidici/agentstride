@@ -101,7 +101,7 @@ See `docs/development-log.md` and updates in `docs/research/api-review-pre-1.0.m
 Short version:
 
 - Domain separation worked without core changes.
-- `asAgentTool` is enough for Receptionist → Security; nested runs inherit **context** but not a top-level `signal` option (outer cancel still wins via `runWithDeadline`).
+- `asAgentTool` is enough for Receptionist → Security; nested runs inherit **context** and, when present, the parent `AbortSignal` via `context.abortSignal` → `run({ signal })` (ADR 0010).
 - Memory was unnecessary for this one-shot case.
 - In-memory RAG was enough to prove knowledge lookup.
 - `abortSignal` on context is usable for cooperative tools; document the reserved key.

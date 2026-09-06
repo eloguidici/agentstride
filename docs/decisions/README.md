@@ -19,6 +19,7 @@ Documented decisions:
 - [0007](0007-agent-run-events.md) - AgentRun lifecycle events without a bus;
 - [0008](0008-hooks-and-guards.md) - thin hooks and guards, not a policy engine;
 - [0009](0009-abort-signal-cancellation.md) - AbortSignal for timeout and cancellation.
+- [0010](0010-nested-agent-cancellation.md) - Nested agent cancellation via asAgentTool.
 
 Still guiding the roadmap:
 
