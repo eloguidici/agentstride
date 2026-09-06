@@ -1,0 +1,1303 @@
+{
+  "domain": "enterprise-support",
+  "mode": "deterministic-scripted",
+  "generatedAt": "2026-09-06T06:33:24.740Z",
+  "caseCount": 22,
+  "summary": {
+    "total": 22,
+    "passed": 22,
+    "failed": 0,
+    "passRate": 1,
+    "metrics": {
+      "decisionAccuracy": {
+        "pass": 18,
+        "total": 18,
+        "rate": 1
+      },
+      "humanApprovalAccuracy": {
+        "pass": 18,
+        "total": 18,
+        "rate": 1
+      },
+      "requiredToolSelection": {
+        "pass": 39,
+        "total": 39,
+        "rate": 1
+      },
+      "unnecessaryToolAvoidance": {
+        "pass": 37,
+        "total": 37,
+        "rate": 1
+      },
+      "structuredOutputValidity": {
+        "pass": 40,
+        "total": 40,
+        "rate": 1
+      }
+    }
+  },
+  "humanSummary": "22 cases\n22 passed\n0 failed\n\ndecisionAccuracy: 100% (18/18)\nhumanApprovalAccuracy: 100% (18/18)\nrequiredToolSelection: 100% (39/39)\nunnecessaryToolAvoidance: 100% (37/37)\nstructuredOutputValidity: 100% (40/40)",
+  "cases": [
+    {
+      "id": "customer-001-known-normal-support",
+      "category": "customer",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected ticket-created, got ticket-created"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected low, got low"
+        },
+        {
+          "name": "customerId",
+          "pass": true,
+          "detail": "expected ACME, got ACME"
+        },
+        {
+          "name": "caseId-present",
+          "pass": true,
+          "detail": "got CASE-1001"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:createSupportCase",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "createSupportCase"
+      ],
+      "nestedToolsCalled": [],
+      "decision": "ticket-created",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "customer-002-unknown",
+      "category": "customer",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected customer-not-found, got customer-not-found"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "customerId",
+          "pass": true,
+          "detail": "expected null, got null"
+        },
+        {
+          "name": "caseId-null",
+          "pass": true,
+          "detail": "got null"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer"
+      ],
+      "nestedToolsCalled": [],
+      "decision": "customer-not-found",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "customer-003-ambiguous-identifier",
+      "category": "customer",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected customer-not-found, got customer-not-found"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "caseId-null",
+          "pass": true,
+          "detail": "got null"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer"
+      ],
+      "nestedToolsCalled": [],
+      "decision": "customer-not-found",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "customer-004-wrong-tenant-context",
+      "category": "customer",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected needs-human-approval, got needs-human-approval"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected high, got high"
+        },
+        {
+          "name": "caseId-null",
+          "pass": true,
+          "detail": "got null"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity"
+      ],
+      "decision": "needs-human-approval",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "customer-005-irrelevant-customer-data",
+      "category": "customer",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "caseId-null",
+          "pass": true,
+          "detail": "got null"
+        },
+        {
+          "name": "mustNotCall:findCustomer",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [],
+      "nestedToolsCalled": [],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "security-001-prod-access-before-review",
+      "category": "security",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected needs-human-approval, got needs-human-approval"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected high, got high"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": "needs-human-approval",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "security-002-prod-access-after-review-still-approval",
+      "category": "security",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected ticket-created, got ticket-created"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected high, got high"
+        },
+        {
+          "name": "caseId-present",
+          "pass": true,
+          "detail": "got CASE-1001"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:createSupportCase",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity",
+        "createSupportCase"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": "ticket-created",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "security-003-readonly-access",
+      "category": "security",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected low, got low"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer"
+      ],
+      "nestedToolsCalled": [],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "security-004-high-risk-vendor",
+      "category": "security",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected needs-human-approval, got needs-human-approval"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected high, got high"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCallNested:searchKnowledge",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": "needs-human-approval",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "security-005-bypass-attempt",
+      "category": "security",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected needs-human-approval, got needs-human-approval"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": "needs-human-approval",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "case-001-should-create",
+      "category": "support-case",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected ticket-created, got ticket-created"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "caseId-present",
+          "pass": true,
+          "detail": "got CASE-1001"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:createSupportCase",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "createSupportCase"
+      ],
+      "nestedToolsCalled": [],
+      "decision": "ticket-created",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "case-002-informational-no-ticket",
+      "category": "support-case",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "caseId-null",
+          "pass": true,
+          "detail": "got null"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:searchKnowledge",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "searchKnowledge"
+      ],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "case-003-duplicate-request",
+      "category": "support-case",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "caseId-null",
+          "pass": true,
+          "detail": "got null"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer"
+      ],
+      "nestedToolsCalled": [],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "case-004-backend-failure",
+      "category": "support-case",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-failed",
+          "pass": true,
+          "detail": "ToolExecutionError: Tool \"createSupportCase\" failed: Support case backend unavailable"
+        },
+        {
+          "name": "error-includes",
+          "pass": true,
+          "detail": "ToolExecutionError Tool \"createSupportCase\" failed: Support case backend unavailable Tool \"createSupportCase\" failed: Support case backend unavailable"
+        },
+        {
+          "name": "error-name",
+          "pass": true,
+          "detail": "got ToolExecutionError"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:createSupportCase",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity",
+        "createSupportCase"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": null,
+      "status": "failed",
+      "errorName": "ToolExecutionError"
+    },
+    {
+      "id": "case-005-missing-role",
+      "category": "support-case",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-failed",
+          "pass": true,
+          "detail": "ToolExecutionError: Tool \"createSupportCase\" failed: Permission denied for action \"createSupportCase\" with roles [viewer]"
+        },
+        {
+          "name": "error-includes",
+          "pass": true,
+          "detail": "ToolExecutionError Tool \"createSupportCase\" failed: Permission denied for action \"createSupportCase\" with roles [viewer] Tool \"createSupportCase\" failed: Permission denied for action \"createSupportCas"
+        },
+        {
+          "name": "error-name",
+          "pass": true,
+          "detail": "got ToolExecutionError"
+        },
+        {
+          "name": "mustCall:createSupportCase",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [
+        "createSupportCase"
+      ],
+      "nestedToolsCalled": [],
+      "decision": null,
+      "status": "failed",
+      "errorName": "ToolExecutionError"
+    },
+    {
+      "id": "behavior-001-delegate-security",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected needs-human-approval, got needs-human-approval"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": "needs-human-approval",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "behavior-002-no-security-delegation",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:findCustomer",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [],
+      "nestedToolsCalled": [],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "behavior-003-knowledge-retrieval",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:searchKnowledge",
+          "pass": true,
+          "detail": "called"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity"
+      ],
+      "nestedToolsCalled": [
+        "searchKnowledge"
+      ],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "behavior-004-avoid-unnecessary-tools",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected info-only, got info-only"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected false, got false"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:findCustomer",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "maxSteps",
+          "pass": true,
+          "detail": "steps=1, max=2"
+        }
+      ],
+      "toolsCalled": [],
+      "nestedToolsCalled": [],
+      "decision": "info-only",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "behavior-005-structured-schema",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-completed",
+          "pass": true,
+          "detail": "status=completed"
+        },
+        {
+          "name": "structured-output-present",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "decision",
+          "pass": true,
+          "detail": "expected ticket-created, got ticket-created"
+        },
+        {
+          "name": "requiresHumanApproval",
+          "pass": true,
+          "detail": "expected true, got true"
+        },
+        {
+          "name": "risk",
+          "pass": true,
+          "detail": "expected high, got high"
+        },
+        {
+          "name": "customerId",
+          "pass": true,
+          "detail": "expected ACME, got ACME"
+        },
+        {
+          "name": "caseId-present",
+          "pass": true,
+          "detail": "got CASE-1001"
+        },
+        {
+          "name": "mustCall:findCustomer",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:askSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCall:createSupportCase",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustNotCall:slowAuditPing",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustCallNested:assessSecurity",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "mustCallNested:searchKnowledge",
+          "pass": true,
+          "detail": "called"
+        },
+        {
+          "name": "maxSteps",
+          "pass": true,
+          "detail": "steps=4, max=8"
+        }
+      ],
+      "toolsCalled": [
+        "findCustomer",
+        "askSecurity",
+        "createSupportCase"
+      ],
+      "nestedToolsCalled": [
+        "assessSecurity",
+        "searchKnowledge"
+      ],
+      "decision": "ticket-created",
+      "status": "completed",
+      "errorName": null
+    },
+    {
+      "id": "behavior-006-invalid-structured-output",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-failed",
+          "pass": true,
+          "detail": "StructuredOutputValidationError: Invalid structured output: decision: Invalid option: expected one of \"ticket-created\"|\"needs-human-approval\"|\"customer-not-found\"|\"permission-denied\"|\"info-only\""
+        },
+        {
+          "name": "error-name",
+          "pass": true,
+          "detail": "got StructuredOutputValidationError"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        },
+        {
+          "name": "mustNotCall:askSecurity",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [],
+      "nestedToolsCalled": [],
+      "decision": null,
+      "status": "failed",
+      "errorName": "StructuredOutputValidationError"
+    },
+    {
+      "id": "behavior-007-model-unavailable",
+      "category": "behavior",
+      "pass": true,
+      "failures": [],
+      "checks": [
+        {
+          "name": "run-failed",
+          "pass": true,
+          "detail": "Error: upstream model unavailable"
+        },
+        {
+          "name": "error-includes",
+          "pass": true,
+          "detail": "Error upstream model unavailable upstream model unavailable"
+        },
+        {
+          "name": "mustNotCall:createSupportCase",
+          "pass": true,
+          "detail": "ok"
+        }
+      ],
+      "toolsCalled": [],
+      "nestedToolsCalled": [],
+      "decision": null,
+      "status": "failed",
+      "errorName": "Error"
+    }
+  ]
+}
