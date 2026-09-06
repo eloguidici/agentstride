@@ -153,3 +153,5 @@ Added `examples/18-enterprise-support-http`:
 - Fake mode for CI; AbortSignal from HTTP close.
 - Confirmed embedding does not require core changes.
 
+Merged to `main` as PR #5. Real-world validation track for this slice is closed until a new product need appears.
+
