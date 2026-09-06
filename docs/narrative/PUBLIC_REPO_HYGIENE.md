@@ -1,68 +1,63 @@
 # Public repository hygiene
 
 Date: 2026-09-06  
-Status: Findings + light actions on `docs/public-productization-prep`  
-Plan: PP-6
+Status: Updated on `docs/private-productization-completion`  
+Plan: PP-6 (+ internal disposition)
 
 ## Findings
 
 | Area | Finding | Action |
 | --- | --- | --- |
-| Secrets | `.env` gitignored; `.env.example` placeholders; tests use fake keys | Keep; already audited in release-gate |
-| Handoffs | Older handoffs remain as history | Keep (evidence); current handoff points to productization plan |
-| Examples | Many examples; some overlap (Nest 12 vs 18 vs 26) | Keep all — useful evidence; README no longer catalogs every one |
-| Internal process language | Old README mentioned ChatGPT/Codex/Cursor in product voice | Removed from root README product sections |
-| Generated artifacts | `packages/*/dist` present in workspace; publish uses `files` | Dry-run verifies tarball contents |
-| Terminology | “production-ready” absent from product docs | Maintain claim discipline ([PUBLIC_WORDING_REVIEW](./PUBLIC_WORDING_REVIEW.md)) |
-| Stale package README claims | Core README fixed in release-gate | OK |
-| Duplicate plan docs | Production-validation plan + productization plan both exist | Keep both; handoff points to productization as **next** |
-| LICENSE | MIT at repo root | **Gate 3 closed — MIT confirmed** |
-| Private posture | Explicit in README / RELEASE_READINESS | Keep until owner flips |
+| Secrets | `.env` gitignored; `.env.example` placeholders; tests use fake keys | Keep |
+| Handoffs | Older handoffs remain as history | Keep (evidence) |
+| Examples | Many examples; overlap is OK | Keep; README lists representative only |
+| Internal process language | Removed from root README product voice | Keep disciplined |
+| Generated artifacts | `*.last.json` gitignored where needed | Keep |
+| Terminology | No blanket production-ready claims | Maintain |
+| LICENSE | MIT | Gate 3 closed |
+| **`docs/internal/`** | Growth + LinkedIn + career drafts | **Must remove/move before public** — see disposition |
+| Pack 1 drafts | Under `docs/narrative/drafts/` | OK to stay (technical); not LinkedIn profile text |
+| Dry-run | core + openai + tsc + runtime | Green |
 
 ## Do not delete
 
-- Development log, ADRs, research notes, eval baselines — historical evidence.  
-- Velum Grid fiction — intentional demo org, not customer data.
+- Development log, ADRs, research notes, eval baselines.  
+- Velum Grid fiction.  
+- Narrative Pack 1 drafts (product evidence).
 
-## Actions taken this pass
+## Must not ship publicly as-is
 
-- Root README productization (PP-3).  
-- Origins/vision clarifying lines (PP-2).  
-- Story index status column (PP-1).  
-- No mass deletion of examples or docs.
+- Entire `docs/internal/` tree (career metrics, LinkedIn About, growth funnel).
 
-## Follow-ups (optional, non-blocking)
+## Actions taken
 
-- Consider a short `examples/README.md` “start here” path for strangers (already has a table).  
-- After owner selects stories, add `docs/narrative/drafts/` (PP-8) — **not** before.
+- Productization README / wording / story selection (prior).  
+- Pack 1 drafts (prior).  
+- Internal strategy + LinkedIn prep + disposition (this pass).  
+- Extended package dry-run (this pass).
+
+## Follow-ups (owner / Gate 4)
+
+- Execute internal docs disposition before visibility flip.  
+- Optional: rebase/merge PR #26 validation battery.
 
 ## Quality gate
 
-Run on this branch before merge:
-
-```bash
-npm run build
-npm run typecheck
-npm test
-npm run publish:check
-```
+Docs/script change: `npm run package:dry-run` (green). Full monorepo gate optional for docs-only.
 
 ---
 
 ### Context
-Make the private repo readable by future strangers without destroying evidence.
+Strangers + accidental internal career docs must not mix.
 
 ### Evidence
-Release-gate audit; doc inventory; README rewrite.
+Inventory of `docs/internal/`; dry-run results.
 
 ### Decision
-Hygiene via clarity + claim control, not deletion.
+Keep engineering evidence; quarantine internal strategy until owner deletes/moves it.
 
 ### Rejected
-Deleting verticals “to look smaller”; opening the repo as hygiene.
-
-### Risk
-Internal handoff paths confuse public readers — mitigated by clearer README status.
+Publishing with `docs/internal/` still linked; deleting ADRs for “cleanliness.”
 
 ### Next question
-Owner launch checklist after gates 1–3.
+OWNER GATE 4.

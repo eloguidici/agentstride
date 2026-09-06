@@ -1,4 +1,4 @@
-# Development log
+﻿# Development log
 
 This is a lightweight running log of meaningful project changes.
 
@@ -125,7 +125,7 @@ OpenAI / migrate / Nest / A2A:
 
 ## 2026-09-06 - Real-world validation slice
 
-Mode shift: **framework design → real-world validation** on `feature/real-world-validation`.
+Mode shift: **framework design â†’ real-world validation** on `feature/real-world-validation`.
 
 Added `examples/17-enterprise-support-agent`:
 
@@ -134,13 +134,13 @@ Added `examples/17-enterprise-support-agent`:
 - Structured support result; context (`tenantId`, `userId`, `requestId`, `roles`); no auto-grant of production access.
 - Offline fake model + optional live script; memory intentionally unused.
 
-### Ergonomics findings (`problem → example → possible solution`)
+### Ergonomics findings (`problem â†’ example â†’ possible solution`)
 
-1. **Nested cancel signal** — Outer `run({ signal })` aborts the receptionist wait, but `asAgentTool` only forwards `context`, not `options.signal`, so the specialist model may not see `ModelRequest.signal`. *Resolved later as ADR 0010 / Track B:* `asAgentTool` maps `context.abortSignal` into `run({ signal })`.
-2. **Reserved `abortSignal` key** — Cooperative tools work; domain authors must avoid colliding keys. Still acceptable vs widening `Tool.execute`.
-3. **Lookup misses as throws** — Throwing from `findCustomer` aborted the whole run before structured `customer-not-found`. Fixed in the **example** by returning `{ found: false }` (app/adapter choice, not core).
-4. **Trace ergonomics** — Manual `onEvent` printer is enough; OTel still not justified.
-5. **Features not needed** — Memory, Nest, MCP, migrate, A2A unused here without pain.
+1. **Nested cancel signal** â€” Outer `run({ signal })` aborts the receptionist wait, but `asAgentTool` only forwards `context`, not `options.signal`, so the specialist model may not see `ModelRequest.signal`. *Resolved later as ADR 0010 / Track B:* `asAgentTool` maps `context.abortSignal` into `run({ signal })`.
+2. **Reserved `abortSignal` key** â€” Cooperative tools work; domain authors must avoid colliding keys. Still acceptable vs widening `Tool.execute`.
+3. **Lookup misses as throws** â€” Throwing from `findCustomer` aborted the whole run before structured `customer-not-found`. Fixed in the **example** by returning `{ found: false }` (app/adapter choice, not core).
+4. **Trace ergonomics** â€” Manual `onEvent` printer is enough; OTel still not justified.
+5. **Features not needed** â€” Memory, Nest, MCP, migrate, A2A unused here without pain.
 
 Next step recommendation: merge this branch, then either embed the slice behind Nest HTTP or tighten `asAgentTool` signal forwarding **only if** a product cancel path needs nested abort.
 
@@ -207,7 +207,7 @@ Outer abort rejected the parent wait while nested specialists could keep running
 
 ### Hypothesis
 
-Map `context.abortSignal` → nested `run({ signal })` with no new public options.
+Map `context.abortSignal` â†’ nested `run({ signal })` with no new public options.
 
 ### Evidence
 
@@ -233,7 +233,7 @@ Track C: parent/child run causality.
 
 ### Context
 
-Nested AgentRuns existed without a parent link; reconstructing Receptionist → Security required a bus we refuse to bring back.
+Nested AgentRuns existed without a parent link; reconstructing Receptionist â†’ Security required a bus we refuse to bring back.
 
 ### Hypothesis
 
@@ -271,7 +271,7 @@ Needed standard traces without turning core into an observability platform.
 
 ### Evidence
 
-`examples/19-opentelemetry-tracing` — in-memory tests for run/model/tool spans, nested parent link, failures, privacy defaults. Core has zero `@opentelemetry/*` deps.
+`examples/19-opentelemetry-tracing` â€” in-memory tests for run/model/tool spans, nested parent link, failures, privacy defaults. Core has zero `@opentelemetry/*` deps.
 
 ### Decision
 
@@ -287,13 +287,13 @@ Working proof. Optional package not justified yet.
 
 ### Next question
 
-Track E: human approval as propose → approve → act without a workflow engine.
+Track E: human approval as propose â†’ approve â†’ act without a workflow engine.
 
 ## 2026-09-06 - Track E human approval
 
 ### Context
 
-`requiresHumanApproval` was only a flag. We needed a real propose → external approve → execute path for production access.
+`requiresHumanApproval` was only a flag. We needed a real propose â†’ external approve â†’ execute path for production access.
 
 ### Hypothesis
 
@@ -385,7 +385,7 @@ Track H (pre-1.0 API freeze) and Track I (narrative/release) need an **owner dec
 
 ### Context
 
-Owner chose stay-private + a near-real case: multi-team alarms, categorize, ticket/page — not ACME.
+Owner chose stay-private + a near-real case: multi-team alarms, categorize, ticket/page â€” not ACME.
 
 ### Hypothesis
 
@@ -435,7 +435,7 @@ Nest wrapper for this slice; putting approve tools on the agent.
 
 ### Result
 
-Propose → external decide is now demonstrable over HTTP and covered by evals.
+Propose â†’ external decide is now demonstrable over HTTP and covered by evals.
 
 ### Next question
 
@@ -475,7 +475,7 @@ More private use cases, Nest packaging, or resume H/I?
 
 ### Context
 
-Owner asked to apply remaining options but keep the repo private until “perfecto”.
+Owner asked to apply remaining options but keep the repo private until â€œperfectoâ€.
 
 ### Hypothesis
 
@@ -483,7 +483,7 @@ One more compliance vertical + Nest packaging + API freeze docs/packaging + narr
 
 ### Evidence
 
-Example 25 data-export; example 26 Nest Velum; ADR 0013; types→dist; RELEASE_READINESS private gate.
+Example 25 data-export; example 26 Nest Velum; ADR 0013; typesâ†’dist; RELEASE_READINESS private gate.
 
 ### Decision
 
@@ -539,9 +539,9 @@ The private engineering release gate reached green after production validation, 
 
 ### Evidence
 
-- Tracks A–G complete
+- Tracks Aâ€“G complete
 - ADR 0013 accepted
-- examples 23–26 complete
+- examples 23â€“26 complete
 - release readiness engineering gate green
 - core remains small and optional integrations remain outside core
 
@@ -564,7 +564,7 @@ The plan separates autonomous private preparation from explicit owner gates for 
 
 ### Result
 
-The next AI session should focus on public story, README, release scope, versioning recommendation, repository hygiene and dry-run evidence — while keeping the repository private.
+The next AI session should focus on public story, README, release scope, versioning recommendation, repository hygiene and dry-run evidence â€” while keeping the repository private.
 
 ### Next question
 
@@ -596,7 +596,7 @@ Documented in `docs/engineering/GITHUB_ACTIONS_OPTIMIZATION.md`. Validate locall
 
 Merge CI chore when ready; resume productization owner gates; avoid push spam.
 
-## 2026-09-06 - Public productization private prep (PP-1…PP-7)
+## 2026-09-06 - Public productization private prep (PP-1â€¦PP-7)
 
 ### Context
 
@@ -625,7 +625,7 @@ Handoff states autonomous work is complete; project pauses for owner decision.
 
 ### Next question
 
-Owner gates 1–3 (stories, packages, semver/license), then optional PP-8 drafts.
+Owner gates 1â€“3 (stories, packages, semver/license), then optional PP-8 drafts.
 
 ## 2026-09-06 - Narrative Pack 1 drafts (PP-8)
 
@@ -699,12 +699,11 @@ At authorized launch: `@agentstride/core` and `@agentstride/openai` publish as *
 
 ### Result
 
-Gates 2–3 closed. Still private; no npm publish.
+Gates 2â€“3 closed. Still private; no npm publish.
 
 ### Next question
 
 Owner: draft review and/or visibility + npm launch decision (irreversible).
-
 ## 2026-09-06 - Internal growth and promotion strategy
 
 ### Context
@@ -717,32 +716,15 @@ Added an internal growth/distribution strategy:
 
 `docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
 
-It documents:
-
-- growth flywheel;
-- positioning;
-- GitHub conversion;
-- narrative-led launch;
-- LinkedIn/Hacker News/Reddit/community strategy;
-- npm discovery;
-- first-user / first-100-star milestones;
-- adoption metrics;
-- launch sequence;
-- anti-patterns.
-
 ### Important constraint
 
 The strategy is private planning material. Before the repository becomes public it must be explicitly reviewed and removed, moved or converted.
-
-### Narrative value
-
-This captures not only how AgentStride was engineered, but how the project planned to transition from technical proof to real developer adoption.
 
 ## 2026-09-06 - Career positioning and LinkedIn plan
 
 ### Context
 
-AgentStride's purpose is not only open-source adoption. It is also intended to provide visible evidence of senior/principal backend + agentic AI architecture capability and support the owner's job search.
+AgentStride is also intended to provide visible evidence of backend + agentic AI architecture capability.
 
 ### Decision
 
@@ -750,28 +732,25 @@ Added:
 
 `docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
 
-The plan covers:
-
-- AgentStride as a portfolio/evidence asset;
-- LinkedIn About / Featured / Projects usage;
-- technical content sequencing for career impact;
-- career-oriented metrics;
-- interview topics backed by repository evidence;
-- relationship with Enterprise Agentization;
-- timing of profile changes relative to public release.
-
-### Key positioning choice
-
-Do not sell the project primarily as "I built a framework".
-
-Use it as evidence of:
-
-> the kinds of AI/backend architecture and production problems the owner knows how to solve.
-
 ### Constraint
 
 This is internal career strategy. Review/remove/move it before making the repository public.
 
-### Narrative value
+## 2026-09-06 - Private productization completion (disposition + dry-run)
 
-The repository now preserves the full path from architecture → production validation → productization → growth planning → professional positioning.
+### Context
+
+Dry-run covered core only; needed Gate-2 packages + tsc consumer and explicit internal-docs disposition.
+
+### Evidence
+
+- `docs/internal/INTERNAL_DOCS_DISPOSITION.md` + `linkedin-drafts/`
+- Extended `scripts/package-dry-run.mjs` — core+openai pack/install/`tsc --noEmit`/runtime GREEN
+
+### Decision
+
+Complete remaining autonomous private prep; stop at OWNER GATE 4. Do not publish or invent features.
+
+### Next question
+
+Owner Gate 4: internal disposition + visibility/npm + optional post publishing.

@@ -274,7 +274,7 @@ Autonomous prep delivered:
 7. package dry run (core) green;
 8. launch checklist template (no irreversible steps).
 
-**Owner gates:** Gates 2–3 closed (core+openai, `0.1.0`+MIT). Still open: draft review/publish, visibility/npm.
+**Owner gates:** Gates 2–3 closed; dry-run green for core+openai; internal growth/LinkedIn prep ready. Pause for Gate 4 (visibility/npm + internal disposition).
 
 
 Repository visibility, npm publication, final story selection, final semver and license confirmation remain explicit owner decisions.

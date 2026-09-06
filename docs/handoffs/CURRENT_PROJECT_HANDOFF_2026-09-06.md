@@ -2,7 +2,6 @@
 
 Repository: `eloguidici/agentstride`  
 Default branch: **`main`**  
-Active work: owner launch decisions (still private)  
 Also open: `chore/validation-battery` (PR #26) — conflicting; rebase later  
 Repository visibility: **private**
 
@@ -13,54 +12,41 @@ Do not publish LinkedIn/articles/npm or make the repo public without explicit ow
 
 ## Status
 
-Productization **decision gates 2–3 closed**. Still private; packages remain `0.0.0` / `private: true`.
-
-| Gate | State |
+| Gate / track | State |
 | --- | --- |
-| Stories for drafting | Pack 1 drafted |
-| Draft review / publish posts | **awaiting owner** |
-| Package scope | **closed — core + openai** |
-| Semver + license | **closed — `0.1.0` + MIT** |
-| Visibility / npm | **awaiting owner** (irreversible) |
+| Stories (draft Pack 1) | drafted — publish posts **awaiting owner** |
+| Package scope | **closed** — `core` + `openai` |
+| Semver + license | **closed** — `0.1.0` + MIT at launch (tree still `0.0.0`) |
+| Package dry-run | **green** — install + `tsc` + runtime for core+openai |
+| Growth + LinkedIn plans | **ready** under `docs/internal/` |
+| LinkedIn copy drafts | `docs/internal/linkedin-drafts/` |
+| Implementer docs | merging via `docs/implementer-facing-docs` |
+| Visibility / npm | **OWNER GATE 4 — awaiting owner** |
 
 ---
 
 ## What to read
 
-- Versioning: `docs/narrative/VERSIONING_RECOMMENDATION.md`
-- Packages: `docs/narrative/INITIAL_PACKAGE_SCOPE_RECOMMENDATION.md`
-- Drafts: `docs/narrative/drafts/README.md`
+- Growth: `docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
+- Career / LinkedIn: `docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+- Before public: `docs/internal/INTERNAL_DOCS_DISPOSITION.md`
+- Dry-run: `docs/research/public-package-dry-run.md`
+- Getting started / guides: `docs/GETTING_STARTED.md`, `docs/guides/` (after implementer merge)
 - Launch: `docs/narrative/LAUNCH_CHECKLIST.md`
+- Plan: `docs/plans/PUBLIC_PRODUCTIZATION_AND_RELEASE_DECISION_PLAN_2026-09-06.md`
 
 ---
 
-## Owner next
+## Owner next (Gate 4)
 
-1. Review/edit Pack 1 drafts (external posts only with explicit OK).  
-2. Decide keep **private** vs make **public** (and only then: bump to `0.1.0`, remove `private`, npm publish).  
+1. Review/edit Pack 1 drafts and LinkedIn drafts (publish only with explicit OK).  
+2. Confirm `docs/internal/` disposition (**recommend remove/move out before public**).  
+3. Keep **private** until ordered — then decide public + optional npm `0.1.0`.
 
 **Do not invent a new engineering feature phase while closing launch gates.**
 
 ---
 
-## Internal growth strategy
+## Stop statement
 
-While the repository remains private, promotion/distribution planning is documented in:
-
-`docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
-
-Use it together with the public productization plan when preparing launch recommendations.
-
-Important: this file is internal. Before repository visibility changes, explicitly review whether to remove, move or convert it.
-
----
-
-## Career positioning / LinkedIn
-
-Internal career-positioning guidance is documented in:
-
-`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
-
-Use it when preparing profile wording, Featured links, technical posts and career-oriented launch sequencing.
-
-This file is internal and should be reviewed/removed/moved before the repository becomes public.
+**The engineering, private productization, growth planning and career-positioning preparation that can be done autonomously is complete. The project should pause here for an owner decision.** (Implementer-facing docs are an agreed docs-only follow-up and do not change Gate 4.)

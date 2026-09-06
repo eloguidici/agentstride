@@ -8,3 +8,4 @@ coverage/
 *.log
 *.tgz
 docs/research/public-package-dry-run.last.json
+docs/engineering/validation-battery.last.json
