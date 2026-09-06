@@ -1,0 +1,16 @@
+{
+  "name": "@agentstride/example-opentelemetry-tracing",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Proof that AgentStride lifecycle events map to OpenTelemetry without core OTel deps",
+  "scripts": {
+    "start": "npm run build -w @agentstride/core && node index.mjs",
+    "test": "npm run build -w @agentstride/core && node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "@agentstride/core": "*",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/sdk-trace-base": "^1.30.0"
+  }
+}
