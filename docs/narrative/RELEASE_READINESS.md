@@ -35,10 +35,10 @@ Only the owner can flip those switches.
 
 ## Explicit owner decisions
 
-1. Keep private vs make public — **open**
+1. Keep private vs make public — **open** (irreversible when flipped)
 2. npm publish scope — **closed: Option A (`@agentstride/core` + `@agentstride/openai`)** — still not published
-3. Semver starting version — **open** (leave `0.0.0` until Gate 3; rec `0.1.0`)
-4. License confirmation — **open** (rec MIT)
+3. Semver starting version — **closed: `0.1.0` at launch** (tree still `0.0.0` until then)
+4. License confirmation — **closed: MIT** (root `LICENSE` already MIT)
 
 ## Current posture
 

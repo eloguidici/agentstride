@@ -678,3 +678,29 @@ Gate 2 closed. Still private; no publish.
 ### Next question
 
 OWNER GATE 3: semver + license (recommend `0.1.0` + MIT).
+
+## 2026-09-06 - OWNER GATE 3 closed (`0.1.0` + MIT)
+
+### Context
+
+Owner confirmed versioning and license for a future first npm publish.
+
+### Evidence
+
+Owner confirmation after recommendation in `VERSIONING_RECOMMENDATION.md`; root `LICENSE` already MIT; Gate 2 Option A.
+
+### Decision
+
+At authorized launch: `@agentstride/core` and `@agentstride/openai` publish as **`0.1.0`** under **MIT**. Do not bump versions in tree until launch.
+
+### Rejected
+
+`1.0.0` now; bumping `package.json` versions before launch; publishing now.
+
+### Result
+
+Gates 2–3 closed. Still private; no npm publish.
+
+### Next question
+
+Owner: draft review and/or visibility + npm launch decision (irreversible).

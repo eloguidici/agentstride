@@ -64,4 +64,4 @@ Option B and C for initial launch; publishing `a2a`.
 Users ask for Nest/MCP packages day one — answer with examples + roadmap.
 
 ### Next question
-OWNER GATE 3: semver + license (recommendation: `0.1.0` + MIT).
+Launch gates: visibility / npm / draft publish — Gate 3 closed (`0.1.0` + MIT).
