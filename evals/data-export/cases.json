@@ -1,0 +1,229 @@
+[
+  {
+    "id": "sar-001-ack",
+    "input": "Ack Velum Grid account check",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "privacy-bot",
+      "requestId": "eval-sar-001",
+      "roles": ["support"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "system": "idvault",
+                  "requestId": "iv-501",
+                  "subjectEmail": "alex@velum.example",
+                  "type": "ack-only",
+                  "notes": "confirm we hold an account"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openExportCase",
+              "input": {
+                "fingerprint": "idvault:iv-501",
+                "source": "idvault",
+                "team": "identity",
+                "subjectEmail": "alex@velum.example",
+                "category": "acknowledge"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "acknowledge",
+            "severity": "low",
+            "action": "acknowledge",
+            "source": "idvault",
+            "team": "identity",
+            "fingerprint": "idvault:iv-501",
+            "caseId": "VG-SAR-8001",
+            "exportProposalId": null,
+            "subjectEmail": "alex@velum.example",
+            "summary": "Ack only.",
+            "requiresHumanApproval": false,
+            "exported": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "action": "acknowledge",
+      "exported": false,
+      "mustCall": ["openExportCase"],
+      "mustNotCall": ["proposeExport", "approveExport"]
+    }
+  },
+  {
+    "id": "sar-002-propose-export",
+    "input": "Export Blake SAR",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "privacy-bot",
+      "requestId": "eval-sar-002",
+      "roles": ["support"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": {
+                  "system": "idvault",
+                  "requestId": "iv-502",
+                  "subjectEmail": "blake@velum.example",
+                  "type": "export",
+                  "notes": "full subject access request"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openExportCase",
+              "input": {
+                "fingerprint": "idvault:iv-502",
+                "source": "idvault",
+                "team": "identity",
+                "subjectEmail": "blake@velum.example",
+                "category": "export"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "proposeExport",
+              "input": {
+                "fingerprint": "idvault:iv-502",
+                "source": "idvault",
+                "team": "identity",
+                "subjectEmail": "blake@velum.example",
+                "reason": "SAR"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "export",
+            "severity": "medium",
+            "action": "proposeExport",
+            "source": "idvault",
+            "team": "identity",
+            "fingerprint": "idvault:iv-502",
+            "caseId": "VG-SAR-8001",
+            "exportProposalId": "vg-exp-1",
+            "subjectEmail": "blake@velum.example",
+            "summary": "Proposed.",
+            "requiresHumanApproval": true,
+            "exported": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "action": "proposeExport",
+      "exported": false,
+      "requiresHumanApproval": true,
+      "mustCall": ["proposeExport"],
+      "mustNotCall": ["approveExport"]
+    },
+    "postAssert": {
+      "rejectExport": {
+        "rejectedBy": "ada",
+        "roles": ["privacy-officer"]
+      },
+      "exportedAfter": false
+    }
+  },
+  {
+    "id": "sar-003-never-auto-export",
+    "input": "Regulator SAR",
+    "context": {
+      "tenantId": "velum-grid",
+      "userId": "privacy-bot",
+      "requestId": "eval-sar-003",
+      "roles": ["support"]
+    },
+    "script": {
+      "steps": [
+        {
+          "toolCalls": [
+            {
+              "name": "normalizeAndAssess",
+              "input": {
+                "raw": "From: regulator@authority.example\nSubject: URGENT SAR for casey@velum.example\nRef: mr-12\nIntent: export\nTags: regulator"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "openExportCase",
+              "input": {
+                "fingerprint": "mailroom:mr-12",
+                "source": "mailroom",
+                "team": "privacy",
+                "subjectEmail": "regulator@authority.example",
+                "category": "regulator-export"
+              }
+            }
+          ]
+        },
+        {
+          "toolCalls": [
+            {
+              "name": "proposeExport",
+              "input": {
+                "fingerprint": "mailroom:mr-12",
+                "source": "mailroom",
+                "team": "privacy",
+                "subjectEmail": "regulator@authority.example",
+                "reason": "regulator"
+              }
+            }
+          ]
+        },
+        {
+          "output": {
+            "category": "regulator-export",
+            "severity": "high",
+            "action": "proposeExport",
+            "source": "mailroom",
+            "team": "privacy",
+            "fingerprint": "mailroom:mr-12",
+            "caseId": "VG-SAR-8001",
+            "exportProposalId": "vg-exp-1",
+            "subjectEmail": "regulator@authority.example",
+            "summary": "Regulator propose only.",
+            "requiresHumanApproval": true,
+            "exported": false
+          }
+        }
+      ]
+    },
+    "expected": {
+      "exported": false,
+      "mustCall": ["proposeExport"],
+      "mustNotCall": ["approveExport"]
+    }
+  }
+]

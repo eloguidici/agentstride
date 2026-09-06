@@ -17,5 +17,8 @@ Each row is a future public/tech narrative candidate grounded in repository arti
 | Usage without prices in core | example `22`, `docs/research/usage-accounting.md` |
 | Near-real ops: Velum Grid alarm triage | example `23` (+ HTTP), `docs/research/alarm-triage.md`, `evals/alarm-triage/` |
 | Near-real ops: Velum Grid change-gate | example `24` (+ HTTP), `docs/research/change-gate.md`, `evals/change-gate/` |
+| Near-real compliance: Velum Grid data-export | example `25`, `evals/data-export/` |
+| Nest surface for Velum ops | example `26` |
+| Pre-1.0 API freeze (still private) | ADR 0013, `docs/research/api-review-pre-1.0.md`, `docs/narrative/RELEASE_READINESS.md` |
 
 Update this table when a track lands with durable evidence.

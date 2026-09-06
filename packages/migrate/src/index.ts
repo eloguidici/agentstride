@@ -72,17 +72,3 @@ export function toLangChainToolConfig(
     },
   };
 }
-
-/** @deprecated Prefer toMastraToolConfig */
-export function toMastraTool(
-  tool: Tool<unknown, unknown> & { inputSchema?: ZodType },
-): PortableTool {
-  return toPortableTool(tool);
-}
-
-/** @deprecated Prefer toLangChainToolConfig */
-export function toLangChainTool(
-  tool: Tool<unknown, unknown> & { inputSchema?: ZodType },
-): PortableTool {
-  return toPortableTool(tool);
-}
