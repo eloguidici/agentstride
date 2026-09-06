@@ -1,7 +1,7 @@
 # AgentStride - Production Validation and Public Narrative Plan
 
 Date: 2026-09-06  
-Status: Planned  
+Status: In progress — Track A (evaluation harness) implemented on `feature/evaluation-harness`  
 Source of truth for the next development track
 
 This document defines the next stage of AgentStride after foundation, runtime hardening and the first real enterprise validation slices.
@@ -139,7 +139,8 @@ Do not rely on chat history.
 # Track A - Evaluation harness
 
 Priority: P0  
-Recommended first implementation track
+Status: **Done** (deterministic baseline, 2026-09-06)  
+Branch: `feature/evaluation-harness`
 
 ## A.1 Why this comes next
 
@@ -348,6 +349,14 @@ Track A is done when:
 - baseline is recorded;
 - no core API change was made unless forced by evidence;
 - development log and research note are updated.
+
+**Exit check (2026-09-06):** met.
+
+- `evals/` + `@agentstride/evals-internal` (private)
+- 22 cases; runner + scorers + aggregation
+- baseline `evals/results/baseline-enterprise-support.json` (22/22)
+- research note `docs/research/evaluation-harness.md`
+- core untouched; example 17 only gained optional `onSecurityEvent` for nested observation
 
 ---
 

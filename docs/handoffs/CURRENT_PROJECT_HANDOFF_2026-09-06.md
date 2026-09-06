@@ -3,8 +3,8 @@
 This document is the current source of truth for continuing AgentStride in another session or tool.
 
 Repository: `eloguidici/agentstride`  
-Default branch: **`main`** @ `c92a7c0`  
-Planning branch: **`docs/production-validation-plan`**  
+Default branch: **`main`**  
+Active feature branch: **`feature/evaluation-harness`** (Track A)  
 Repository visibility: **private**
 
 Do not develop feature work directly on `main`.  
@@ -16,101 +16,56 @@ Do not make the repository public or publish npm packages unless explicitly requ
 
 **The repository is the shared memory.**
 
-AgentStride may be continued from ChatGPT, Codex or Cursor. The next tool must be able to continue from repository state alone.
-
 ---
 
-## 1. Completed tracks
+## 1. Completed on this branch (Track A)
 
-Already merged to `main`:
+Evaluation harness (production validation plan Track A):
 
-- foundation;
-- runtime hardening;
-- schemas / structured output;
-- AgentRun/events;
-- hooks/guards;
-- OpenAI-compatible adapter;
-- RAG/MCP/memory/Nest incubation packages;
-- local delegation / ReceptionistAgent;
-- migration proof;
-- experimental remote AgentLike / A2A research;
-- enterprise support vertical slice (`examples/17`);
-- Nest HTTP surface (`examples/18`).
+- `evals/` private workspace `@agentstride/evals-internal`
+- 22 enterprise-support cases + deterministic scripted runner + scorers
+- Baseline: `evals/results/baseline-enterprise-support.json` (22/22)
+- Research: `docs/research/evaluation-harness.md`
+- Example 17: optional `onSecurityEvent` for nested tool observation
+- **Core unchanged**
 
-The enterprise slice validated that domain logic can remain free of AgentStride imports and that this realistic backend scenario did not require core growth.
+Commands:
 
----
+```bash
+npm test -w @agentstride/evals-internal
+npm run eval:enterprise-support
+```
 
-## 2. Next-stage plan
-
-The next development track is defined in:
+Plan source of truth:
 
 `docs/plans/PRODUCTION_VALIDATION_AND_PUBLIC_NARRATIVE_PLAN_2026-09-06.md`
 
-Read it before starting new work.
+---
 
-Strategy:
+## 2. Next track after merge
 
-> production validation, not feature expansion.
+**Track B — Nested cancellation across `asAgentTool`**
 
-Recommended order:
+Branch suggestion: `feature/nested-cancellation`
 
-1. evaluation harness;
-2. nested cancellation;
-3. parent/child run causality;
-4. OpenTelemetry proof;
-5. human approval pattern;
-6. idempotent side-effect tools;
-7. usage accounting;
-8. pre-1.0 API stabilization;
-9. narrative/release decision.
+Known gap: outer `AbortSignal` does not automatically become `run({ signal })` for nested agents.
 
-Do not skip directly to workflows, full A2A, browser, voice, scheduler or additional providers.
+Do not skip to workflows / A2A / new providers.
 
 ---
 
-## 3. Narrative requirement
+## 3. Narrative rule
 
-Documentation is part of the work.
-
-Every track must capture:
-
-- problem;
-- hypothesis;
-- evidence;
-- decision;
-- rejected alternatives;
-- result;
-- next question.
-
-This evidence is intended to support future technical notes, GitHub documentation, LinkedIn posts and interviews.
-
-Do not reconstruct a story later from memory.
+Capture problem → hypothesis → evidence → decision → rejected → result → next question in the development log / research notes during work (not after the fact).
 
 ---
 
-## 4. First recommended implementation branch
+## 4. Quality gate
 
-After this planning branch is merged, start from latest `main`:
-
-`feature/evaluation-harness`
-
-Start Track A from the production validation plan.
-
-Core should remain frozen unless evaluation evidence forces a change.
-
----
-
-## 5. End-of-session rule
-
-Before handing to another tool:
-
-- run relevant build/typecheck/tests;
-- update development log;
-- update ADRs;
-- update plan status;
-- update this handoff;
-- capture narrative evidence;
-- commit coherent work.
-
-The next tool may not have access to the previous conversation.
+```bash
+npm run build
+npm run typecheck
+npm run test
+npm run publish:check
+npm run eval:enterprise-support
+```
