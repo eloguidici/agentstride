@@ -40,3 +40,15 @@ Productization **decision gates 2–3 closed**. Still private; packages remain `
 2. Decide keep **private** vs make **public** (and only then: bump to `0.1.0`, remove `private`, npm publish).  
 
 **Do not invent a new engineering feature phase while closing launch gates.**
+
+---
+
+## Internal growth strategy
+
+While the repository remains private, promotion/distribution planning is documented in:
+
+`docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
+
+Use it together with the public productization plan when preparing launch recommendations.
+
+Important: this file is internal. Before repository visibility changes, explicitly review whether to remove, move or convert it.

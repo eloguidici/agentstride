@@ -844,3 +844,17 @@ This phase is successful when:
 - no public action occurs without explicit owner approval.
 
 At that point, if the owner has not authorized launch, the correct action is to stop.
+
+---
+
+## Internal promotion strategy reference
+
+Distribution and early-adoption planning is documented privately in:
+
+`docs/internal/INTERNAL_GROWTH_AND_PROMOTION_STRATEGY_2026-09-06.md`
+
+This document may guide launch preparation, channel strategy, first-user goals and post-launch measurement.
+
+It does not authorize public launch or publication.
+
+Before making the repository public, review the internal strategy file and decide whether to remove, move or convert it.
