@@ -6,3 +6,5 @@ coverage/
 !.env.example
 .DS_Store
 *.log
+*.tgz
+docs/research/public-package-dry-run.last.json
