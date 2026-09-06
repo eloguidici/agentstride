@@ -63,7 +63,7 @@ export function createSecurityTools() {
 /**
  * Security specialist agent. Exposed to Receptionist via asAgentTool.
  */
-export function createSecurityAgent(model) {
+export function createSecurityAgent(model, options = {}) {
   const tools = createSecurityTools();
   return createAgent({
     model,
@@ -71,5 +71,6 @@ export function createSecurityAgent(model) {
       "You are the security specialist. Use assessSecurity and searchKnowledge. Never grant production access. Recommend human approval when risk is high. Be concise.",
     tools,
     maxSteps: 4,
+    ...(options.onEvent ? { onEvent: options.onEvent } : {}),
   });
 }
