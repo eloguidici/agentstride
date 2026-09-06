@@ -737,3 +737,41 @@ The strategy is private planning material. Before the repository becomes public 
 ### Narrative value
 
 This captures not only how AgentStride was engineered, but how the project planned to transition from technical proof to real developer adoption.
+
+## 2026-09-06 - Career positioning and LinkedIn plan
+
+### Context
+
+AgentStride's purpose is not only open-source adoption. It is also intended to provide visible evidence of senior/principal backend + agentic AI architecture capability and support the owner's job search.
+
+### Decision
+
+Added:
+
+`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+
+The plan covers:
+
+- AgentStride as a portfolio/evidence asset;
+- LinkedIn About / Featured / Projects usage;
+- technical content sequencing for career impact;
+- career-oriented metrics;
+- interview topics backed by repository evidence;
+- relationship with Enterprise Agentization;
+- timing of profile changes relative to public release.
+
+### Key positioning choice
+
+Do not sell the project primarily as "I built a framework".
+
+Use it as evidence of:
+
+> the kinds of AI/backend architecture and production problems the owner knows how to solve.
+
+### Constraint
+
+This is internal career strategy. Review/remove/move it before making the repository public.
+
+### Narrative value
+
+The repository now preserves the full path from architecture → production validation → productization → growth planning → professional positioning.

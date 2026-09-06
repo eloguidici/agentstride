@@ -632,3 +632,15 @@ This strategy succeeds if AgentStride grows because:
 The goal is not to make a number look large.
 
 The goal is to create genuine developer adoption.
+
+---
+
+## Career objective
+
+AgentStride is also intended to strengthen the owner's professional positioning and job search.
+
+The detailed internal plan is:
+
+`docs/internal/INTERNAL_CAREER_POSITIONING_AND_LINKEDIN_PLAN_2026-09-06.md`
+
+Growth metrics should therefore include not only stars/downloads but relevant recruiter, CTO and engineering conversations.
