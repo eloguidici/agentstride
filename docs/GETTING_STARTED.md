@@ -8,7 +8,7 @@ Goal: run a minimal AgentStride agent in about ten minutes.
 npm install @agentstride/core @agentstride/openai zod
 ```
 
-Use **Zod 4+** (or another Standard Schema with JSON Schema) so `defineTool` can publish tool `parameters` to the model.
+Use **Zod 4+** (or another Standard Schema with JSON Schema) so `defineTool` can publish tool `parameters` to the model. `asAgentTool` already publishes `{ request: string }` parameters.
 Or clone this monorepo for examples and guides.
 
 ## 1. Mental model (2 minutes)

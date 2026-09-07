@@ -43,9 +43,9 @@ const run = await agent.run("hello", {
 
 ## Stable surface
 
-- `createAgent`, `defineTool`, `asAgentTool`
+- `createAgent`, `defineTool`, `asAgentTool` (nested agents get `{ request }` JSON Schema parameters)
 - `AgentRun` as the success value (failures throw; optional `error.agentRun`)
-- Standard Schema for tool input + structured output
+- Standard Schema for tool input + structured output — prefer **Zod 4+** (or pass explicit `parameters`) so providers see tool shapes
 - AbortSignal / `runWithDeadline`, nested cancel, `parentRunId` causality
 
 ## Out of core

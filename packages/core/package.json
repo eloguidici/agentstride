@@ -1,6 +1,6 @@
 {
   "name": "@agentstride/core",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "description": "Small embeddable TypeScript agent runtime for POCs and production — tools, runs, cancel — without a workflow engine",
   "keywords": [

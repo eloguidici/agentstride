@@ -12,5 +12,6 @@ Short how-to pages for embedding AgentStride. Depth lives in ADRs and examples.
 | [05 — Observability (OTel)](./05-observability-otel.md) | Spans without core lock-in |
 | [06 — Evals](./06-evals.md) | Measure decisions, not only tools |
 | [07 — Nest / HTTP embed](./07-nestjs-embed.md) | Put an agent behind an API |
+| [08 — Multi-agent (local)](./08-multi-agent-local.md) | `asAgentTool`, nested cancel/causality, approval outside |
 
 Start here: [Getting started](../GETTING_STARTED.md).

@@ -1,5 +1,16 @@
 # Release notes
 
+## 0.1.5 (DX)
+
+- **`asAgentTool`:** publishes JSON Schema parameters `{ request: string }` to the model (no Zod wrap required). Validates `request` before nested `run`.
+- Guide: [Multi-agent (local)](./guides/08-multi-agent-local.md)
+
+```bash
+npm install @agentstride/core@0.1.5 @agentstride/openai@0.1.5
+```
+
+---
+
 ## 0.1.4 (DX / adapter)
 
 External dogfood (Vault Desk) fixes:

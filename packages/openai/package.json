@@ -1,6 +1,6 @@
 {
   "name": "@agentstride/openai",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "type": "module",
   "description": "OpenAI-compatible Model adapter for AgentStride POCs and apps — OpenAI or OpenRouter via fetch",
   "keywords": [

@@ -107,6 +107,7 @@ More detail: [architecture](docs/architecture.md), [origins](docs/origins.md) (R
 | --- | --- |
 | Decision evals | [`evals/`](evals/), [guide](docs/guides/06-evals.md) |
 | Human approval (agent ≠ approver) | [example 20](examples/20-human-approval/), [guide](docs/guides/03-human-approval.md) |
+| Multi-agent (local delegation) | [guide](docs/guides/08-multi-agent-local.md), [example 16](examples/16-orchestrator-n-agents/), ADR 0010/0011 |
 | Idempotent side effects | [example 21](examples/21-side-effect-idempotency/), [guide](docs/guides/04-idempotent-side-effects.md) |
 | OpenTelemetry without core lock-in | [example 19](examples/19-opentelemetry-tracing/), [ADR 0012](docs/decisions/0012-opentelemetry-out-of-core.md) |
 | Nest / HTTP embed | [examples 18](examples/18-enterprise-support-http/) / [26](examples/26-velum-grid-nestjs/), [guide](docs/guides/07-nestjs-embed.md) |
@@ -124,8 +125,8 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 | Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **`0.1.3`** |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.3`** |
+| `@agentstride/core` | Runtime | **`0.1.5`** |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.5`** |
 | `rag` / `memory` / `mcp` / `nestjs` | Optional | Unpublished (in-repo) |
 | `a2a` | Experimental remote sketch | Unpublished |
 | `migrate` | Portability helpers | Unpublished |
