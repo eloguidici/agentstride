@@ -1,5 +1,20 @@
 # Release notes
 
+## 0.1.3 (docs)
+
+Clarify audience:
+
+- README **Who it is for** — POCs/demos/spikes, path to production, and when not to use
+- Package READMEs / npm `description` mention POC → production without a platform
+
+No runtime API changes.
+
+```bash
+npm install @agentstride/core@0.1.3 @agentstride/openai@0.1.3
+```
+
+---
+
 ## 0.1.2 (docs)
 
 Clarify package purpose on npm:

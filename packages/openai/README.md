@@ -2,6 +2,8 @@
 
 **Purpose:** OpenAI-compatible Chat Completions adapter for AgentStride’s `Model` contract — so `@agentstride/core` can call OpenAI or gateways like OpenRouter without the `openai` SDK.
 
+**Good for:** POCs/demos with a real model, and the same adapter in production backends.
+
 Use this when you want a practical first model provider; bring another adapter anytime (core stays provider-agnostic).
 
 ```bash

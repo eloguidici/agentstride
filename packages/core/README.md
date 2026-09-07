@@ -2,6 +2,8 @@
 
 **Purpose:** a small, embeddable TypeScript runtime for AI agents — tools, structured output, runs, events, hooks/guards — without pulling in a workflow engine or control plane.
 
+**Good for:** POCs, demos, and spikes inside your app; same loop can grow into production patterns (cancel, external approvals, evals).
+
 Keep domain logic, policy, and human approvals in **your** app. AgentStride runs the agent loop.
 
 ```bash

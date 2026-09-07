@@ -1,8 +1,8 @@
 {
   "name": "@agentstride/core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
-  "description": "Small embeddable TypeScript runtime for AI agents — tools, structured output, runs, and cancel — without a workflow engine",
+  "description": "Small embeddable TypeScript agent runtime for POCs and production — tools, runs, cancel — without a workflow engine",
   "keywords": [
     "agents",
     "llm",

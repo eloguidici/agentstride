@@ -5,7 +5,19 @@
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.2`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.3`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+
+---
+
+## Who it is for
+
+| | |
+| --- | --- |
+| **Good for** | POCs, demos, and spikes you embed in **your** TypeScript app — without adopting a platform or workflow engine first |
+| **Also for** | Carrying those same patterns into production (cancel, approvals outside the loop, evals) without rewriting the agent runtime |
+| **Not for** | Hosted control planes, durable distributed workflows / long-running graphs, agent marketplaces, or “pick a huge catalog of integrations” as the product |
+
+> Start lightweight. Stay if it is enough. Graduate if it is not.
 
 ---
 
@@ -102,14 +114,7 @@ More detail: [architecture](docs/architecture.md), [origins](docs/origins.md) (R
 
 ## When not to use AgentStride
 
-Prefer a larger framework or platform when you already need:
-
-- durable distributed workflows / long-running graphs;
-- a hosted agent control plane (deploy, sessions UI, sandboxes);
-- a broad provider/integration catalog as the product;
-- marketplace, scheduler, or channel product features.
-
-AgentStride is for teams that want a **small embeddable runtime** inside their own backend.
+See [Who it is for](#who-it-is-for). In short, prefer a larger framework or platform when you already need durable distributed workflows, a hosted agent control plane, or a broad integration catalog as the product itself.
 
 ## Portability / graduate path
 
@@ -119,8 +124,8 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 | Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **`0.1.2`** |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.2`** |
+| `@agentstride/core` | Runtime | **`0.1.3`** |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.3`** |
 | `rag` / `memory` / `mcp` / `nestjs` | Optional | Unpublished (in-repo) |
 | `a2a` | Experimental remote sketch | Unpublished |
 | `migrate` | Portability helpers | Unpublished |
