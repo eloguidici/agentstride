@@ -1,5 +1,18 @@
 # Release notes
 
+## 0.1.4 (DX / adapter)
+
+External dogfood (Vault Desk) fixes:
+
+- **`defineTool`:** warn when `inputSchema` cannot produce JSON Schema parameters (common with Zod 3). Prefer **Zod 4+** or pass explicit `parameters`.
+- **`@agentstride/openai`:** do not send `response_format: json_object` on turns that include **tools** (still hints via system message; `json_object` remains for tool-less structured finals).
+
+```bash
+npm install @agentstride/core@0.1.4 @agentstride/openai@0.1.4
+```
+
+---
+
 ## 0.1.3 (docs)
 
 Clarify audience:

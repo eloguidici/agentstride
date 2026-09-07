@@ -39,10 +39,12 @@ Product pitch + when to use AgentStride: [GitHub README](https://github.com/elog
 When `request.outputSchema` is present, this adapter may:
 
 1. hint the model with the JSON Schema in a system message;
-2. request `response_format: { type: "json_object" }` (retried without it if the gateway rejects it);
+2. request `response_format: { type: "json_object" }` **only when the request has no tools** (retried without it if the gateway rejects it). Tool turns skip `json_object` because many gateways return empty tool arguments otherwise;
 3. best-effort `JSON.parse` of the assistant text into `response.output`.
 
 That is **not** native schema enforcement. `@agentstride/core` always validates structured output with Standard Schema (`run(input, { output })`). Treat provider JSON mode as a hint only.
+
+Pass `jsonObjectMode: false` to disable `response_format` entirely.
 
 ## Docs
 

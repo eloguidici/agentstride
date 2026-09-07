@@ -12,7 +12,7 @@ export type OpenAIModelOptions = Readonly<{
   model?: string;
   baseUrl?: string;
   headers?: Readonly<Record<string, string>>;
-  /** When false, never send response_format even if outputSchema is present. */
+  /** When false, never send response_format. Default true, but skipped when tools are present (json_object + tools is unreliable on many gateways). */
   jsonObjectMode?: boolean;
   fetchImpl?: typeof fetch;
 }>;
@@ -79,8 +79,12 @@ export function createOpenAIModel(options: OpenAIModelOptions = {}): Model {
         body.tools = request.tools.map(toOpenAITool);
       }
 
+      // Prefer json_object only on tool-less turns. Combining tools + response_format
+      // often yields empty tool arguments or non-schema finals on OpenRouter/OpenAI.
       const wantsJsonObject =
-        jsonObjectMode && request.outputSchema !== undefined;
+        jsonObjectMode &&
+        request.outputSchema !== undefined &&
+        request.tools.length === 0;
 
       if (wantsJsonObject) {
         body.response_format = { type: "json_object" };

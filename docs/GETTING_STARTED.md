@@ -5,9 +5,10 @@ Goal: run a minimal AgentStride agent in about ten minutes.
 **Install** (published packages):
 
 ```bash
-npm install @agentstride/core @agentstride/openai
+npm install @agentstride/core @agentstride/openai zod
 ```
 
+Use **Zod 4+** (or another Standard Schema with JSON Schema) so `defineTool` can publish tool `parameters` to the model.
 Or clone this monorepo for examples and guides.
 
 ## 1. Mental model (2 minutes)

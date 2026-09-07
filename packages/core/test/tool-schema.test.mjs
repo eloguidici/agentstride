@@ -151,3 +151,39 @@ test("keeps tools without inputSchema unvalidated", async () => {
   const result = await agent.run("go");
   assert.equal(result.text, "done");
 });
+
+test("warns when inputSchema cannot produce JSON Schema parameters", () => {
+  const warnings = [];
+  const original = console.warn;
+  console.warn = (...args) => {
+    warnings.push(args.map(String).join(" "));
+  };
+
+  try {
+    const schema = {
+      "~standard": {
+        version: 1,
+        vendor: "test-no-json-schema",
+        validate(value) {
+          return { value };
+        },
+      },
+    };
+
+    const tool = defineTool({
+      name: "opaque",
+      description: "Has validate but no jsonSchema",
+      inputSchema: schema,
+      execute(input) {
+        return input;
+      },
+    });
+
+    assert.equal(tool.parameters, undefined);
+    assert.equal(warnings.length, 1);
+    assert.match(warnings[0], /opaque/);
+    assert.match(warnings[0], /JSON Schema|Zod 4/i);
+  } finally {
+    console.warn = original;
+  }
+});

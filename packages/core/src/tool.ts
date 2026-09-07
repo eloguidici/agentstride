@@ -60,6 +60,11 @@ export function defineTool(
   const parameters = getSchemaJsonSchema(defined.inputSchema);
 
   if (parameters === undefined) {
+    console.warn(
+      `[agentstride] defineTool("${defined.name}"): inputSchema has no JSON Schema ` +
+        `(Standard Schema \`~standard.jsonSchema\`). Tool parameters will be empty for the model. ` +
+        `Use Zod 4+, or pass explicit \`parameters\`, so providers receive argument shapes.`,
+    );
     return defined;
   }
 

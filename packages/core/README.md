@@ -12,6 +12,8 @@ npm install @agentstride/core @agentstride/openai
 
 Pair with a `Model` adapter — typically [`@agentstride/openai`](https://www.npmjs.com/package/@agentstride/openai).
 
+For tools with `inputSchema`, use a Standard Schema that exposes JSON Schema (e.g. **Zod 4+**), or pass explicit `parameters`. Zod 3 validates inputs but does not publish tool argument shapes to the model.
+
 Why this exists (problem + scope): [GitHub README](https://github.com/eloguidici/agentstride#readme).  
 Pre-1.0 freeze: [ADR 0013](https://github.com/eloguidici/agentstride/blob/main/docs/decisions/0013-pre-1.0-api-freeze.md).
 
