@@ -1,8 +1,8 @@
 {
   "name": "@agentstride/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
-  "description": "Core runtime primitives for AgentStride",
+  "description": "Small embeddable TypeScript runtime for AI agents — tools, structured output, runs, and cancel — without a workflow engine",
   "keywords": [
     "agents",
     "llm",

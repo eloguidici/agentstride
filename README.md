@@ -5,7 +5,7 @@
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.1`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.2`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ---
 
@@ -119,8 +119,8 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 | Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **`0.1.1`** |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.1`** |
+| `@agentstride/core` | Runtime | **`0.1.2`** |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.2`** |
 | `rag` / `memory` / `mcp` / `nestjs` | Optional | Unpublished (in-repo) |
 | `a2a` | Experimental remote sketch | Unpublished |
 | `migrate` | Portability helpers | Unpublished |

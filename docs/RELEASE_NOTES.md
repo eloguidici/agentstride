@@ -1,5 +1,20 @@
 # Release notes
 
+## 0.1.2 (docs)
+
+Clarify package purpose on npm:
+
+- Stronger `description` + README openers for `@agentstride/core` and `@agentstride/openai`
+- Point npm readers at the GitHub README for problem / when-to-use
+
+No runtime API changes.
+
+```bash
+npm install @agentstride/core@0.1.2 @agentstride/openai@0.1.2
+```
+
+---
+
 ## 0.1.1 (docs)
 
 Documentation alignment for the published packages:

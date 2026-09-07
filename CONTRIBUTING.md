@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for interest in AgentStride. Public packages today: `@agentstride/core` and `@agentstride/openai` (`0.1.1`, MIT).
+Thanks for interest in AgentStride. Public packages today: `@agentstride/core` and `@agentstride/openai` (`0.1.2`, MIT).
 
 ## For contributors
 

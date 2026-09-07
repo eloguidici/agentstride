@@ -1,8 +1,8 @@
 # @agentstride/openai
 
-OpenAI-compatible Chat Completions adapter for AgentStride's `Model` contract.
+**Purpose:** OpenAI-compatible Chat Completions adapter for AgentStride’s `Model` contract — so `@agentstride/core` can call OpenAI or gateways like OpenRouter without the `openai` SDK.
 
-Uses `fetch` directly — the `openai` SDK is not required. Works with OpenAI and gateways like OpenRouter.
+Use this when you want a practical first model provider; bring another adapter anytime (core stays provider-agnostic).
 
 ```bash
 npm install @agentstride/core @agentstride/openai
@@ -25,6 +25,8 @@ const agent = createAgent({
 ```
 
 Peer dependency: `@agentstride/core@^0.1.0`.
+
+Product pitch + when to use AgentStride: [GitHub README](https://github.com/eloguidici/agentstride#readme).
 
 ## Cancellation
 

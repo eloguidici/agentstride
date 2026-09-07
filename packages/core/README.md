@@ -1,13 +1,16 @@
 # @agentstride/core
 
-Small TypeScript agent runtime: tools, structured output, runs, events, hooks/guards.
+**Purpose:** a small, embeddable TypeScript runtime for AI agents — tools, structured output, runs, events, hooks/guards — without pulling in a workflow engine or control plane.
+
+Keep domain logic, policy, and human approvals in **your** app. AgentStride runs the agent loop.
 
 ```bash
-npm install @agentstride/core
+npm install @agentstride/core @agentstride/openai
 ```
 
 Pair with a `Model` adapter — typically [`@agentstride/openai`](https://www.npmjs.com/package/@agentstride/openai).
 
+Why this exists (problem + scope): [GitHub README](https://github.com/eloguidici/agentstride#readme).  
 Pre-1.0 freeze: [ADR 0013](https://github.com/eloguidici/agentstride/blob/main/docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ## Minimal usage
