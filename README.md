@@ -1,11 +1,16 @@
 # AgentStride
 
+[![npm version](https://img.shields.io/npm/v/@agentstride/core.svg)](https://www.npmjs.com/package/@agentstride/core)
+[![CI status](https://github.com/eloguidici/agentstride/actions/workflows/ci.yml/badge.svg)](https://github.com/eloguidici/agentstride/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm downloads](https://img.shields.io/npm/dm/@agentstride/core.svg)](https://www.npmjs.com/package/@agentstride/core)
+
 **A small, production-minded TypeScript runtime for portable AI agents — without adopting heavy orchestration too early.**
 
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.5`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.6`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ---
 
@@ -53,7 +58,7 @@ Domain logic stays in your app. AgentStride does **not** ship a workflow engine,
 3. Pick one path from [Examples — Start here](examples/README.md).
 
 ```bash
-npm install @agentstride/core @agentstride/openai
+npm install @agentstride/core @agentstride/openai zod
 ```
 
 ```ts
@@ -125,8 +130,8 @@ Tools stay portable by design. `@agentstride/migrate` helps toward other ecosyst
 
 | Package | Role | First public cut |
 | --- | --- | --- |
-| `@agentstride/core` | Runtime | **`0.1.5`** |
-| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.5`** |
+| `@agentstride/core` | Runtime | **`0.1.6`** |
+| `@agentstride/openai` | OpenAI-compatible `Model` | **`0.1.6`** |
 | `rag` / `memory` / `mcp` / `nestjs` | Optional | Unpublished (in-repo) |
 | `a2a` | Experimental remote sketch | Unpublished |
 | `migrate` | Portability helpers | Unpublished |

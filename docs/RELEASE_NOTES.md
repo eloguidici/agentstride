@@ -1,5 +1,20 @@
 # Release notes
 
+## 0.1.6 (docs / dx)
+
+Repository polish for visibility and onboarding:
+
+- **README:** npm version, CI status, license, and npm downloads badges
+- **Install instructions:** corrected to include `zod` dependency required by the quickstart
+- **New example:** `02-quickstart-no-api-key` — complete quickstart from the README that runs without an API key (fake model). CI smoke-tests it to ensure documentation accuracy.
+- **Docs organization:** moved `IDEAS_AGENTIC_AI_2026-09-18.md` from repo root to `docs/research/ideas-agentic-ai-2026-09-18.md`
+
+```bash
+npm install @agentstride/core@0.1.6 @agentstride/openai@0.1.6 zod
+```
+
+---
+
 ## 0.1.5 (DX)
 
 - **`asAgentTool`:** publishes JSON Schema parameters `{ request: string }` to the model (no Zod wrap required). Validates `request` before nested `run`.
