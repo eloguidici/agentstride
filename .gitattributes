@@ -1,3 +1,7 @@
 # Examples and evals are supporting demo/test code, not the core library
 examples/** linguist-documentation
 evals/** linguist-documentation
+
+# Build/publish scripts and test files are not part of the library
+scripts/** linguist-documentation
+**/test/** linguist-documentation
