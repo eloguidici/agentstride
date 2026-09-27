@@ -43,3 +43,4 @@ jobs:
       - run: npm run test
       - run: npm run publish:check
       - run: npm run examples:smoke
+      - run: npm start -w @agentstride/example-quickstart-no-api-key
