@@ -5,7 +5,7 @@
 > Build simple. Grow deliberately.  
 > Start lightweight. Stay if it is enough. Graduate if it is not.
 
-**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.3`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
+**Status:** Public packages — `@agentstride/core` + `@agentstride/openai` at **`0.1.5`** (MIT). Pre-1.0 freeze notes: [ADR 0013](docs/decisions/0013-pre-1.0-api-freeze.md).
 
 ---
 
